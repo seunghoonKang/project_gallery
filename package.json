@@ -1,0 +1,15 @@
+{
+  "name": "project_gallery",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://kdt-gitlab.elice.io/sw_track/class_02_seoul/web_project_2/team15/project_gallery.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
