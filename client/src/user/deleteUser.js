@@ -40,7 +40,7 @@ function DeleteUser(){
             setUser(res.data)
             localStorage.setItem('token',user.token);
             localStorage.setItem('role',user.role)
-            window.location.href = '/';
+           // window.location.href = '/';
             
           }
         })
@@ -51,7 +51,8 @@ function DeleteUser(){
         }
         
     return (
-        <Form onSubmit={onSubmitHandler} style={{maxWidth:'700px', margin:'2rem auto'}}>
+      <div style={{maxWidth:'800px',margin:'2rem auto', borderRadius:"10px",backgroundColor:"#3e383899",borderStyle:'solid',borderColor:"rgb(123, 120, 120)"}}>
+        <Form onSubmit={onSubmitHandler} style={{maxWidth:'700px', margin:'2rem auto',color:"white"}}>
   <Form.Group className="mb-3" controlId="formBasicEmail" >
     <Form.Label>이메일</Form.Label>
     <Form.Control type="email" placeholder="Enter email" value={inputEmail} onChange={inputEmailHandler}  />
@@ -65,10 +66,11 @@ function DeleteUser(){
     <Form.Control type="password" placeholder="Password" value={inputPwd} onChange={inputPwdHandler}/>
   </Form.Group>
  
-  <Button variant="primary" type="submit">
-    Submit
+  <Button variant="primary" type="submit"  style={{backgroundColor:"#6b6a6d",borderColor:"white"}}>
+    회원탈퇴
   </Button>
 </Form>
+</div>
     )
     
     
