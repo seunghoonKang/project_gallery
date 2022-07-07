@@ -51,7 +51,8 @@ function ReviseUser(){
         }
         
     return (
-        <Form onSubmit={onSubmitHandler} style={{maxWidth:'700px', margin:'2rem auto'}}>
+      <div style={{maxWidth:'800px',margin:'2rem auto', borderRadius:"10px",backgroundColor:"#3e383899",borderStyle:'solid',borderColor:"rgb(123, 120, 120)"}}>
+        <Form onSubmit={onSubmitHandler} style={{maxWidth:'700px', margin:'2rem auto',color:"white"}}>
   <Form.Group className="mb-3" controlId="formBasicEmail" >
     <Form.Label>이메일</Form.Label>
     <Form.Control type="email" placeholder="Enter email" value={inputEmail} onChange={inputEmailHandler}  />
@@ -61,14 +62,16 @@ function ReviseUser(){
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formBasicPassword">
-    <Form.Label>비밀번호</Form.Label>
+    <Form.Label>비밀번호 확인</Form.Label>
     <Form.Control type="password" placeholder="Password" value={inputPwd} onChange={inputPwdHandler}/>
   </Form.Group>
  
-  <Button variant="primary" type="submit">
+  <Button variant="primary" type="submit" style={{backgroundColor:"#6b6a6d", borderColor:"white"}}>
     Submit
   </Button>
+
 </Form>
+</div>
     )
     
     
