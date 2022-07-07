@@ -34,10 +34,10 @@ function Loign(){
    }
 
   const register=(e)=>{
-    //window.location.href="/login"
+    //window.location.href="/register"
   }
   const findPwd=(e)=>{
-
+    //window.location.href="/findPwd"
   }
     
    
@@ -49,7 +49,7 @@ function Loign(){
           password:inputPwd
         }
         
-        axios.post("/api/user/login", body)
+        axios.post("/", body)
         .then((res) => {  
          
         const user=res.data
