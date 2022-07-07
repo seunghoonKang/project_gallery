@@ -28,7 +28,7 @@ function DeleteUser(){
           password:inputPwd
         }
         
-        axios.post("/api/user/login", body)
+        axios.post("/", body)
         .then((res) => {  
          
         const user=res.data
