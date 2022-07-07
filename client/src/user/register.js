@@ -1,6 +1,8 @@
 import { Form,Button} from 'react-bootstrap';
+import styled from 'styled-components'
 import {useEffect,useState}from 'react';
 import axios from 'axios';
+
 
 
 function Register(){
@@ -71,6 +73,7 @@ function Register(){
           password:inputPwd2,
           nickName:inputNickname
         }
+        // 회원가입 이후에는 로그인 창으로 가기
         // axios.post("/api/user/register", body)
         // .then((res) => { setUser(res.data)})
         // console.log(user)
@@ -79,7 +82,7 @@ function Register(){
         //       alert('이미 등록된 이메일입니다.')
         //    }else {
         //      alert('정상적으로 회원가입이 되었습니다!')
-        //      //window.location.href = '/';
+        //      //window.location.href = '/login';
         //    }
         //   
       }else{
@@ -94,9 +97,10 @@ function Register(){
     
 
     return (
-        <Form onSubmit={onSubmitHandler}style={{maxWidth:'700px', margin:'2rem auto'}}>
+      <div style={{maxWidth:'800px',margin:'2rem auto', borderRadius:"10px",backgroundColor:"#3e383899",borderStyle:'solid',borderColor:"rgb(123, 120, 120)"}}>
+        <Form onSubmit={onSubmitHandler}style={{maxWidth:'700px', margin:'2rem auto',color:"white"}}>
   <Form.Group className="mb-3" controlId="formBasicEmail" >
-    <Form.Label>이메일</Form.Label>
+    <Form.Label >이메일</Form.Label>
     <Form.Control required type="email" placeholder="Enter email" value={inputEmail} onChange={inputEmailHandler}  />
     
     <Form.Text className="text-muted">
@@ -104,7 +108,7 @@ function Register(){
     </Form.Text>
   </Form.Group>
   <Form.Group className="mb-3" controlId="formBasicEmail" >
-    <Form.Label>닉네임</Form.Label>
+    <Form.Label >닉네임</Form.Label>
     <Form.Control required type="string" placeholder="Enter nickName" value={inputNickname} onChange={inputNicHandler}  />
     
     <Form.Text className="text-muted">
@@ -130,10 +134,11 @@ function Register(){
       :<div style={{color:"green",fontSize:"12px"}}>비밀번호가 같습니다. </div>}
     </div>
   </Form.Group>
-  <Button variant="primary" type="submit">
+  <Button variant="primary" type="submit" style={{backgroundColor:"#6b6a6d",borderColor:"white"}}>
     Submit
   </Button>
 </Form>
+</div>
     )
     
     
