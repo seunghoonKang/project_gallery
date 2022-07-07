@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const HomeCard = () => {
   return(
     <Cards>
-      <Card style={{ width: '20rem' }} >
+      <Card className="me-4" style={{ width: '20rem' }} >
         <Card.Img variant="top" src="https://cdn.pixabay.com/photo/2017/09/25/13/14/dog-2785077_1280.jpg" alt="img" />
         <Card.Body>
           <Card.Title>Exhibition</Card.Title>
@@ -15,7 +15,7 @@ const HomeCard = () => {
           <Button variant="secondary">Go somewhere</Button>
         </Card.Body>
       </Card>
-      <Card style={{ width: '20rem' }} >
+      <Card className="me-4" style={{ width: '20rem' }} >
         <Card.Img variant="top" src="https://cdn.pixabay.com/photo/2017/09/25/13/14/dog-2785077_1280.jpg" alt="img" />
         <Card.Body>
           <Card.Title>Exhibition</Card.Title>
