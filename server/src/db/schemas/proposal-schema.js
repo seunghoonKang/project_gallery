@@ -1,9 +1,4 @@
-import { mongoose } from 'mongoose';
-import autoIncrement from 'mongoose-auto-increment';
-
-const Schema = mongoose.Schema;
-
-autoIncrement.initialize(mongoose);
+import { Schema } from 'mongoose';
 
 const ProposalSchema = new Schema(
   {
@@ -29,11 +24,5 @@ const ProposalSchema = new Schema(
     timestamps: true,
   }
 );
-ProposalSchema.plugin(autoIncrement.plugin, {
-  model: 'title',
-  field: 'title_id',
-  startAt: 1,
-  incrementBy: 1,
-});
 
 export { ProposalSchema };

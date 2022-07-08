@@ -1,13 +1,13 @@
 import { Router } from 'express';
 
 import { loginRequired } from '../middlewares';
-import { ProposalService } from '../services';
+import { proposalService } from '../services';
 
 const proposalRouter = Router();
 
 proposalRouter.get('/', loginRequired, async (req, res, next) => {
   try {
-    const proposals = await ProposalService.getAllProposal();
+    const proposals = await proposalService.getProposal();
     res.status(201).json(proposals);
   } catch (error) {
     next(error);
@@ -15,51 +15,51 @@ proposalRouter.get('/', loginRequired, async (req, res, next) => {
 });
 
 proposalRouter.post('/', loginRequired, async (req, res, next) => {
-    try {
-      const { nickName, title, tag, description } = req.body;
-
-      const new_proposal = await ProposalService.addProposal({
-        nickName,
-        title,
-        tag,
-        description
-      });
-
-      res.status(201).json(new_proposal);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-
-proposalRouter.delete('/', loginRequired, async (req, res, next) => {
   try {
-    const title_id = req.body.title_id;
-    const deletedCount = await ProposalService.deleteTitle(title_id);
+    const { title, tag, description } = req.body;
 
-    res.status(201).json(deletedCount);
+    const new_proposal = await proposalService.addProposal({
+      title,
+      tag,
+      description,
+    });
+
+    res.status(201).json(new_proposal);
   } catch (error) {
     next(error);
   }
 });
 
-proposalRouter.patch('/', loginRequired, async function (req, res, next) {
+proposalRouter.delete('/', loginRequired, async (req, res, next) => {
   try {
-    const { nickName, title, tag, description } = req.body;
+    const titleId = req.body._id;
+    const proposal = await proposalService.deleteProposal(titleId);
 
-    const title_origin = await ProposalService.getTitle(title);
+    res.status(201).json(proposal);
+  } catch (error) {
+    next(error);
+  }
+});
+
+proposalRouter.patch('/', loginRequired, async (req, res, next) => {
+  try {
+    const { nickName, title, _id, tag, description } = req.body;
+
+    const title_origin = await proposalService.getProposal(_id);
 
     if (title_origin.nickName !== nickName) {
       throw new Error('제안을 수정할 권한이 없습니다.');
     }
 
     const toUpdate = {
+      ...(title && { title }),
       ...(tag && { tag }),
       ...(description && { description }),
     };
 
-    const updatedProposal = await ProposalService.setProposal(
-      title,
+    const titleId = { _id: titleId };
+    const updatedProposal = await proposalService.setProposal(
+      titleId,
       toUpdate
     );
 
