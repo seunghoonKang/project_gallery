@@ -1,28 +1,29 @@
 import { Schema } from 'mongoose';
 
-const ProposalSchema = new Schema(
+const UserSchema = new Schema(
   {
+    email: {
+      type: String,
+      required: true,
+    },
     nickName: {
       type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    role: {
+      type: String,
       required: false,
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    tag: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-      required: true,
+      default: 'basic-user',
     },
   },
   {
-    collection: 'proposals',
+    collection: 'users',
     timestamps: true,
   }
 );
 
-export { ProposalSchema };
+export { UserSchema };
