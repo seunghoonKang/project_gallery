@@ -50,5 +50,6 @@ function Footer() {
                         </div>
                     </section>
                 </div>
+                </div>
             )        
 }
