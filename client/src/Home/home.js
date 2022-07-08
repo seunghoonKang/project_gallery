@@ -1,12 +1,10 @@
 import styled from 'styled-components';
-import HomeCard from './homeCard'
-import HomeNav from './homenav';
+import HomeCard from './homeCard';
 import HomeUpper from './homeUpper';
 
 const Home = () => {
 return(
   <Container>
-    <HomeNav />
     <HomeUpper />
     <HomeCard />
     <footer></footer>
