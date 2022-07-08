@@ -1,19 +1,22 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
-
-import Login from './user/login';
-import Register from './user/register';
-import DeleteUser from './user/deleteUser';
-import ReviseUser from './user/ReviseUser';
-
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./Home/home";
+import Login from './user/login';
+import './App.css';
+import HomeNav from './Home/homenav';
+import Proposal from './Proposal/proposal';
 function App() {
   return (
-
-    <div className="App" >
-      <Login />
-    </div>
-  );
+    <BrowserRouter>
+      <div className="App">
+      <HomeNav />
+        <Routes>
+          <Route path="/" element = {<Home />} />
+          <Route path="/login" element = {<Login />} />
+          <Route path="/Proposal" element = {<Proposal />} />           
+        </Routes>
+      </div>
+    </BrowserRouter>
+  )
 }
-
 export default App;
