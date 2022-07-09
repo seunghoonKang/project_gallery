@@ -1,4 +1,6 @@
-export * from './login';
-export * from './register';
-export * from './deleteUser';
-export * from './reviseUser';
+export Login from './login';
+export Register from './register';
+export DeleteUser from './deleteUser';
+export ReviseUser from './reviseUser';
+
+export UserRoutes from './userRoutes';

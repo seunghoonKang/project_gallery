@@ -10,6 +10,7 @@ function DeleteUser() {
   const inputEmailHandler = (e) => {
     seInputEmail(e.currentTarget.value);
   };
+
   const inputPwdHandler = (e) => {
     setInputPwd(e.currentTarget.value);
     console.log(inputPwd);
@@ -87,4 +88,4 @@ function DeleteUser() {
   );
 }
 
-export { DeleteUser };
+export default DeleteUser;

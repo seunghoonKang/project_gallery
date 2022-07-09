@@ -13,6 +13,7 @@ const Div = styled.div`
 `;
 
 function Login() {
+  console.log('Login');
   const [user, setUser] = useState();
   const [inputEmail, seInputEmail] = useState('');
   const [inputPwd, setInputPwd] = useState('');
@@ -113,4 +114,4 @@ function Login() {
   );
 }
 
-export { Login };
+export default Login;
