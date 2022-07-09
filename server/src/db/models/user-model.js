@@ -17,7 +17,7 @@ export class UserModel {
   }
 
   // 계정 조회 - 이메일
-  async findById(email) {
+  async findByEmail(email) {
     const user = await User.findOne({ email });
     return user;
   }
