@@ -4,6 +4,8 @@ import Home from './Home/home';
 
 import { Login, Register, DeleteUser, ReviseUser } from './user';
 
+//const Login=lazy(()=>import('./user/login'))
+//const User = lazy(() => import('./user'));
 import './App.css';
 import HomeNav from './Home/homenav';
 import Proposal from './Proposal/proposal';

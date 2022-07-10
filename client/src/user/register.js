@@ -1,6 +1,7 @@
 import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
+import regExpUtil from '../utils/regExpUtil';
 import axios from 'axios';
 
 const NickName = styled.div`
@@ -38,11 +39,11 @@ function Register() {
   };
 
   //비밀번호 특수문자 등을 확인하는 코드
-  const reg = new RegExp(
-    /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/
-  );
+  // const reg = new RegExp(
+  //   /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/
+  // );
   useEffect(() => {
-    if (reg.test(inputPwd)) {
+    if (regExpUtil.checkPasswordRule(inputPwd)) {
       setInputPwdCheck(true);
     } else {
       setInputPwdCheck(false);
