@@ -43,7 +43,8 @@ const HomeNav = () => {
 };
 
 const NavContainer = styled.nav`
-  position: fixed;
+  position: sticky;
+  top: 0px;
   color: #ccc;
   width: 100vw;
   height: 70px;
@@ -64,8 +65,6 @@ const LogoName = styled.div`
 `;
 
 const Navigations = styled.div`
-  margin-top: 22px;
-
   & a {
     text-decoration: none;
     color: #ccc;
@@ -80,6 +79,7 @@ const Navigations = styled.div`
 
   & ul,
   li {
+    margin-top: 11px;
     margin-left: 2rem;
     float: left;
     list-style: none;
@@ -89,6 +89,9 @@ const Navigations = styled.div`
 const LoginNav = styled.div`
   display: relative;
   float: right;
+  margin-top: 22px;
+  margin-left: 50px;
+  padding-left: 50px;
   font-size: 1rem;
   :hover {
     cursor: pointer;
