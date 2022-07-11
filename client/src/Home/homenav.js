@@ -25,7 +25,7 @@ const HomeNav = () => {
       <Link to={'/'}>
         <LogoName>Gallery</LogoName>
       </Link>
-    
+
       <Navigations>
         {navs.map((nav, index) => {
           return (
@@ -65,8 +65,6 @@ const LogoName = styled.div`
 `;
 
 const Navigations = styled.div`
-  
-
   & a {
     text-decoration: none;
     color: #ccc;
