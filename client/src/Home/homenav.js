@@ -5,6 +5,17 @@ import styled from 'styled-components';
 
 const HomeNav = () => {
   const navs = ['Exhibition', 'Proposal', 'Recruitment'];
+  const NavItem = {
+    Recruitment: 'Recruitment',
+    Proposal: 'Proposal',
+    Exhibition: 'Exhibition',
+  };
+  const NavItemKo = {
+    Recruitment: '채용',
+    Proposal: '제안',
+    Exhibition: '전시',
+  };
+  const navItems = Object.values(NavItem);
   const navName = ['전시', '제안', '채용'];
   const [login, setLogin] = useState('로그인');
   const [loginState, setLoginState] = useState(false);
@@ -27,11 +38,20 @@ const HomeNav = () => {
       </Link>
 
       <Navigations>
-        {navs.map((nav, index) => {
+        {/* {navs.map((nav, index) => {
           return (
             <ul key={`${nav}-${index}`}>
               <li>
                 <Link to={nav}>{navName[index]}</Link>
+              </li>
+            </ul>
+          );
+        })} */}
+        {navItems.map((item, index) => {
+          return (
+            <ul key={`${item}-${index}`}>
+              <li>
+                <Link to={item}>{NavItemKo[item]}</Link>
               </li>
             </ul>
           );
