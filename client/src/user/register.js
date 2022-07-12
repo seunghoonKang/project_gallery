@@ -16,8 +16,8 @@ const NickNameCheck = styled.button`
 `;
 
 function Register() {
-  const [user, setUser] = useState();
-  const [inputEmail, seInputEmail] = useState('');
+  const [user, setUser] = useState('');
+  const [inputEmail, setInputEmail] = useState('');
   const [inputPwd, setInputPwd] = useState('');
   const [inputPwd2, setInputPwd2] = useState('');
   const [inputNickname, setInputNickname] = useState('');
@@ -26,7 +26,7 @@ function Register() {
   const [inputPwd2Check, setInputPwd2Check] = useState(false);
 
   const inputEmailHandler = (e) => {
-    seInputEmail(e.currentTarget.value);
+    setInputEmail(e.currentTarget.value);
   };
   const inputPwdHandler = (e) => {
     setInputPwd(e.currentTarget.value);
@@ -72,19 +72,19 @@ function Register() {
         nickName: inputNickname,
       };
       // 회원가입 이후에는 로그인 창으로 가기
-      // axios.post("/api/user/register", body)
-      // .then((res) => { setUser(res.data)})
-      // console.log(user)
 
-      //    if(user===undefined){
-      //       alert('이미 등록된 이메일입니다.')
-      //    }else {
-      //      alert('정상적으로 회원가입이 되었습니다!')
-      //      //window.location.href = '/login';
-      //    }
-      //
+      axios
+        .post('http://localhost:8000/api/user/register', body)
+
+        .then((res) => {
+          alert('회원가입 정상적으로 되었습니다 ');
+          //window.location.href = '/login';
+        })
+        .catch(function (err) {
+          alert(`${err.response.data.reason}`);
+        });
     } else {
-      alert('비밀번호 또는 이메일을 확인해주세요!');
+      alert('비밀번호,이메일,닉네임을 한번 더 확인해주세요');
     }
   };
 
@@ -150,7 +150,7 @@ function Register() {
           <div>
             {inputPwdCheck === false ? (
               <div style={{ color: 'red', fontSize: '12px' }}>
-                최소8자리수이며,숫자,문자,특수문자를 넣어주세요{' '}
+                최소8자리수이며,숫자,문자,특수문자를 넣어주세요
               </div>
             ) : (
               <div style={{ color: 'green', fontSize: '12px' }}>

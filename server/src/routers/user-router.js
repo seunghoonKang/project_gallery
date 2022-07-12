@@ -10,6 +10,7 @@ userRouter.post('/register', async (req, res, next) => {
     const email = req.body.email;
     const nickName = req.body.nickName;
     const password = req.body.password;
+    console.log(email);
 
     // 위 데이터를 유저 db에 추가하기
     const newUser = await userService.addUser({
