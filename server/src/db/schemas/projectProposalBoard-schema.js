@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-const ProposalSchema = new Schema(
+const ProjectProposalBoardSchema = new Schema(
   {
     nickName: {
       type: String,
@@ -11,7 +11,7 @@ const ProposalSchema = new Schema(
       required: true,
     },
     tag: {
-      type: String,
+      type: [String],
       required: true,
     },
     description: {
@@ -25,4 +25,4 @@ const ProposalSchema = new Schema(
   }
 );
 
-export { ProposalSchema };
+export { ProjectProposalBoardSchema };
