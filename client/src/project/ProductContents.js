@@ -11,6 +11,10 @@ const Container = styled.div`
   margin-left: 200px;
   margin-right: 200px;
 `;
+
+const Hr = styled.hr`
+  color: white;
+`;
 const nickname = '프로젝트생산자 이게 나다';
 const tag = ['c', 'c++', 'java'];
 const title = '쇼핑몰 프로젝트';
@@ -34,10 +38,14 @@ function ProductContents() {
             );
           })}
         </Stack>
-        <hr style={{ color: 'white' }}></hr>
+        <Hr />
         <h2 style={{ color: 'white' }}>{title}</h2>
-        <hr style={{ color: 'white' }}></hr>
-        <div style={{ color: 'white' }}>{contents}</div>
+        <Hr />
+        <div
+          style={{ color: 'white', borderStyle: 'solid', borderColor: 'white' }}
+        >
+          {contents}
+        </div>
       </Container>
     </>
   );
