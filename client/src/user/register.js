@@ -78,7 +78,7 @@ function Register() {
 
         .then((res) => {
           alert('회원가입 정상적으로 되었습니다 ');
-          //window.location.href = '/login';
+          window.location.href = '/login';
         })
         .catch(function (err) {
           alert(`${err.response.data.reason}`);
