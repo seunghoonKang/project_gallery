@@ -23,8 +23,6 @@ const HomeNav = () => {
   const handleLogin = () => {
     if (login === '로그인') {
       navigate('/login');
-
-      //<Link to={'/login'}></Link>;
     }
     // 1. 토큰 여부 확인, 로그인 한 사람 누군지 확인.
     // 2. db에서 로그인 한 사람의 닉네임을 보여주도록
@@ -38,15 +36,6 @@ const HomeNav = () => {
       </Link>
 
       <Navigations>
-        {/* {navs.map((nav, index) => {
-          return (
-            <ul key={`${nav}-${index}`}>
-              <li>
-                <Link to={nav}>{navName[index]}</Link>
-              </li>
-            </ul>
-          );
-        })} */}
         {navItems.map((item, index) => {
           return (
             <ul key={`${item}-${index}`}>
