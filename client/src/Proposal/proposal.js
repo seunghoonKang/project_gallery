@@ -29,14 +29,13 @@ const Container = styled.div`
   grid-template-rows: repeat(3, 1fr);
   grid-gap: 10px;
   width: 80%;
-  height: 1152px;
   margin: 100px auto auto auto;
 `;
 
 const Section = styled.section`
-  width: 100%;
-  height: 1500px;
-  padding: 32px 16px;
+  /* width: 100%;
+  height: 100%;
+  padding: 32px 16px; */
 
   background-color: #27262b;
   & h2,
