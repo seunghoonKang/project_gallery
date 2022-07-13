@@ -7,7 +7,6 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Fab from '@mui/material/Fab';
 import styled from 'styled-components';
 
 const CardContents = () => {
