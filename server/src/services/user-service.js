@@ -95,11 +95,15 @@ class UserService {
   }
 
   async recheckPassword(loginInfo) {
-    const { userId, password } = loginInfo;
+    const { userId, inputPassword } = loginInfo;
     const user = await this.userModel.findById(userId);
+    const correctPasswordHash = user.password;
 
     // 비밀번호 일치 여부 확인
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    const isPasswordCorrect = await bcrypt.compare(
+      inputPassword,
+      correctPasswordHash
+    );
 
     if (!isPasswordCorrect) {
       throw new Error(
