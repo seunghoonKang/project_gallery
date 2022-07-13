@@ -94,30 +94,28 @@ class UserService {
     return { email, nickName, role };
   }
 
-  // 유저 정보 수정, 현재 비밀번호가 있어야 수정 가능함.
-  async editUserInfo(userInfoRequired, toUpdate) {
-    // 객체 destructuring
-    const { userId, currentPassword } = userInfoRequired;
+  async recheckPassword(loginInfo) {
+    const { userId, password } = loginInfo;
+    const user = await this.userModel.findById(userId);
 
+    // 비밀번호 일치 여부 확인
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordCorrect) {
+      throw new Error(
+        '비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.'
+      );
+    }
+  }
+
+  // 유저 정보 수정
+  async editUserInfo(userId, toUpdate) {
     // 우선 해당 id의 유저가 db에 있는지 확인
     let user = await this.userModel.findById(userId);
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!user) {
       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
-    }
-
-    // 비밀번호 일치 여부 확인 -> 이미 확인하고 온 것이라면 필요없음
-    const correctPasswordHash = user.password;
-    const isPasswordCorrect = await bcrypt.compare(
-      currentPassword,
-      correctPasswordHash
-    );
-
-    if (!isPasswordCorrect) {
-      throw new Error(
-        '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.'
-      );
     }
 
     // 비밀번호도 변경하는 경우에는, 회원가입 때처럼 해쉬화 해주어야 함.
