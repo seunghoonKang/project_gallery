@@ -11,8 +11,11 @@ import Fab from '@mui/material/Fab';
 import styled from 'styled-components';
 
 const CardContents = () => {
+  const handleCardClick = () => {
+    alert('누르면 넘어가게할거야');
+  };
   return (
-    <CardHoverEffect>
+    <CardHoverEffect onClick={handleCardClick}>
       {' '}
       <Card sx={{ maxWidth: 300, p: 1, background: '#111827', color: 'white' }}>
         <CardMedia
