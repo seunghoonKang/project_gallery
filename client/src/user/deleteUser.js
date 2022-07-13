@@ -22,19 +22,18 @@ function DeleteUser() {
       password: inputPwd,
     };
 
-    axios.post('/', body).then((res) => {
-      const user = res.data;
-      console.log(user.token);
-      if (user.token == undefined) {
-        alert('등론된 아이디가 없거나 비밀번호나 아이디가 틀립니다 ');
-      } else {
-        console.log(res.data);
-        setUser(res.data);
-        localStorage.setItem('token', user.token);
-        localStorage.setItem('role', user.role);
-        // window.location.href = '/';
-      }
-    });
+    axios
+      .post('http://localhost:8000/api/user/delete', body)
+      .then((res) => {
+        alert('회원탈퇴가 정상적으로 되었습니다 ');
+        const user = res.data;
+        console.log(user.token);
+        localStorage.getItem('token', user.token);
+        window.location.href = '/';
+      })
+      .catch(function (err) {
+        alert(`${err.response.data.reason}`);
+      });
   };
 
   return (

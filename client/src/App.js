@@ -11,19 +11,28 @@ import { Login, Register, DeleteUser, ReviseUser } from './user';
 import './App.css';
 import HomeNav from './Home/homenav';
 import Proposal from './Proposal/proposal';
+import styled from 'styled-components';
+
+const Body = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #27262b;
+`;
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
-        <HomeNav />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/Proposal" element={<Proposal />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="projectDetail" element={<ProjectDetail />} />
-        </Routes>
-      </div>
+      <Body>
+        <div className="App">
+          <HomeNav />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/Proposal" element={<Proposal />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="projectDetail" element={<ProjectDetail />} />
+          </Routes>
+        </div>
+      </Body>
     </BrowserRouter>
   );
 }
