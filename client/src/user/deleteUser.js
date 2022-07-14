@@ -1,5 +1,5 @@
 import { Form, Button } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 function DeleteUser() {
