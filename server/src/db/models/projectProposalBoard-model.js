@@ -11,7 +11,8 @@ export class ProjectProposalBoardModel {
   }
 
   // 프로젝트 제안 생성
-  async createTitle(titleInfo) {
+  async insertTitle(titleInfo) {
+    console.log('모델임');
     const newProposal = await ProjectProposalBoard.create(titleInfo);
     return newProposal;
   }

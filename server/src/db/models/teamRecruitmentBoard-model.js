@@ -2,7 +2,7 @@ import { model } from 'mongoose';
 import { TeamRecruitmentBoardSchema } from '../schemas/teamRecruitmentBoard-schema';
 
 const TeamRecruitmentBoard = model(
-  'teamRecruitmentBoards',
+  'teamRecruitments',
   TeamRecruitmentBoardSchema
 );
 

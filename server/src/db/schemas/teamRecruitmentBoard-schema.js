@@ -14,10 +14,10 @@ const TeamRecruitmentBoardSchema = new Schema(
       type: String,
       required: false,
     },
-    career: {
-      type: Number,
-      required: true,
-    },
+    // career: {
+    //   type: Number,
+    //   required: true,
+    // },
     tag: {
       type: [String],
       required: true,
@@ -28,8 +28,9 @@ const TeamRecruitmentBoardSchema = new Schema(
     },
   },
   {
-    collection: 'teamRecruitmentBoard',
+    collection: 'teamRecruitments',
     timestamps: true,
+    versionKey: false,
   }
 );
 
