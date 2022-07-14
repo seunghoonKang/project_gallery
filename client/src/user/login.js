@@ -1,5 +1,5 @@
 import { Form, Button } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -13,23 +13,16 @@ const Div = styled.div`
 `;
 
 function Login() {
-  const [user, setUser] = useState();
   const [inputEmail, seInputEmail] = useState('');
   const [inputPwd, setInputPwd] = useState('');
 
-  const inputEmailHandler = (e) => {
+  const onInputEmailHandler = (e) => {
     seInputEmail(e.currentTarget.value);
   };
-  const inputPwdHandler = (e) => {
+  const onInputPwdHandler = (e) => {
     setInputPwd(e.currentTarget.value);
     console.log(inputPwd);
   };
-
-  // token 어디 넣을지
-  function check(e) {
-    if (!e) {
-    }
-  }
 
   const register = (e) => {
     window.location.href = '/register';
@@ -80,7 +73,7 @@ function Login() {
             type="email"
             placeholder="Enter email"
             value={inputEmail}
-            onChange={inputEmailHandler}
+            onChange={onInputEmailHandler}
           />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
@@ -93,7 +86,7 @@ function Login() {
             type="password"
             placeholder="Password"
             value={inputPwd}
-            onChange={inputPwdHandler}
+            onChange={onInputPwdHandler}
           />
         </Form.Group>
         <Button

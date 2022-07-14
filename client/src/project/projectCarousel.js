@@ -1,5 +1,4 @@
 import Carousel from 'react-bootstrap/Carousel';
-import styled from 'styled-components';
 
 const images = [
   'https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E',
