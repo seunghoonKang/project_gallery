@@ -2,7 +2,7 @@ import Carousel from 'react-bootstrap/Carousel';
 
 const images = [
   'https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E',
-  'https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E',
+  'https://images.mypetlife.co.kr/content/uploads/2019/09/09152937/blind-dog-2-1536x1024.jpg',
 ];
 
 function ProjectCarousel() {
@@ -22,7 +22,7 @@ function ProjectCarousel() {
               <img
                 className="d-block w-100"
                 src={images[i]}
-                style={{ height: '100wh' }}
+                style={{ maxHeight: '500px', maxWidth: '100%' }}
                 alt="First slide"
               />
             </Carousel.Item>

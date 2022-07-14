@@ -45,7 +45,7 @@ function Login() {
         console.log(user.token);
         localStorage.setItem('token', user.token);
 
-        // window.location.href = '/';
+        window.location.href = '/';
       })
       .catch(function (err) {
         alert(`${err.response.data.reason}`);
