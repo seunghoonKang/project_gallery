@@ -21,7 +21,6 @@ function Login() {
   };
   const onInputPwdHandler = (e) => {
     setInputPwd(e.currentTarget.value);
-    console.log(inputPwd);
   };
 
   const register = (e) => {
@@ -41,11 +40,12 @@ function Login() {
     axios
       .post('http://localhost:8000/api/user/login', body)
       .then((res) => {
-        alert('회원가입 정상적으로 되었습니다 ');
+        alert(' 정상적으로 로그인 되었습니다 ');
         const user = res.data;
         console.log(user.token);
-        localStorage.getItem('token', user.token);
-        window.location.href = '/';
+        localStorage.setItem('token', user.token);
+
+        // window.location.href = '/';
       })
       .catch(function (err) {
         alert(`${err.response.data.reason}`);
