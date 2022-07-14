@@ -5,13 +5,15 @@ import Stack from '@mui/material/Stack';
 
 const nickname = '프로젝트생산자 ';
 const tag = ['c', 'c++', 'java'];
-const title = '쇼핑몰 프로젝트';
+const projectName = '쇼핑몰 프로젝트';
+const url = 'http:url올거임';
+const time = '처음올린시간';
 const contents = '프로젝트는 ... 궁시렁';
 
 function ProductContents() {
   return (
     <>
-      <div style={{ backgroundColor: '#27262b' }}>
+      <div style={{ backgroundColor: '#27262b', color: 'white' }}>
         <Container>
           <Nick>{nickname}</Nick>
           <Stack direction="row" spacing={1}>
@@ -28,7 +30,9 @@ function ProductContents() {
             })}
           </Stack>
           <Hr />
-          <h2 style={{ color: 'white' }}>{title}</h2>
+          <h2>{projectName}</h2>
+          <div>{url}</div>
+          <div style={{ fontSize: '12px' }}>{time}</div>
           <Hr />
           <ContentsContainer>{contents}</ContentsContainer>
         </Container>

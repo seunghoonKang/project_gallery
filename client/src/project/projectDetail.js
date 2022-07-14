@@ -1,5 +1,5 @@
 import ProjectCarousel from './projectCarousel';
-import ProductContents from './ProductContents';
+import ProjectContents from './projectContents';
 import styled from 'styled-components';
 
 const Body = styled.div`
@@ -12,7 +12,7 @@ function ProjectDetail() {
   return (
     <>
       <ProjectCarousel />
-      <ProductContents />
+      <ProjectContents />
     </>
   );
 }
