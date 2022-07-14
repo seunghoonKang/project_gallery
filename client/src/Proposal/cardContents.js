@@ -16,7 +16,7 @@ const CardContents = () => {
   return (
     <CardHoverEffect onClick={handleCardClick}>
       {' '}
-      <Card sx={{ maxWidth: 300, p: 1, background: '#111827', color: 'white' }}>
+      <Card sx={{ maxWidth: 350, p: 1, background: '#111827', color: 'white' }}>
         <CardMedia
           component="img"
           height="180"
