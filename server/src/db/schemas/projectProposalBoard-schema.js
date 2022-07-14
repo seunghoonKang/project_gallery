@@ -22,6 +22,7 @@ const ProjectProposalBoardSchema = new Schema(
   {
     collection: 'proposals',
     timestamps: true,
+    versionKey: false,
   }
 );
 
