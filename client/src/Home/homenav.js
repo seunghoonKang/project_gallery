@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const HomeNav = () => {
-  const navs = ['Exhibition', 'Proposal', 'Recruitment'];
   const NavItem = {
     Recruitment: 'Recruitment',
     Proposal: 'Proposal',
@@ -16,25 +15,44 @@ const HomeNav = () => {
     Exhibition: '전시',
   };
   const navItems = Object.values(NavItem);
-  const navName = ['전시', '제안', '채용'];
-  const [login, setLogin] = useState('로그인');
-  const [loginState, setLoginState] = useState(false);
   const navigate = useNavigate();
+
+  const [loginState, setLoginState] = useState(false);
+  const [nickName, setNickname] = useState('00님');
+  const token = localStorage.getItem('token');
+
   const handleLogin = () => {
-    if (login === '로그인') {
-      navigate('/login');
-    }
-    // 1. 토큰 여부 확인, 로그인 한 사람 누군지 확인.
-    // 2. db에서 로그인 한 사람의 닉네임을 보여주도록
-    // 3. setLogin(`${닉네임}님 반갑습니다.`) ?
+    navigate('/login');
   };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setLoginState(false);
+  };
+
+  useEffect(() => {
+    if (token) {
+      setLoginState(true);
+      console.log(token);
+      async function checkNickname() {
+        const url = 'http://localhost:8000/api/user/info';
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const nickName = response.data.nickName;
+        setNickname(nickName);
+      }
+      checkNickname();
+    }
+  }, []);
 
   return (
     <NavContainer>
       <Link to={'/'}>
         <LogoName>Gallery</LogoName>
       </Link>
-
       <Navigations>
         {navItems.map((item, index) => {
           return (
@@ -46,7 +64,14 @@ const HomeNav = () => {
           );
         })}
       </Navigations>
-      <LoginNav onClick={handleLogin}>{login}</LoginNav>
+      {loginState ? (
+        <div>
+          <LogoutNav onClick={handleLogout}>로그아웃</LogoutNav>
+          <LogoutNav>{nickName} 님, 반갑습니다.</LogoutNav>
+        </div>
+      ) : (
+        <LoginNav onClick={handleLogin}>로그인</LoginNav>
+      )}
     </NavContainer>
   );
 };
@@ -96,6 +121,18 @@ const Navigations = styled.div`
 `;
 
 const LoginNav = styled.div`
+  display: relative;
+  float: right;
+  margin-top: 22px;
+  margin-left: 50px;
+  padding-left: 50px;
+  font-size: 1rem;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const LogoutNav = styled.div`
   display: relative;
   float: right;
   margin-top: 22px;
