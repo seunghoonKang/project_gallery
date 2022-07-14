@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './Home/home';
 import Footer from './footer/Footer';
-import { ProjectDetail } from './project';
+import { ProjectDetail } from './project/projectDetail';
 
 import { Login, Register, DeleteUser, ReviseUser } from './user';
 
@@ -11,6 +11,14 @@ import { Login, Register, DeleteUser, ReviseUser } from './user';
 import './App.css';
 import HomeNav from './Home/homenav';
 import Proposal from './Proposal/proposal';
+import styled from 'styled-components';
+
+const Body = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #27262b;
+  background-size: cover;
+`;
 function App() {
   return (
     <BrowserRouter>

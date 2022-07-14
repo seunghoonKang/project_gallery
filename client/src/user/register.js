@@ -25,16 +25,16 @@ function Register() {
   const [inputPwdCheck, setInputPwdCheck] = useState(false);
   const [inputPwd2Check, setInputPwd2Check] = useState(false);
 
-  const inputEmailHandler = (e) => {
+  const onInputEmailHandler = (e) => {
     setInputEmail(e.currentTarget.value);
   };
-  const inputPwdHandler = (e) => {
+  const onInputPwdHandler = (e) => {
     setInputPwd(e.currentTarget.value);
   };
-  const inputPwd2Handler = (e) => {
+  const onInputPwd2Handler = (e) => {
     setInputPwd2(e.currentTarget.value);
   };
-  const inputNicHandler = (e) => {
+  const onInputNicHandler = (e) => {
     setInputNickname(e.currentTarget.value);
   };
 
@@ -78,7 +78,7 @@ function Register() {
 
         .then((res) => {
           alert('회원가입 정상적으로 되었습니다 ');
-          //window.location.href = '/login';
+          window.location.href = '/login';
         })
         .catch(function (err) {
           alert(`${err.response.data.reason}`);
@@ -110,7 +110,7 @@ function Register() {
             type="email"
             placeholder="Enter email"
             value={inputEmail}
-            onChange={inputEmailHandler}
+            onChange={onInputEmailHandler}
           />
 
           <Form.Text className="text-muted">
@@ -127,7 +127,7 @@ function Register() {
               type="string"
               placeholder="Enter nickName"
               value={inputNickname}
-              onChange={inputNicHandler}
+              onChange={onInputNicHandler}
             />
             <NickNameCheck required>닉네임 중복</NickNameCheck>
           </NickName>
@@ -145,7 +145,7 @@ function Register() {
             type="password"
             placeholder="Password"
             value={inputPwd}
-            onChange={inputPwdHandler}
+            onChange={onInputPwdHandler}
           />
           <div>
             {inputPwdCheck === false ? (
@@ -168,7 +168,7 @@ function Register() {
             type="password"
             placeholder="Password"
             value={inputPwd2}
-            onChange={inputPwd2Handler}
+            onChange={onInputPwd2Handler}
           />
           <div>
             {inputPwd2Check === false ? (

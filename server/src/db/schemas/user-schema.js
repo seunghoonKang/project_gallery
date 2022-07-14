@@ -23,6 +23,7 @@ const UserSchema = new Schema(
   {
     collection: 'users',
     timestamps: true,
+    versionKey: false,
   }
 );
 
