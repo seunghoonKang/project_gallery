@@ -1,12 +1,12 @@
-/* .App {
+.App {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: #27262b;
-  max-width: calc(
+  /* max-width: calc(
     var(--center-abs-margin) + var(--center-width) + var(--rhs-margin) +
       var(--rhs-width)
-  );
-} */
+  ); */
+}
