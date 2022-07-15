@@ -11,14 +11,7 @@ import { Login, Register, DeleteUser, ReviseUser } from './user';
 import './App.css';
 import HomeNav from './Home/homenav';
 import Proposal from './Proposal/proposal';
-import styled from 'styled-components';
 
-const Body = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: #27262b;
-  background-size: cover;
-`;
 function App() {
   return (
     <BrowserRouter>
