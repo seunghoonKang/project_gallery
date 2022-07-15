@@ -33,7 +33,6 @@ const HomeNav = () => {
   useEffect(() => {
     if (token) {
       setLoginState(true);
-      console.log(token);
       async function checkNickname() {
         const url = 'http://localhost:8000/api/user/info';
         const response = await axios.get(url, {
