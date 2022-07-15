@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import CardContent from './cardContents';
 import PaginationContents from './paginationContents';
+import WriteComp from './writeComponent';
 const Proposal = () => {
   return (
     <Section>
@@ -8,6 +9,7 @@ const Proposal = () => {
       <h5>다양한 아이디어를 제안합니다. </h5>
       <h5>이런 아이디어는 어떠신가요 ?!</h5>
       <PaginationContents />
+      <WriteComp />
       <Container>
         <CardContent />
         <CardContent />
@@ -24,13 +26,14 @@ const Proposal = () => {
 };
 
 const Container = styled.div`
-  border: 1px solid white;
+  border-top: 1px solid white;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-template-rows: repeat(3, 1fr);
-  grid-gap: 10px;
+  grid-gap: 5px;
   width: 80%;
-  margin: 100px auto auto auto;
+  margin: 75px auto auto auto;
+  padding-top: 20px;
 `;
 
 const Section = styled.section`

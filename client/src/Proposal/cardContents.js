@@ -64,10 +64,12 @@ const CardContents = () => {
           </div>
         </CardContent>
         <CardActions>
-          <Button size="small" textAlign="center">
+          <Button size="small" textAlign="center" variant="outlined">
             공유하기
           </Button>
-          <Button size="small">더 보기</Button>
+          <Button size="small" variant="outlined">
+            더 보기
+          </Button>
         </CardActions>
         <Stack direction="row" spacing={1}>
           {tags}
