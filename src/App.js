@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './Home/home';
-
 import { Login, Register, DeleteUser, ReviseUser } from './user';
 
 //const Login=lazy(()=>import('./user/login'))
