@@ -8,9 +8,13 @@ class write extends Component {
   render() {
 
     return (
-        <div>
+        <div className='Write'>
           <div>
-            <h2> This is Write Page </h2>
+            <input type ='text' id='title_txt' name='title' placeholder='제목'/>
+          </div>
+
+          <div>
+            <textarea id='content_txt' name='contents' placeholder='내용을 입력하세요.'> </textarea>
           </div>
         </div>
     );
