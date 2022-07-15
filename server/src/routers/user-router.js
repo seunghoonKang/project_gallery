@@ -84,7 +84,7 @@ userRouter.get('/recheck', loginRequired, async (req, res, next) => {
     const userId = req.currentUserId;
     const inputPassword = req.body.password;
 
-    userService.recheckPassword({ userId, inputPassword });
+    await userService.recheckPassword({ userId, inputPassword });
 
     res.status(200).json({ result: '비밀번호가 일치합니다.' });
   } catch (error) {
@@ -95,7 +95,7 @@ userRouter.get('/recheck', loginRequired, async (req, res, next) => {
 // 회원 탈퇴
 userRouter.delete('/delete', loginRequired, async (req, res, next) => {
   try {
-    const deletedUser = userService.deleteUser(req.currentUserId);
+    const deletedUser = await userService.deleteUser(req.currentUserId);
 
     res.status(200).json(deletedUser);
   } catch (error) {
