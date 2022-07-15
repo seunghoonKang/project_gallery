@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 import { useState } from 'react';
 
-const CardContents = () => {
+const CardContents = ({ data }) => {
   // const [page, setPage] = useState(1);
 
   const tags = ['C', 'C++', 'JAVA'].map((tag, index) => {
