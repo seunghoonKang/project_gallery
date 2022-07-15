@@ -6,7 +6,7 @@ const ProjectExhibitionBoard = model(
   ProjectExhibitionBoardSchema
 );
 
-export class ProjectExhibitionBoardModel {
+class ProjectExhibitionBoardModel {
   async create(projectInfo) {
     const newPost = await ProjectExhibitionBoard.create(projectInfo);
     return newPost;
