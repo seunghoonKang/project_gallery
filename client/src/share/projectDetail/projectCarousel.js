@@ -1,11 +1,7 @@
 import Carousel from 'react-bootstrap/Carousel';
+import { useParams } from 'react';
 
-const images = [
-  'https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E',
-  'https://images.mypetlife.co.kr/content/uploads/2019/09/09152937/blind-dog-2-1536x1024.jpg',
-];
-
-function ProjectCarousel() {
+function ProjectCarousel({ exhibitionProject, id }) {
   return (
     <>
       <Carousel
@@ -16,12 +12,12 @@ function ProjectCarousel() {
           padding: 'auto',
         }}
       >
-        {images.map((a, i) => {
+        {exhibitionProject[id].image.map((image, i) => {
           return (
             <Carousel.Item>
               <img
                 className="d-block w-100"
-                src={images[i]}
+                src={image}
                 style={{
                   maxHeight: '500px',
                   maxWidth: '800px',

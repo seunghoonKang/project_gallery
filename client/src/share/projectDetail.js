@@ -2,11 +2,12 @@ import ProjectCarousel from './projectDetail/projectCarousel';
 import ProjectContents from './projectDetail/projectContents';
 import styled from 'styled-components';
 
-function ProjectDetail() {
+function ProjectDetail({ exhibitionProject, id }) {
+  console.log(id);
   return (
     <>
-      <ProjectCarousel />
-      <ProjectContents />
+      <ProjectCarousel exhibitionProject={exhibitionProject} id={id} />
+      <ProjectContents exhibitionProject={exhibitionProject} id={id} />
     </>
   );
 }

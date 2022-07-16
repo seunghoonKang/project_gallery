@@ -1,19 +1,17 @@
-import styled from 'styled-components';
 import React from 'react';
-import CardContent from './cardContents';
-import PaginationContents from './paginationContents';
-import NewPagination from '../share/projectList/pagination';
-import Pagination from 'react-js-pagination';
+import displayData from '../data/data';
+import styled from 'styled-components';
+import CardContent from '../Proposal/cardContents';
+import Pagination from '../share/projectList/pagination';
 import { useState, useEffect } from 'react';
-import PropsalProject from './propsalProject';
-import data from '../data/data';
+import ExhibitionProject from './exhibitionProject';
 
-const Proposal = () => {
+const ExhibitionList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(9);
   const [project, setProject] = useState([]);
   useEffect(() => {
-    setProject(data);
+    setProject(displayData);
   }, []);
   console.log(project);
   const totalPosts = project.length;
@@ -25,19 +23,21 @@ const Proposal = () => {
   //
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  // 공통으로 사용할 거면 밑에 섹션은 각자 적는걸로 하고 밑에 있는 건 그대로 가지고 가서
+  //컴포넌트로 쓰기
   return (
     <Section>
-      <h2>제안</h2>
-      <h5>다양한 아이디어를 제안합니다. </h5>
-      <h5>이런 아이디어는 어떠신가요 ?!</h5>
+      <h2>프로젝트 전시 </h2>
+      <h5>여러 다양한 프로젝트들을 볼 수 있는 기회! </h5>
+      <h5>이런 프로젝트는 어떠신가요 ?!</h5>
 
-      <NewPagination
+      <Pagination
         postsPerPage={postsPerPage}
         totalPosts={totalPosts}
         paginate={paginate}
       />
       <Container>
-        <PropsalProject project={currentPosts}></PropsalProject>
+        <ExhibitionProject project={currentPosts}></ExhibitionProject>
       </Container>
     </Section>
   );
@@ -63,4 +63,4 @@ const Section = styled.section`
   }
 `;
 
-export default Proposal;
+export default ExhibitionList;

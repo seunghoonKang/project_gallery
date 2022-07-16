@@ -5,12 +5,6 @@ import Stack from '@mui/material/Stack';
 import ShareIcon from '@mui/icons-material/Share';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-const nickname = '프로젝트생산자 ';
-const tag = ['c', 'c++', 'java'];
-const projectName = '쇼핑몰 프로젝트';
-const url = 'http:url올거임';
-const time = '처음올린시간';
-const contents = '프로젝트는 ... 궁시렁';
 //url공유하는 코드
 function urlShare() {
   const getUrl = window.location.href;
@@ -19,23 +13,25 @@ function urlShare() {
   });
 }
 
-function projectShare() {
-  navigator.clipboard.writeText(url).then(() => {
-    alert('링크를 복사했습니다');
-  });
-}
+function ProductContents({ exhibitionProject, id }) {
+  console.log(exhibitionProject);
+  console.log(id);
 
-function ProductContents() {
+  function projectShare() {
+    navigator.clipboard.writeText(exhibitionProject[id].url).then(() => {
+      alert('링크를 복사했습니다');
+    });
+  }
   return (
     <>
       <div style={{ color: 'white' }}>
         <Container>
-          <Nick>{nickname}</Nick>
+          <Nick>{exhibitionProject[id].nickname}</Nick>
           <Stack direction="row" spacing={1}>
-            {tag.map((a, i) => {
+            {exhibitionProject[id].tags.map((tag, i) => {
               return (
                 <Chip
-                  label={tag[i]}
+                  label={tag}
                   clickable
                   component="a"
                   href="/"
@@ -45,7 +41,10 @@ function ProductContents() {
             })}
           </Stack>
           <Hr />
-          <h2 style={{ display: 'inline-block' }}>{projectName}</h2>
+          <h2 style={{ display: 'inline-block' }}>
+            {exhibitionProject[id].title}
+          </h2>
+          ;
           <h4
             onClick={urlShare}
             style={{
@@ -59,7 +58,9 @@ function ProductContents() {
             ></FavoriteBorderIcon>
           </h4>
           <div>
-            <div style={{ display: 'inline-block' }}>{url}</div>
+            <div style={{ display: 'inline-block' }}>
+              {exhibitionProject[id].url}
+            </div>
             <ShareIcon
               onClick={projectShare}
               style={{
@@ -69,9 +70,11 @@ function ProductContents() {
               }}
             ></ShareIcon>
           </div>
-          <div style={{ fontSize: '12px' }}>{time}</div>
+          <div style={{ fontSize: '12px' }}>{exhibitionProject[id].time}</div>
           <Hr />
-          <ContentsContainer>{contents}</ContentsContainer>
+          <ContentsContainer>
+            {exhibitionProject[id].contents}
+          </ContentsContainer>
         </Container>
       </div>
     </>
