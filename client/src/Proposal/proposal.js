@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import PropsalProject from './propsalProject';
 import data from './data';
 
-// 페이지네이션을 적용할려고 제가 따로만든 propsal입니다~ 아직 버튼스타일이랑
+// 페이지네이션을 적용할려고 새로 컴포넌트를 적용한  propsal입니다~ 아직 버튼스타일이랑
 // 디자인을 고치고 있는중입니다~
 const Proposal = () => {
   const [currentPage, setCurrentPage] = useState(1);
