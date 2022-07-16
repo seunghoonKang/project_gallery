@@ -15,3 +15,6 @@ db.on('error', (error) =>
 );
 
 export * from './models/user-model';
+export * from './models/projectExhibitionBoard-model';
+export * from './models/projectProposalBoard-model';
+export * from './models/teamRecruitmentBoard-model';
