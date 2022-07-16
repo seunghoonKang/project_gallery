@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
-const Posts = ({ project }) => {
+const PropsalProject = ({ project }) => {
   const handleCardClick = () => {
     alert('누르면 넘어가게할거야');
   };
@@ -18,6 +18,7 @@ const Posts = ({ project }) => {
       {project.map((project, i) => {
         return (
           <Card
+            classname="propsalCard"
             sx={{ maxWidth: 350, p: 1, background: '#111827', color: 'white' }}
           >
             <CardMedia
@@ -95,4 +96,4 @@ const CardHoverEffect = styled.div`
   }
 `;
 
-export default Posts;
+export default PropsalProject;

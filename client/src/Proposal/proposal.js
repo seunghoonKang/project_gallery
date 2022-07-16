@@ -2,14 +2,17 @@ import styled from 'styled-components';
 import React from 'react';
 import CardContent from './cardContents';
 import PaginationContents from './paginationContents';
-import NewPagination from './newPagination';
+import NewPagination from './pagination';
 import Pagination from 'react-js-pagination';
 import { useState, useEffect } from 'react';
-import Project from './posts';
+import PropsalProject from './propsalProject';
 import data from './data';
+
+// 페이지네이션을 적용할려고 제가 따로만든 propsal입니다~ 아직 버튼스타일이랑
+// 디자인을 고치고 있는중입니다~
 const Proposal = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [postsPerPage, setPostsPerPage] = useState(9);
   const [project, setProject] = useState([]);
   useEffect(() => {
     setProject(data);
@@ -36,7 +39,7 @@ const Proposal = () => {
         paginate={paginate}
       />
       <Container>
-        <Project project={currentPosts}></Project>
+        <PropsalProject project={currentPosts}></PropsalProject>
       </Container>
     </Section>
   );
