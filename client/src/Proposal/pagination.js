@@ -7,23 +7,24 @@ const NewPagination = ({ postsPerPage, totalPosts, paginate }) => {
     pageNumbers.push(i);
   }
   return (
-    <nav>
-      <ul>
-        {pageNumbers.map((number) => {
-          return (
-            <li key={number} className="page-item">
+    <div>
+      {pageNumbers.map((number) => {
+        return (
+          <div className="pagenation">
+            <div key={number}>
               <a
                 href="#"
                 onClick={(e) => paginate(number)}
                 className='"page-link'
+                style={{ float: 'center' }}
               >
                 {number}
               </a>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 };
 export default NewPagination;
