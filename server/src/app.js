@@ -2,6 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import {
   userRouter,
+  projectExhibitionBoardRouter,
   projectProposalBoardRouter,
   teamRecruitmentBoardRouter,
 } from './routers';
