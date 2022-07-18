@@ -2,8 +2,10 @@ import cors from 'cors';
 import express from 'express';
 import {
   userRouter,
+  projectExhibitionBoardRouter,
   projectProposalBoardRouter,
   teamRecruitmentBoardRouter,
+  commentRouter,
 } from './routers';
 import { errorHandler } from './middlewares';
 
@@ -20,6 +22,7 @@ app.use('/api/user', userRouter);
 app.use('/api/exhibition', projectExhibitionBoardRouter);
 app.use('/api/Proposal', projectProposalBoardRouter);
 app.use('/api/Recruitment', teamRecruitmentBoardRouter);
+app.use('api/Comment', commentRouter);
 
 app.use(errorHandler);
 
