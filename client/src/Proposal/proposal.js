@@ -2,16 +2,13 @@ import styled from 'styled-components';
 import React from 'react';
 import CardContent from './cardContents';
 import PaginationContents from './paginationContents';
-<<<<<<< HEAD
 import WriteComp from './writeComponent';
-=======
 import NewPagination from '../share/projectList/pagination';
 import Pagination from 'react-js-pagination';
 import { useState, useEffect } from 'react';
 import PropsalProject from './propsalProject';
 import data from '../data/data';
 
->>>>>>> origin/dev
 const Proposal = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(9);
@@ -34,17 +31,13 @@ const Proposal = () => {
       <h2>제안</h2>
       <h5>다양한 아이디어를 제안합니다. </h5>
       <h5>이런 아이디어는 어떠신가요 ?!</h5>
-<<<<<<< HEAD
       <PaginationContents />
       <WriteComp />
-=======
-
       <NewPagination
         postsPerPage={postsPerPage}
         totalPosts={totalPosts}
         paginate={paginate}
       />
->>>>>>> origin/dev
       <Container>
         <PropsalProject project={currentPosts}></PropsalProject>
       </Container>

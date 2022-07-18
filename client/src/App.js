@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './Home/home';
+import Home from './home/home';
 import Footer from './footer/Footer';
 import { ExhibitionDetail } from './exhibition/exhibitionDetailt';
 
@@ -10,10 +10,12 @@ import { Login, Register, DeleteUser, ReviseUser } from './user';
 //const Login=lazy(()=>import('./user/login'))
 //const User = lazy(() => import('./user'));
 import './App.css';
-import HomeNav from './Home/homenav';
+import HomeNav from './home/homenav';
 import Proposal from './Proposal/proposal';
 import ExhibitionList from './exhibition/exhibitionListPages';
 import exhibitionProject from './data/data';
+
+import InputProject from './inputProject/inputProject';
 
 console.log(exhibitionProject);
 function App() {
@@ -36,6 +38,7 @@ function App() {
             }
           />
           <Route path="/Exhibition" element={<ExhibitionList />} />
+          <Route path="/inputTest" element={<InputProject />} />
         </Routes>
       </div>
     </BrowserRouter>

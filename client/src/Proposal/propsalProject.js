@@ -19,7 +19,12 @@ const PropsalProject = ({ project }) => {
         return (
           <Card
             classname="propsalCard"
-            sx={{ maxWidth: 350, p: 1, background: '#111827', color: 'white' }}
+            sx={{
+              maxWidth: 350,
+              p: 1,
+              background: '#111827',
+              color: 'white',
+            }}
           >
             <CardMedia
               key={i}
