@@ -1,25 +1,20 @@
 import { Router } from 'express';
-
 import { loginRequired } from '../middlewares';
 import { teamRecruitmentBoardService } from '../services';
 
 const teamRecruitmentBoardRouter = Router();
 
 // 팀원 모집 조회 api 호출
-teamRecruitmentBoardRouter.get(
-  '/info',
-  loginRequired,
-  async (req, res, next) => {
-    try {
-      const teams = await teamRecruitmentBoardService.getTeamRecruitmentBoard(
-        nickName
-      );
-      res.status(201).json(teams);
-    } catch (error) {
-      next(error);
-    }
+teamRecruitmentBoardRouter.get('/info', async (req, res, next) => {
+  try {
+    const teams = await teamRecruitmentBoardService.getTeamRecruitmentBoard(
+      nickName
+    );
+    res.status(201).json(teams);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 // 팀원 모집 추가 api 호출
 teamRecruitmentBoardRouter.post(
@@ -68,11 +63,11 @@ teamRecruitmentBoardRouter.patch(
     try {
       const { nickName, _id, title, position, tag, description } = req.body;
 
-      const title_origin =
+      const recruitment_origin =
         await teamRecruitmentBoardService.getTeamRecruitmentBoard(_id);
 
-      if (title_origin.nickName !== nickName) {
-        throw new Error('제안을 수정할 권한이 없습니다.');
+      if (recruitment_origin.nickName !== nickName) {
+        throw new Error('모집을 수정할 권한이 없습니다.');
       }
 
       const toUpdate = {

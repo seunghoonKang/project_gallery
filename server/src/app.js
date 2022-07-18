@@ -20,9 +20,9 @@ app.use(express.urlencoded({ extended: false }));
 // /api/login 으로 요청을 해야 하게 됨. 백엔드용 라우팅을 구분하기 위함임.
 app.use('/api/user', userRouter);
 app.use('/api/exhibition', projectExhibitionBoardRouter);
-app.use('/api/Proposal', projectProposalBoardRouter);
-app.use('/api/Recruitment', teamRecruitmentBoardRouter);
-app.use('api/Comment', commentRouter);
+app.use('/api/proposal', projectProposalBoardRouter);
+app.use('/api/recruitment', teamRecruitmentBoardRouter);
+app.use('/api/comment', commentRouter);
 
 app.use(errorHandler);
 
