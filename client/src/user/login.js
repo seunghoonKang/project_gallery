@@ -1,5 +1,5 @@
 import { Form, Button } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -13,23 +13,15 @@ const Div = styled.div`
 `;
 
 function Login() {
-  const [user, setUser] = useState();
   const [inputEmail, seInputEmail] = useState('');
   const [inputPwd, setInputPwd] = useState('');
 
-  const inputEmailHandler = (e) => {
+  const onInputEmailHandler = (e) => {
     seInputEmail(e.currentTarget.value);
   };
-  const inputPwdHandler = (e) => {
+  const onInputPwdHandler = (e) => {
     setInputPwd(e.currentTarget.value);
-    console.log(inputPwd);
   };
-
-  // token 어디 넣을지
-  function check(e) {
-    if (!e) {
-    }
-  }
 
   const register = (e) => {
     window.location.href = '/register';
@@ -45,19 +37,19 @@ function Login() {
       password: inputPwd,
     };
 
-    axios.post('/', body).then((res) => {
-      const user = res.data;
-      console.log(user.token);
-      if (user.token == undefined) {
-        alert('등론된 아이디가 없거나 비밀번호나 아이디가 틀립니다 ');
-      } else {
-        console.log(res.data);
-        setUser(res.data);
+    axios
+      .post('http://localhost:8000/api/user/login', body)
+      .then((res) => {
+        alert(' 정상적으로 로그인 되었습니다 ');
+        const user = res.data;
+        console.log(user.token);
         localStorage.setItem('token', user.token);
-        localStorage.setItem('role', user.role);
+
         window.location.href = '/';
-      }
-    });
+      })
+      .catch(function (err) {
+        alert(`${err.response.data.reason}`);
+      });
   };
 
   return (
@@ -81,7 +73,7 @@ function Login() {
             type="email"
             placeholder="Enter email"
             value={inputEmail}
-            onChange={inputEmailHandler}
+            onChange={onInputEmailHandler}
           />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
@@ -94,7 +86,7 @@ function Login() {
             type="password"
             placeholder="Password"
             value={inputPwd}
-            onChange={inputPwdHandler}
+            onChange={onInputPwdHandler}
           />
         </Form.Group>
         <Button
