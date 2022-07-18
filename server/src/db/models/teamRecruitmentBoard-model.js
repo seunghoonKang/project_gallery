@@ -2,7 +2,7 @@ import { model } from 'mongoose';
 import { TeamRecruitmentBoardSchema } from '../schemas/teamRecruitmentBoard-schema';
 
 const TeamRecruitmentBoard = model(
-  'teamRecruitments',
+  'teamRecruitmentBoards',
   TeamRecruitmentBoardSchema
 );
 
@@ -13,22 +13,16 @@ export class TeamRecruitmentBoardModel {
     return user;
   }
 
-  // 팀원 모집 생성
-  async createTeam(teamInfo) {
-    const newTeam = await TeamRecruitmentBoard.create(teamInfo);
-    return newTeam;
-  }
-
-  // 팀원 모집 삭제
-  async deleteTeam(titleId) {
-    const team = await TeamRecruitmentBoard.findOneAndDelete({ _id: titleId });
-    return team;
-  }
-
   // 모든 팀원 모집 조회
   async findAllTeam() {
     const allTeams = await TeamRecruitmentBoard.find({});
     return allTeams;
+  }
+
+  // 팀원 모집 생성
+  async create(teamInfo) {
+    const newTeam = await TeamRecruitmentBoard.create(teamInfo);
+    return newTeam;
   }
 
   // 팀원 모집 수정
@@ -42,6 +36,12 @@ export class TeamRecruitmentBoardModel {
       option
     );
     return updatedTeam;
+  }
+
+  // 팀원 모집 삭제
+  async delete(titleId) {
+    const team = await TeamRecruitmentBoard.findOneAndDelete({ _id: titleId });
+    return team;
   }
 }
 
