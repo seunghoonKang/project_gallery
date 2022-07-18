@@ -96,8 +96,8 @@ const Hr = styled.hr`
 const ContentsContainer = styled.div`
   color: white;
   border-style: solid;
-  min-width: 800px;
-  min-height: 800px;
+  min-width: 500;
+  min-height: 500px;
   border-width: 1px;
 `;
 const ProjectName = styled.h2`

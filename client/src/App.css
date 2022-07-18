@@ -8,6 +8,8 @@
 .displayTapBox {
   margin-left: 200px;
   margin-right: 200px;
+  color: white;
+  min-height: 500px;
 }
 
 .pagenation {
