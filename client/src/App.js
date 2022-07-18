@@ -15,7 +15,6 @@ import Proposal from './proposal/proposal';
 import ExhibitionList from './exhibition/exhibitionListPages';
 import exhibitionProject from './data/data';
 
-import InputProject from './inputProject/inputProject';
 function App() {
   return (
     <BrowserRouter>
@@ -36,7 +35,6 @@ function App() {
             }
           />
           <Route path="/Exhibition" element={<ExhibitionList />} />
-          <Route path="/inputTest" element={<InputProject />} />
         </Routes>
       </div>
     </BrowserRouter>
