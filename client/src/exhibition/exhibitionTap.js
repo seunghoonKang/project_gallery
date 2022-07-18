@@ -5,11 +5,16 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
+import ExhReviw from './exhReviw';
+//import { styled } from '@emotion/styled';
 const WhiteTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
     backgroundColor: 'white',
   },
 });
+// const CustomTap = styled(Tab)`
+//   background-color: white;
+// `;
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,7 +50,9 @@ function a11yProps(index) {
 }
 function onClickHandler() {}
 
-export default function DisplayTap() {
+export default function ExhibitionTap({ exhibitionProject, id }) {
+  console.log(id);
+  console.log(exhibitionProject[id].contents);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -66,22 +73,25 @@ export default function DisplayTap() {
               className="taps"
               onClick={onClickHandler}
               indicatorColor="white"
-              label="사용후기 및 질문"
+              label={<span style={{ color: 'white' }}>프로젝트 설명</span>}
               {...a11yProps(0)}
             />
-            <Tab label="새로운 버전 " {...a11yProps(1)} />
+            <Tab
+              label={<span style={{ color: 'white' }}>사용후기 및 질문</span>}
+              {...a11yProps(1)}
+            />
             <Tab label="Item Three" {...a11yProps(2)} />
           </WhiteTabs>
         </div>
       </Box>
       <TabPanel value={value} index={0}>
-        Item One
+        {exhibitionProject[id].contents}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <ExhReviw />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        ?
       </TabPanel>
     </Box>
   );
