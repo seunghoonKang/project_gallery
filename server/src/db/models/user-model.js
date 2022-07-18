@@ -3,7 +3,7 @@ import { UserSchema } from '../schemas/user-schema';
 
 const User = model('users', UserSchema);
 
-export class UserModel {
+class UserModel {
   // 계정 생성
   async create(userInfo) {
     const newUser = await User.create(userInfo);
