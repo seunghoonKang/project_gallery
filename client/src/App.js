@@ -11,13 +11,11 @@ import { Login, Register, DeleteUser, ReviseUser } from './user';
 //const User = lazy(() => import('./user'));
 import './App.css';
 import HomeNav from './home/homenav';
-import Proposal from './Proposal/proposal';
+import Proposal from './proposal/proposal';
 import ExhibitionList from './exhibition/exhibitionListPages';
 import exhibitionProject from './data/data';
 
 import InputProject from './inputProject/inputProject';
-
-console.log(exhibitionProject);
 function App() {
   return (
     <BrowserRouter>

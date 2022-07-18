@@ -10,32 +10,18 @@ import {
   Typography,
 } from '@mui/material';
 import styled from 'styled-components';
-import { useState } from 'react';
 
-const CardContents = () => {
+const CardContents = ({ projects }) => {
   // const [page, setPage] = useState(1);
-
-  const tags = ['C', 'C++', 'JAVA'].map((tag, index) => {
-    return (
-      <Chip
-        key={index}
-        label={tag}
-        component="a"
-        href="/"
-        variant="outlined"
-        clickable
-        style={{ backgroundColor: 'white' }}
-      />
-    );
-  });
   const handleCardClick = () => {
     alert('누르면 넘어가게할거야');
   };
-  return (
+  return projects.map((project, index) => {
     <CardHoverEffect>
       {' '}
       <Card sx={{ maxWidth: 350, p: 1, background: '#111827', color: 'white' }}>
         <CardMedia
+          key={index}
           component="img"
           height="180"
           image="https://cdn.pixabay.com/photo/2017/09/25/13/14/dog-2785077_1280.jpg"
@@ -49,7 +35,7 @@ const CardContents = () => {
             component="div"
             textAlign="center"
           >
-            제목
+            {project.title}
           </Typography>
           <div style={{ width: 200, height: 30, whiteSpace: 'nowrap' }}>
             <Typography
@@ -61,7 +47,7 @@ const CardContents = () => {
                 color: 'white',
               }}
             >
-              내용이 들어갑니다. 이런저런 두런두런ㅇㅁㄴㅁㅇㄴㅁㄴㅇㅇㅁㄴ
+              {project.contents}
             </Typography>
           </div>
         </CardContent>
@@ -74,11 +60,23 @@ const CardContents = () => {
           </Button>
         </CardActions>
         <Stack direction="row" spacing={1}>
-          {tags}
+          {project.tags.map((tag, i) => {
+            return (
+              <Chip
+                key={i}
+                label={tag}
+                component="a"
+                href="/"
+                variant="outlined"
+                clickable
+                style={{ backgroundColor: 'gray' }}
+              />
+            );
+          })}
         </Stack>
       </Card>
-    </CardHoverEffect>
-  );
+    </CardHoverEffect>;
+  });
 };
 
 const CardHoverEffect = styled.div`

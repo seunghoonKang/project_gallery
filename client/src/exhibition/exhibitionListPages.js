@@ -1,7 +1,7 @@
 import React from 'react';
 import displayData from '../data/data';
 import styled from 'styled-components';
-import CardContent from '../Proposal/cardContents';
+import CardContent from '../proposal/cardContents';
 import Pagination from '../share/projectList/pagination';
 import { useState, useEffect } from 'react';
 import ExhibitionProject from './exhibitionProject';

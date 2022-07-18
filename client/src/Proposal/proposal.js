@@ -1,45 +1,40 @@
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import React from 'react';
-import CardContent from './cardContents';
 import PaginationContents from './paginationContents';
 import WriteComp from './writeComponent';
-import NewPagination from '../share/projectList/pagination';
-import Pagination from 'react-js-pagination';
-import { useState, useEffect } from 'react';
 import PropsalProject from './propsalProject';
 import data from '../data/data';
 
 const Proposal = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(9);
+  const [postsPerPage, setPostsPerPage] = useState(10);
   const [project, setProject] = useState([]);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = project.slice(indexOfFirstPost, indexOfLastPost);
+
   useEffect(() => {
     setProject(data);
   }, []);
-  console.log(project);
-  const totalPosts = project.length;
-  console.log(totalPosts);
-
-  const inexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = inexOfLastPost - postsPerPage;
-  const currentPosts = project.slice(indexOfFirstPost, inexOfLastPost);
   //
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <Section>
       <h2>제안</h2>
       <h5>다양한 아이디어를 제안합니다. </h5>
       <h5>이런 아이디어는 어떠신가요 ?!</h5>
-      <PaginationContents />
-      <WriteComp />
-      <NewPagination
+      <PaginationContents
+        project={project}
         postsPerPage={postsPerPage}
-        totalPosts={totalPosts}
         paginate={paginate}
+        currentPage={currentPage}
       />
+      <WriteComp />
       <Container>
-        <PropsalProject project={currentPosts}></PropsalProject>
+        <PropsalProject projects={currentPosts} />
       </Container>
     </Section>
   );

@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
 import Pagination from 'react-js-pagination';
 import './paginationContents.css';
 
-const PaginationContents = () => {
-  const [page, setPage] = useState(1);
-  const handlePageChange = (page) => {
-    setPage(page);
-  };
+const PaginationContents = ({
+  project,
+  postsPerPage,
+  paginate,
+  currentPage,
+}) => {
   return (
     <Pagination
-      activePage={page} //현재 페이지
-      itemsCountPerPage={12} // 한 페이지에 몇 개의 아이템(카드)을 보여줄거야?. 일단 12개로 생각해봄
-      totalItemsCount={500} //총 아이템(카드) 수. api후 props {count} 로 받자
-      pageRangeDisplayed={5} //페이지네이터 내에서 보여줄 페이지의 범위
-      prevPageText={'<'} // 이전 버튼
-      nextPageText={'>'} // 이후 버튼
-      onChange={handlePageChange} //페이지 바뀔 때 핸들링함수. props {setPage}로 받고,
+      activePage={currentPage} //현재 페이지
+      itemsCountPerPage={postsPerPage} // 한 페이지에 몇 개의 아이템(카드)을 보여줄거야?.
+      totalItemsCount={project.length} //총 아이템(카드) 수.
+      pageRangeDisplayed={Math.ceil(project.length / postsPerPage)} //페이지네이터가 보여줄 페이지 범위
+      prevPageText={'이전'} // 이전 버튼
+      nextPageText={'다음'} // 이후 버튼
+      onChange={paginate} //페이지 바뀔 때 핸들링함수.
     />
   );
 };

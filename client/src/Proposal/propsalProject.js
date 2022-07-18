@@ -9,15 +9,16 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
-const PropsalProject = ({ project }) => {
+const PropsalProject = ({ projects }) => {
   const handleCardClick = () => {
     alert('누르면 넘어가게할거야');
   };
-  return (
-    <CardHoverEffect>
-      {project.map((project, i) => {
-        return (
+  {
+    return projects.map((project, i) => {
+      return (
+        <CardHoverEffect>
           <Card
+            key={i}
             classname="propsalCard"
             sx={{
               maxWidth: 350,
@@ -69,7 +70,7 @@ const PropsalProject = ({ project }) => {
                 공유하기
               </Button>
               <Button size="small" style={{ color: 'white' }}>
-                더 보기
+                url 바로가기
               </Button>
             </CardActions>
             <Stack direction="row" spacing={1}>
@@ -88,10 +89,10 @@ const PropsalProject = ({ project }) => {
               })}
             </Stack>
           </Card>
-        );
-      })}
-    </CardHoverEffect>
-  );
+        </CardHoverEffect>
+      );
+    });
+  }
 };
 const CardHoverEffect = styled.div`
   :hover {
