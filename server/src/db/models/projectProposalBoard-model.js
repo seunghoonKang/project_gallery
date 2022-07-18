@@ -10,25 +10,16 @@ export class ProjectProposalBoardModel {
     return user;
   }
 
-  // 프로젝트 제안 생성
-  async insertTitle(titleInfo) {
-    console.log('모델임');
-    const newProposal = await ProjectProposalBoard.create(titleInfo);
-    return newProposal;
-  }
-
-  // 프로젝트 제안 삭제
-  async deleteTitle(titleId) {
-    const proposal = await ProjectProposalBoard.findOneAndDelete({
-      _id: titleId,
-    });
-    return proposal;
-  }
-
   // 모든 프로젝트 제안 조회
   async findAllProposal() {
     const allProposals = await ProjectProposalBoard.find({});
     return allProposals;
+  }
+
+  // 프로젝트 제안 생성
+  async create(titleInfo) {
+    const newProposal = await ProjectProposalBoard.create(titleInfo);
+    return newProposal;
   }
 
   // 프로젝트 제안 수정
@@ -42,6 +33,14 @@ export class ProjectProposalBoardModel {
       option
     );
     return updatedProposal;
+  }
+
+  // 프로젝트 제안 삭제
+  async delete(titleId) {
+    const proposal = await ProjectProposalBoard.findOneAndDelete({
+      _id: titleId,
+    });
+    return proposal;
   }
 }
 

@@ -8,7 +8,7 @@ function ExhibitionDetail({ exhibitionProject }) {
   return (
     <>
       <ProjectDetail exhibitionProject={exhibitionProject} id={id} />
-      <ExhibitionTap />
+      <ExhibitionTap exhibitionProject={exhibitionProject} id={id} />
     </>
   );
 }
