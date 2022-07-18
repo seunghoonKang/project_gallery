@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './home/home';
-import Footer from './footer/Footer';
+//import Footer from './footer/Footer';
 import { ExhibitionDetail } from './exhibition/exhibitionDetailt';
 
 import { Login, Register, DeleteUser, ReviseUser } from './user';
@@ -23,7 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/Proposal" element={<Proposal />} />
+          <Route path="/proposal" element={<Proposal />} />
           <Route path="/register" element={<Register />} />
           <Route
             path="/exhibitionDetail/:id"
