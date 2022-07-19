@@ -19,7 +19,7 @@ const HomeCard = () => {
           <Button
             variant="secondary"
             onClick={() => {
-              navigate('Exhibition');
+              navigate('exhibitionList');
             }}
           >
             전시 둘러보기
@@ -38,7 +38,7 @@ const HomeCard = () => {
           <Button
             variant="secondary"
             onClick={() => {
-              navigate('Proposal');
+              navigate('proposalList');
             }}
           >
             제안 둘러보기
@@ -52,12 +52,12 @@ const HomeCard = () => {
           alt="img"
         />
         <Card.Body>
-          <Card.Title>모집</Card.Title>
+          <Card.Title>팀원모집</Card.Title>
           <Card.Text>함께할 동료를 모집합니다 !</Card.Text>
           <Button
             variant="secondary"
             onClick={() => {
-              navigate('Recruitment');
+              navigate('recruitmentList');
             }}
           >
             모집 둘러보기
