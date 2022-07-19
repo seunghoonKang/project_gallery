@@ -2,7 +2,7 @@ import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import regExpUtil from '../utils/regExpUtil';
-import axios from 'axios';
+import userApi from '../api/user/userApi';
 
 const NickName = styled.div`
   display: flex;
@@ -38,10 +38,6 @@ function Register() {
     setInputNickname(e.currentTarget.value);
   };
 
-  //비밀번호 특수문자 등을 확인하는 코드
-  // const reg = new RegExp(
-  //   /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/
-  // );
   useEffect(() => {
     if (regExpUtil.checkPasswordRule(inputPwd)) {
       setInputPwdCheck(true);
@@ -72,17 +68,7 @@ function Register() {
         nickName: inputNickname,
       };
       // 회원가입 이후에는 로그인 창으로 가기
-
-      axios
-        .post('http://localhost:8000/api/user/register', body)
-
-        .then((res) => {
-          alert('회원가입 정상적으로 되었습니다 ');
-          window.location.href = '/login';
-        })
-        .catch(function (err) {
-          alert(`${err.response.data.reason}`);
-        });
+      userApi.registerApi(body);
     } else {
       alert('비밀번호,이메일,닉네임을 한번 더 확인해주세요');
     }

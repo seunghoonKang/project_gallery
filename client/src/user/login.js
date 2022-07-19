@@ -1,7 +1,7 @@
 import { Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import userApi from '../api/user/userApi';
 
 const Div = styled.div`
   font-size: 10px;
@@ -36,9 +36,8 @@ function Login() {
       email: inputEmail,
       password: inputPwd,
     };
-
-    axios
-      .post('http://localhost:8000/api/user/login', body)
+    userApi
+      .loginApi(body)
       .then((res) => {
         alert(' 정상적으로 로그인 되었습니다 ');
         const user = res.data;

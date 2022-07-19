@@ -1,7 +1,7 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import userApi from '../api/user/userApi';
 
 const HomeNav = () => {
   const NavItem = {
@@ -33,17 +33,16 @@ const HomeNav = () => {
   useEffect(() => {
     if (token) {
       setLoginState(true);
-      async function checkNickname() {
-        const url = 'http://localhost:8000/api/user/info';
-        const response = await axios.get(url, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+
+      userApi
+        .homeNavApi(token)
+        .then((res) => {
+          const nickName = res.data.nickName;
+          setNickname(nickName);
+        })
+        .catch(function (err) {
+          alert(`${err.response.data.reason}`);
         });
-        const nickName = response.data.nickName;
-        setNickname(nickName);
-      }
-      checkNickname();
     }
   }, []);
 
