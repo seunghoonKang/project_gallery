@@ -1,11 +1,11 @@
 import { model } from 'mongoose';
 import { CommentSchema } from '../schemas/comment-schema';
 
-const Comment = model('reviews', CommentSchema);
+const Comment = model('comments', CommentSchema);
 
 export class CommentModel {
-  async findByCommentId(comment_id) {
-    const comment = await Comment.findOne({ comment_id });
+  async findById(postId) {
+    const comment = await Comment.findOne({ postId });
     return comment;
   }
 
@@ -14,13 +14,13 @@ export class CommentModel {
     return comments;
   }
 
-  async createComment(commentInfo) {
+  async create(commentInfo) {
     const newComment = await Comment.create(commentInfo);
     return newComment;
   }
 
-  async update({ comment_id, update }) {
-    const filter = { comment_id: comment_id };
+  async update({ postId, update }) {
+    const filter = { postId: postId };
     const option = { returnOriginal: false };
 
     const updatedComment = await Comment.findOneAndUpdate(
@@ -31,8 +31,8 @@ export class CommentModel {
     return updatedComment;
   }
 
-  async deleteById(comment_id) {
-    const comment = await Comment.deleteOne({ comment_id });
+  async delete(postId) {
+    const comment = await Comment.deleteOne({ postId });
     return comment;
   }
 }

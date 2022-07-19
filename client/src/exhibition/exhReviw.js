@@ -3,10 +3,11 @@ import Form from 'react-bootstrap/Form';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { minWidth } from '@mui/system';
 
 function ExhReviw() {
   const [review, setReview] = useState('');
+  const [nickName, setNickname] = useState('');
+  const [myReviw, setMyReviw] = useState(true);
 
   useEffect(() => {
     axios.get('http://localhost:8000/api/Comment').then((res) => {
@@ -29,10 +30,18 @@ function ExhReviw() {
   return (
     <>
       <Container>
-        <ReviwCard>
-          <div>쓴사람: 나다</div>
-          <Contents>글내용</Contents>
-        </ReviwCard>
+        {myReviw === true ? (
+          <MyReviwCard>
+            <div>쓴사람: {nickName}</div>
+            <Contents>글내용</Contents>
+          </MyReviwCard>
+        ) : (
+          <ReviwCard>
+            <div>쓴사람: {nickName}</div>
+            <Contents>글내용</Contents>
+          </ReviwCard>
+        )}
+
         <hr />
         <Form onSubmit={onSubmitHandler}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -71,4 +80,14 @@ const ReviwCard = styled.div`
 `;
 const Contents = styled.div`
   margin-top: 10px;
+`;
+const MyReviwCard = styled.div`
+  padding-top: 8px;
+  padding-left: 10px;
+  border-style: solid;
+  min-height: 150px;
+  border-radius: 10px;
+  border-width: 1px;
+  background-color: rgb(205, 205, 187);
+  color: black;
 `;

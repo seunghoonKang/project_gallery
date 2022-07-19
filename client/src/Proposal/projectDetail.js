@@ -1,7 +1,8 @@
-import ProjectCarousel from './projectDetail/projectCarousel';
-import ProjectContents from './projectDetail/projectContents';
+import ProjectCarousel from '../share/projectDetail/projectCarousel';
+import ProjectContents from '../share/projectDetail/projectContents';
 
 function ProjectDetail({ exhibitionProject }) {
+  console.log('hi');
   console.log(exhibitionProject);
   return (
     <>

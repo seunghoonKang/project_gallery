@@ -10,16 +10,18 @@ import {
   Button,
   Typography,
 } from '@mui/material';
+import styled from 'styled-components';
+import shareName from "../share/routerName"
 
-const PropsalProject = ({ projects }) => {
+const ShareProjectList = ({ projects }) => {
   let navigate = useNavigate();
 
   return projects.map((project, i) => {
     return (
-      <CardHoverEffect key={i}>
+      <CardHoverEffect>
         <Card
           key={i}
-          className="propsalCard"
+          classname="propsalCard"
           sx={{
             maxWidth: 350,
             p: 1,
@@ -34,19 +36,17 @@ const PropsalProject = ({ projects }) => {
             image={project.image}
             alt="image"
             onClick={() => {
-              navigate(`/proposalDetail/${i}`);
-            }}
+                navigate(`/${shareName.}/${i}`);
+              }}
           />
-          <CardContent
-            onClick={() => {
-              navigate(`/proposalDetail/${i}`);
-            }}
-          >
+          <CardContent  onClick={() => {
+                navigate(`/ExhibitionDetail/${i}`);
+              }}>
             <Typography
               gutterBottom
               variant="h5"
               component="div"
-              textalign="center"
+              textAlign="center"
             >
               {project.title}
               <hr />
@@ -68,7 +68,7 @@ const PropsalProject = ({ projects }) => {
           <CardActions>
             <Button
               size="small"
-              textalign="center"
+              textAlign="center"
               style={{
                 color: 'white',
               }}
@@ -107,4 +107,4 @@ const CardHoverEffect = styled.div`
   }
 `;
 
-export default PropsalProject;
+export default ShareProjectList;

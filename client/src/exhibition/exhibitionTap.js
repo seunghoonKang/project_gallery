@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import ExhReviw from './exhReviw';
+import { useParams } from 'react-router-dom';
 //import { styled } from '@emotion/styled';
 const WhiteTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
@@ -50,7 +51,8 @@ function a11yProps(index) {
 }
 function onClickHandler() {}
 
-export default function ExhibitionTap({ exhibitionProject, id }) {
+export default function ExhibitionTap({ exhibitionProject }) {
+  let { id } = useParams();
   console.log(id);
   console.log(exhibitionProject[id].contents);
   const [value, setValue] = React.useState(0);
