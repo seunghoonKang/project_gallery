@@ -5,8 +5,8 @@ class CommentService {
     this.commentModel = commentModel;
   }
 
-  async getComment(comment_id) {
-    const comment = await this.reviewModel.findByCommentId(comment_id);
+  async getComment(postId) {
+    const comment = await this.reviewModel.findById(postId);
     return comment;
   }
 
@@ -16,22 +16,22 @@ class CommentService {
   }
 
   async addComment(commentInfo) {
-    const createdComment = await this.commentModel.createComment(commentInfo);
-    return createdComment;
+    const newComment = await this.commentModel.create(commentInfo);
+    return newComment;
   }
 
-  async setComment(comment_id, toUpdate) {
-    const Comment = await this.commentModel.update({
-      comment_id,
+  async editComment(postId, toUpdate) {
+    const editedComment = await this.commentModel.update({
+      postId,
       update: toUpdate,
     });
 
-    return Comment;
+    return editedComment;
   }
 
-  async deleteComment(comment_id) {
-    const comment = await this.commentModel.deleteById(comment_id);
-    return comment;
+  async deleteComment(postId) {
+    const deletedComment = await this.commentModel.delete(postId);
+    return deletedComment;
   }
 }
 

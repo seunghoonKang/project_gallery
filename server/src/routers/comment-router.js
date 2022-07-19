@@ -1,5 +1,4 @@
 import { Router } from 'express';
-
 import { loginRequired } from '../middlewares';
 import { commentService } from '../services';
 
@@ -7,7 +6,17 @@ const commentRouter = Router();
 
 commentRouter.get('/', async (req, res, next) => {
   try {
-    const title = req.params.title;
+    const postId = req.body.postId;
+    const comment = await commentService.getComment(postId);
+    res.status(201).json(comment);
+  } catch (error) {
+    next(error);
+  }
+});
+
+commentRouter.get('/', async (req, res, next) => {
+  try {
+    const title = req.body.title;
     const comments = await commentService.getComments(title);
     res.status(201).json(comments);
   } catch (error) {
@@ -17,13 +26,11 @@ commentRouter.get('/', async (req, res, next) => {
 
 commentRouter.post('/', loginRequired, async (req, res, next) => {
   try {
-    const { comment_id, nickName, title, rate, comment } = req.body;
+    const { postId, nickName, comment } = req.body;
 
     const new_comment = await commentService.addComment({
-      comment_id,
+      postId,
       nickName,
-      title,
-      rate,
       comment,
     });
 
@@ -33,37 +40,33 @@ commentRouter.post('/', loginRequired, async (req, res, next) => {
   }
 });
 
-commentRouter.delete('/', loginRequired, async function (req, res, next) {
-  try {
-    const comment_id = req.body.comment_id;
-    const comment = await commentService.deleteComment(comment_id);
-    res.status(200).json(comment);
-  } catch (error) {
-    next(error);
-  }
-});
-
 commentRouter.patch('/', loginRequired, async (req, res, next) => {
   try {
-    const { comment_id, nickName, rate, comment } = req.body;
+    const { postId, nickName, comment } = req.body;
 
-    const comment_origin = await reviewService.getReview(comment_id);
+    const comment_origin = await commentService.getComment(postId);
 
     if (comment_origin.nickName !== nickName) {
       throw new Error('리뷰를 수정할 권한이 없습니다.');
     }
 
     const toUpdate = {
-      ...(rate && { rate }),
       ...(comment && { comment }),
     };
 
-    const updatedComment = await commentService.setComment(
-      comment_id,
-      toUpdate
-    );
+    const editedComment = await commentService.editComment(postId, toUpdate);
 
-    res.status(200).json(updatedComment);
+    res.status(200).json(editedComment);
+  } catch (error) {
+    next(error);
+  }
+});
+
+commentRouter.delete('/', loginRequired, async function (req, res, next) {
+  try {
+    const postId = req.body.postId;
+    const deletedComment = await commentService.deleteComment(postId);
+    res.status(200).json(deletedComment);
   } catch (error) {
     next(error);
   }
