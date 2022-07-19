@@ -1,22 +1,29 @@
-import { mongoose } from 'mongoose';
-import autoIncrement from 'mongoose-auto-increment';
-
-const Schema = mongoose.Schema;
-
-autoIncrement.initialize(mongoose);
+import { Schema } from 'mongoose';
 
 const CommentSchema = new Schema(
   {
-    nickName: {
+    postId: {
       type: String,
       required: true,
     },
     title: {
       type: String,
+      required: false,
+    },
+    commentList: {
+      type: [
+        new Schema(
+          {
+            nickName: { type: String, required: false },
+            comment: { type: String, required: true },
+          },
+          {
+            __id: true,
+          }
+        ),
+      ],
       required: true,
     },
-    rate: Number,
-    comment: String,
   },
   {
     collection: 'comments',
@@ -25,11 +32,8 @@ const CommentSchema = new Schema(
   }
 );
 
-CommentSchema.plugin(autoIncrement.plugin, {
-  model: 'comments',
-  field: 'comment_id',
-  startAt: 1,
-  incrementBy: 1,
-});
-
 export { CommentSchema };
+
+// const orderedDate = createdAt.sort(
+//   (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+// );
