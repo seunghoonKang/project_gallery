@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useParams } from 'react';
+import { useEffect, useParams } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './home/home';
 //import Footer from './footer/Footer';
@@ -14,8 +14,12 @@ import HomeNav from './home/homenav';
 import Proposal from './proposal/proposal';
 import ExhibitionList from './exhibition/exhibitionListPages';
 import exhibitionProject from './data/data';
+import { exhibitionProjects } from './api/exhibition/exhibitionProject';
 
 function App() {
+  useEffect(() => {
+    exhibitionProjects();
+  }, []);
   return (
     <BrowserRouter>
       <div className="App">
