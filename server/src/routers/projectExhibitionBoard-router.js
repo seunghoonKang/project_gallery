@@ -76,14 +76,14 @@ projectExhibitionBoardRouter.get(
 projectExhibitionBoardRouter.get('/filter/:tag', async (req, res, next) => {
   try {
     const posts = await projectExhibitionBoardService.getPosts();
+    const tags = req.params.tag.split(' ');
+    let resultArr = [];
 
-    // 태그를 복수 적용할 수 있게 할 것인지?
-    // 구분자로 || && 사용할건지, 하나만 사용할 것인지
-    // 배열로 저장해야함, split?
-    // 태그를 변경할때마다 페이지 로딩을 다시 하지 않으려면 프론트에서?
-    const tags = req.params.tag;
+    for (let i = 0; i < posts.length; i++) {
+      // posts의 태그와 tags가 포함관계인 게시글의 아이디와 게시글 제목만 리턴
+    }
 
-    res.status(200).json();
+    res.status(200).json(resultArr);
   } catch (error) {
     next(error);
   }

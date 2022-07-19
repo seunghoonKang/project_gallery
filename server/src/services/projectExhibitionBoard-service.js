@@ -32,7 +32,7 @@ class ProjectExhibitionBoardService {
 
   async getPostByNickName(nickName) {
     const postByNickName =
-      await this.projectExhibitionBoardModel.findByNickName(nickName);
+      await this.projectExhibitionBoardModel.findByNickName({ nickName });
 
     if (!postByNickName) {
       throw new Error('해당 유저가 작성한 글이 존재하지 않습니다.');
