@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { NavLink, useParams } from 'react-router-dom';
+import styled from 'styled-components';
 import {
   Card,
   CardActions,
@@ -9,19 +11,19 @@ import {
   Button,
   Typography,
 } from '@mui/material';
-import styled from 'styled-components';
 
 const PropsalProject = ({ projects }) => {
   const handleCardClick = () => {
-    alert('누르면 넘어가게할거야');
+    alert('체크..');
+    <NavLink to="/proposal/:i"></NavLink>;
   };
 
   return projects.map((project, i) => {
     return (
-      <CardHoverEffect>
+      <CardHoverEffect key={i}>
         <Card
           key={i}
-          classname="propsalCard"
+          className="propsalCard"
           sx={{
             maxWidth: 350,
             p: 1,
@@ -42,7 +44,7 @@ const PropsalProject = ({ projects }) => {
               gutterBottom
               variant="h5"
               component="div"
-              textAlign="center"
+              textalign="center"
             >
               {project.title}
               <hr />
@@ -64,7 +66,7 @@ const PropsalProject = ({ projects }) => {
           <CardActions>
             <Button
               size="small"
-              textAlign="center"
+              textalign="center"
               style={{
                 color: 'white',
               }}

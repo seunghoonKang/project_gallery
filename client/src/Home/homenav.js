@@ -5,14 +5,14 @@ import styled from 'styled-components';
 
 const HomeNav = () => {
   const NavItem = {
-    Recruitment: 'Recruitment',
-    Proposal: 'Proposal',
-    Exhibition: 'Exhibition',
+    Recruitment: 'recruitment',
+    Proposal: 'proposal',
+    Exhibition: 'exhibition',
   };
   const NavItemKo = {
-    Recruitment: '채용',
-    Proposal: '제안',
-    Exhibition: '전시',
+    recruitment: '채용',
+    proposal: '제안',
+    exhibition: '전시',
   };
   const navItems = Object.values(NavItem);
   const navigate = useNavigate();

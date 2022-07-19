@@ -14,6 +14,7 @@ import HomeNav from './home/homenav';
 import Proposal from './proposal/proposal';
 import ExhibitionList from './exhibition/exhibitionListPages';
 import exhibitionProject from './data/data';
+import PropsalProject from './proposal/propsalProject';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/proposal" element={<Proposal />} />
+          <Route path="/proposal/:id" element={<ExhibitionDetail />} />
           <Route path="/register" element={<Register />} />
           <Route
             path="/exhibitionDetail/:id"
