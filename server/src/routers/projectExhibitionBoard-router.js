@@ -15,6 +15,9 @@ projectExhibitionBoardRouter.post(
       const url = req.body.url;
       const tag = req.body.tag;
       const description = req.body.description;
+      const images = req.body.images;
+      const intro = req.body.intro;
+      const updateLog = req.body.updateLog;
 
       const newPost = await projectExhibitionBoardService.addPost({
         title,
@@ -22,6 +25,9 @@ projectExhibitionBoardRouter.post(
         url,
         tag,
         description,
+        images,
+        intro,
+        updateLog,
       });
 
       res.status(200).json(newPost);
@@ -89,10 +95,11 @@ projectExhibitionBoardRouter.get('/filter/:tag', async (req, res, next) => {
   }
 });
 
-// 프로젝트 전시 - 키워드로 검색하기
-projectExhibitionBoardRouter.get('/filter/keyword', async (req, res, next) => {
+// 프로젝트 전시 - 키워드로 검색하기(미완성)
+projectExhibitionBoardRouter.get('/keyword', async (req, res, next) => {
   try {
     const keyword = req.query.keyword;
+    console.log(keyword);
     const posts = await projectExhibitionBoardService.getPosts();
     let resultArr = [];
 
@@ -109,45 +116,63 @@ projectExhibitionBoardRouter.get('/filter/keyword', async (req, res, next) => {
 });
 
 // 프로젝트 전시 - 게시글 수정
-projectExhibitionBoardRouter.patch('/edit/:postId', async (req, res, next) => {
-  try {
-    const postId = req.params.postId;
-    const title = req.body.title;
-    const nickName = req.body.nickName;
-    const url = req.body.url;
-    const tag = req.body.tag;
-    const description = req.body.description;
+projectExhibitionBoardRouter.patch(
+  '/edit/:postId',
+  loginRequired,
+  async (req, res, next) => {
+    try {
+      // 본인 글인지 확인하는 절차 삽입
 
-    const toUpdate = {
-      ...(title && { title }),
-      ...(nickName && { nickName }),
-      ...(url && { url }),
-      ...(tag && { tag }),
-      ...(description && { description }),
-    };
+      const postId = req.params.postId;
+      const title = req.body.title;
+      const nickName = req.body.currentNickName;
+      const url = req.body.url;
+      const tag = req.body.tag;
+      const description = req.body.description;
+      const images = req.body.images;
+      const intro = req.body.intro;
+      const updateLog = req.body.updateLog;
 
-    const updatedPostInfo = await projectExhibitionBoardService.editPost(
-      postId,
-      toUpdate
-    );
+      const toUpdate = {
+        ...(title && { title }),
+        ...(nickName && { nickName }),
+        ...(url && { url }),
+        ...(tag && { tag }),
+        ...(description && { description }),
+        ...(images && { images }),
+        ...(intro && { intro }),
+        ...(updateLog && { updateLog }),
+      };
 
-    res.status(200).json(updatedPostInfo);
-  } catch (error) {
-    next(error);
+      const updatedPostInfo = await projectExhibitionBoardService.editPost(
+        postId,
+        toUpdate
+      );
+
+      res.status(200).json(updatedPostInfo);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 // 프로젝트 전시 - 게시글 삭제
-projectExhibitionBoardRouter.delete('/delete', async (req, res, next) => {
-  try {
-    const deletedPost = await projectExhibitionBoardService.deletePost(
-      req.body.postId
-    );
+projectExhibitionBoardRouter.delete(
+  '/delete',
+  loginRequired,
+  async (req, res, next) => {
+    try {
+      // 본인 글인지 확인하는 절차 삽입
 
-    res.status(200).json(deletedPost);
-  } catch (error) {
-    next(error);
+      const deletedPost = await projectExhibitionBoardService.deletePost(
+        req.body.postId
+      );
+
+      res.status(200).json(deletedPost);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 export { projectExhibitionBoardRouter };
