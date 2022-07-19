@@ -22,6 +22,19 @@ const ProjectExhibitionBoardSchema = new Schema(
       type: String,
       required: true,
     },
+    images: {
+      type: [String],
+      required: false,
+    },
+    intro: {
+      type: String,
+      required: true,
+    },
+    updateLog: {
+      type: String,
+      required: false,
+      // default : 업데이트 내역이 없습니다.
+    },
   },
   {
     collection: 'exhibitions',
