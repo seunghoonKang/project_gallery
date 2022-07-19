@@ -5,7 +5,7 @@ import WriteComp from './writeComponent';
 import PropsalProject from './propsalProject';
 import data from '../data/data';
 
-const Proposal = () => {
+const ProposalList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [project, setProject] = useState([]);
@@ -61,4 +61,4 @@ const Section = styled.section`
   }
 `;
 
-export default Proposal;
+export default ProposalList;

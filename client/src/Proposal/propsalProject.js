@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Card,
   CardActions,
@@ -12,9 +13,7 @@ import {
 import styled from 'styled-components';
 
 const PropsalProject = ({ projects }) => {
-  const handleCardClick = () => {
-    alert('누르면 넘어가게할거야');
-  };
+  let navigate = useNavigate();
 
   return projects.map((project, i) => {
     return (
@@ -35,9 +34,15 @@ const PropsalProject = ({ projects }) => {
             height="180"
             image={project.image}
             alt="image"
-            onClick={handleCardClick}
+            onClick={() => {
+              navigate(`/proposalDetail/${i}`);
+            }}
           />
-          <CardContent onClick={handleCardClick}>
+          <CardContent
+            onClick={() => {
+              navigate(`/proposalDetail/${i}`);
+            }}
+          >
             <Typography
               gutterBottom
               variant="h5"

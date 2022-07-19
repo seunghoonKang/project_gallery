@@ -4,6 +4,7 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import ShareIcon from '@mui/icons-material/Share';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { useParams } from 'react-router-dom';
 
 //url공유하는 코드
 function urlShare() {
@@ -13,9 +14,10 @@ function urlShare() {
   });
 }
 
-function ProductContents({ exhibitionProject, id }) {
-  console.log(exhibitionProject);
+function ProductContents({ exhibitionProject }) {
+  const { id } = useParams();
   console.log(id);
+  console.log(exhibitionProject[id].nickname);
 
   function projectShare() {
     navigator.clipboard.writeText(exhibitionProject[id].url).then(() => {

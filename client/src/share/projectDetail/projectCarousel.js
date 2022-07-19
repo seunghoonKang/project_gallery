@@ -1,7 +1,9 @@
 import Carousel from 'react-bootstrap/Carousel';
-import { useParams } from 'react';
+import { useParams } from 'react-router-dom';
 
-function ProjectCarousel({ exhibitionProject, id }) {
+function ProjectCarousel({ exhibitionProject }) {
+  const { id } = useParams();
+  console.log(id);
   return (
     <>
       <Carousel
