@@ -13,7 +13,7 @@ class ProjectExhibitionBoardModel {
   }
 
   async getAll() {
-    const posts = await ProjectExhibitionBoard.findAll();
+    const posts = await ProjectExhibitionBoard.findAll({});
     return posts;
   }
 
