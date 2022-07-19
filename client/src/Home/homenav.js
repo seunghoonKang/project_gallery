@@ -5,14 +5,14 @@ import userApi from '../api/user/userApi';
 
 const HomeNav = () => {
   const NavItem = {
-    Recruitment: 'Recruitment',
-    Proposal: 'Proposal',
-    Exhibition: 'Exhibition',
+    Recruitment: 'recruitmentList',
+    Proposal: 'proposalList',
+    Exhibition: 'exhibitionList',
   };
   const NavItemKo = {
-    Recruitment: '채용',
-    Proposal: '제안',
-    Exhibition: '전시',
+    recruitmentList: '팀원모집',
+    proposalList: '제안',
+    exhibitionList: '전시',
   };
   const navItems = Object.values(NavItem);
   const navigate = useNavigate();

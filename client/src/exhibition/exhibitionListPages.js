@@ -5,6 +5,8 @@ import CardContent from '../proposal/cardContents';
 import Pagination from '../share/projectList/pagination';
 import { useState, useEffect } from 'react';
 import ExhibitionProject from './exhibitionProject';
+import PaginationContents from '../proposal/paginationContents';
+import WriteComp from '../proposal/writeComponent';
 
 const ExhibitionList = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,13 +33,15 @@ const ExhibitionList = () => {
       <h5>여러 다양한 프로젝트들을 볼 수 있는 기회! </h5>
       <h5>이런 프로젝트는 어떠신가요 ?!</h5>
 
-      <Pagination
+      <PaginationContents
+        project={project}
         postsPerPage={postsPerPage}
-        totalPosts={totalPosts}
         paginate={paginate}
+        currentPage={currentPage}
       />
+      <WriteComp />
       <Container>
-        <ExhibitionProject project={currentPosts}></ExhibitionProject>
+        <ExhibitionProject projects={currentPosts}></ExhibitionProject>
       </Container>
     </Section>
   );

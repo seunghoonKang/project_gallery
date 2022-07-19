@@ -11,11 +11,11 @@ import { Login, Register, DeleteUser, ReviseUser } from './user';
 //const User = lazy(() => import('./user'));
 import './App.css';
 import HomeNav from './home/homenav';
-import Proposal from './proposal/proposal';
+import ProposalList from './proposal/proposalList';
 import ExhibitionList from './exhibition/exhibitionListPages';
 import exhibitionProject from './data/data';
 import { exhibitionProjects } from './api/exhibition/exhibitionProject';
-
+import { PropsalDetail } from './proposal/proposalDetail';
 function App() {
   useEffect(() => {
     exhibitionProjects();
@@ -27,18 +27,17 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/proposal" element={<Proposal />} />
+          <Route path="/proposalList" element={<ProposalList />} />
+          <Route
+            path="/proposalDetail/:id"
+            element={<PropsalDetail exhibitionProject={exhibitionProject} />}
+          />
           <Route path="/register" element={<Register />} />
+          <Route path="/exhibitionList" element={<ExhibitionList />} />
           <Route
             path="/exhibitionDetail/:id"
-            element={
-              <ExhibitionDetail
-                exhibitionProject={exhibitionProject}
-                useParams={useParams}
-              />
-            }
+            element={<ExhibitionDetail exhibitionProject={exhibitionProject} />}
           />
-          <Route path="/Exhibition" element={<ExhibitionList />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -11,10 +11,10 @@ import {
   Typography,
 } from '@mui/material';
 import styled from 'styled-components';
+import shareName from "../share/routerName"
 
-const ExhibitionProject = ({ projects }) => {
+const ShareProjectList = ({ projects }) => {
   let navigate = useNavigate();
-  console.log(projects);
 
   return projects.map((project, i) => {
     return (
@@ -36,14 +36,12 @@ const ExhibitionProject = ({ projects }) => {
             image={project.image}
             alt="image"
             onClick={() => {
-              navigate(`/exhibitionDetail/${i}`);
-            }}
+                navigate(`/${shareName.}/${i}`);
+              }}
           />
-          <CardContent
-            onClick={() => {
-              navigate(`/exhibitionDetail/${i}`);
-            }}
-          >
+          <CardContent  onClick={() => {
+                navigate(`/ExhibitionDetail/${i}`);
+              }}>
             <Typography
               gutterBottom
               variant="h5"
@@ -109,4 +107,4 @@ const CardHoverEffect = styled.div`
   }
 `;
 
-export default ExhibitionProject;
+export default ShareProjectList;
