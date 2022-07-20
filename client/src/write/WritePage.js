@@ -54,7 +54,7 @@ function WritePage() {
       <div className='movie-container'>
         {viewContent.map(element =>
           <div>
-            <h2>{element.title}</h2>
+            <h1>{element.title}</h1>
             <div>
               {element.content}
             </div>
@@ -96,7 +96,7 @@ function WritePage() {
       </div>
       <button className="submit-button"
       onClick={submitReview}
-      >입력</button>
+      >입력버튼</button>
     </div>
   );
 }
