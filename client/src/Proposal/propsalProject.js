@@ -10,7 +10,7 @@ import {
   Button,
   Typography,
 } from '@mui/material';
-
+import styled from 'styled-components';
 const PropsalProject = ({ projects }) => {
   let navigate = useNavigate();
 

@@ -4,6 +4,7 @@ import PaginationContents from './paginationContents';
 import WriteComp from './writeComponent';
 import PropsalProject from './propsalProject';
 import data from '../data/data';
+import SelectTags from './selectTags';
 
 const ProposalList = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,12 +21,12 @@ const ProposalList = () => {
     setProject(data);
   }, []);
   //
-
   return (
     <Section>
       <h2>제안</h2>
       <h5>다양한 아이디어를 제안합니다. </h5>
       <h5>이런 아이디어는 어떠신가요 ?!</h5>
+
       <PaginationContents
         project={project}
         postsPerPage={postsPerPage}
@@ -33,6 +34,7 @@ const ProposalList = () => {
         currentPage={currentPage}
       />
       <WriteComp />
+      <SelectTags projects={project} />
       <Container>
         <PropsalProject projects={currentPosts} />
       </Container>
