@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { loginRequired } from '../middlewares';
-import { projectExhibitionBoardService, commentService } from '../services';
+import { projectExhibitionBoardService } from '../services';
 
 const projectExhibitionBoardRouter = Router();
 
@@ -46,9 +46,8 @@ projectExhibitionBoardRouter.get('/list', async (req, res, next) => {
 // 프로젝트 전시 - 오브젝트 아이디로 불러오기
 projectExhibitionBoardRouter.get('/postId/:postId', async (req, res, next) => {
   try {
-    const postById = await projectExhibitionBoardService.getPostById(
-      req.params.postId
-    );
+    const postId = req.params.postId;
+    const postById = await projectExhibitionBoardService.getPostById(postId);
 
     res.status(200).json(postById);
   } catch (error) {
@@ -61,10 +60,9 @@ projectExhibitionBoardRouter.get(
   '/nickName/:nickName',
   async (req, res, next) => {
     try {
+      const nickName = req.params.nickname;
       const postsByNickName =
-        await projectExhibitionBoardService.getPostsByNickName(
-          req.params.nickName
-        );
+        await projectExhibitionBoardService.getPostsByNickName(nickName);
 
       res.status(200).json(postsByNickName);
     } catch (error) {
@@ -124,8 +122,9 @@ projectExhibitionBoardRouter.patch(
       const { title, url, tags, description, images, intro, updateLog } =
         req.body;
 
-      const owner = await projectExhibitionBoardService.getPostById(postId)
-        .nickName;
+      const postById = await projectExhibitionBoardService.getPostById(postId);
+      const owner = postById.nickName;
+
       if (owner !== nickName) {
         throw new Error('전시물을 수정할 권한이 없습니다.');
       }
@@ -161,10 +160,11 @@ projectExhibitionBoardRouter.delete(
     try {
       const postId = req.params.postId;
       const nickName = req.currentNickName;
-      const owner = await projectExhibitionBoardService.getPostById(postId)
-        .nickName;
+
+      const postById = await projectExhibitionBoardService.getPostById(postId);
+      const owner = postById.nickName;
       if (owner !== nickName) {
-        throw new Error('전시물을 수정할 권한이 없습니다.');
+        throw new Error('전시물을 삭제할 권한이 없습니다.');
       }
 
       const deletedPost = await projectExhibitionBoardService.deletePost(
