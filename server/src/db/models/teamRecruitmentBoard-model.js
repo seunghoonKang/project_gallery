@@ -30,7 +30,7 @@ export class TeamRecruitmentBoardModel {
     const filter = { _id: postId };
     const option = { returnOriginal: false };
 
-    const updatedTeam = await TeamRecruitmentBoard.findByIdAndUpdate(
+    const updatedTeam = await TeamRecruitmentBoard.findOneAndUpdate(
       filter,
       update,
       option

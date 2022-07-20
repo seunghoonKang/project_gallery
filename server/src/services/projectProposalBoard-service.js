@@ -26,7 +26,7 @@ class ProjectProposalBoardService {
   }
 
   // 프로젝트 제안 수정
-  async setProposal(postId, toUpdate) {
+  async editProposal(postId, toUpdate) {
     const editedProposal =
       await this.proposalprojectProposalBoardModelModel.update({
         postId,

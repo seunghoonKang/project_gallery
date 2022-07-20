@@ -74,7 +74,7 @@ teamRecruitmentBoardRouter.patch(
 
 // 팀원 모집 삭제 api 호출
 teamRecruitmentBoardRouter.delete(
-  '/',
+  '/postId/:postId',
   loginRequired,
   async (req, res, next) => {
     try {

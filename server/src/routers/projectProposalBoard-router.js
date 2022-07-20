@@ -22,7 +22,7 @@ projectProposalBoardRouter.post('/', loginRequired, async (req, res, next) => {
 });
 
 // 프로젝트 제안 전체 정보 조회 api 호출
-projectProposalBoardRouter.get('/', async (req, res, next) => {
+projectProposalBoardRouter.get('/list', async (req, res, next) => {
   try {
     const proposals = await projectProposalBoardService.getProposals();
 
@@ -69,10 +69,8 @@ projectProposalBoardRouter.patch(
         ...(description && { description }),
       };
 
-      const updatedProposalInfo = await projectProposalBoardService.setProposal(
-        postId,
-        toUpdate
-      );
+      const updatedProposalInfo =
+        await projectProposalBoardService.editProposal(postId, toUpdate);
 
       res.status(200).json(updatedProposalInfo);
     } catch (error) {
@@ -83,7 +81,7 @@ projectProposalBoardRouter.patch(
 
 // 프로젝트 제안 삭제 api 호출
 projectProposalBoardRouter.delete(
-  '/',
+  '/postId/:postId',
   loginRequired,
   async (req, res, next) => {
     try {
