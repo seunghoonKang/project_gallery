@@ -1,29 +1,24 @@
 import { Router } from 'express';
 import { loginRequired } from '../middlewares';
-import { projectExhibitionBoardService } from '../services';
+import { projectExhibitionBoardService, commentService } from '../services';
 
 const projectExhibitionBoardRouter = Router();
 
 // 프로젝트 전시 - 게시글 생성
 projectExhibitionBoardRouter.post(
-  '/register',
+  '/',
   loginRequired,
   async (req, res, next) => {
     try {
-      const title = req.body.title;
+      const { title, url, tags, description, images, intro, updateLog } =
+        req.body;
       const nickName = req.currentNickName;
-      const url = req.body.url;
-      const tag = req.body.tag;
-      const description = req.body.description;
-      const images = req.body.images;
-      const intro = req.body.intro;
-      const updateLog = req.body.updateLog;
 
       const newPost = await projectExhibitionBoardService.addPost({
         title,
         nickName,
         url,
-        tag,
+        tags,
         description,
         images,
         intro,
@@ -49,7 +44,7 @@ projectExhibitionBoardRouter.get('/list', async (req, res, next) => {
 });
 
 // 프로젝트 전시 - 오브젝트 아이디로 불러오기
-projectExhibitionBoardRouter.get('/post/:postId', async (req, res, next) => {
+projectExhibitionBoardRouter.get('/postId/:postId', async (req, res, next) => {
   try {
     const postById = await projectExhibitionBoardService.getPostById(
       req.params.postId
@@ -63,7 +58,7 @@ projectExhibitionBoardRouter.get('/post/:postId', async (req, res, next) => {
 
 // 프로젝트 전시 - 작성자 닉네임으로 불러오기
 projectExhibitionBoardRouter.get(
-  '/filter/:nickName',
+  '/nickName/:nickName',
   async (req, res, next) => {
     try {
       const postByNickName =
@@ -79,10 +74,10 @@ projectExhibitionBoardRouter.get(
 );
 
 // 프로젝트 전시 - 태그로 불러오기(미완성)
-projectExhibitionBoardRouter.get('/filter/:tag', async (req, res, next) => {
+projectExhibitionBoardRouter.get('/tags/:tags', async (req, res, next) => {
   try {
     const posts = await projectExhibitionBoardService.getPosts();
-    const tags = req.params.tag.split(' ');
+    const searchTag = req.params.tags.split(' ');
     let resultArr = [];
 
     for (let i = 0; i < posts.length; i++) {
@@ -96,48 +91,51 @@ projectExhibitionBoardRouter.get('/filter/:tag', async (req, res, next) => {
 });
 
 // 프로젝트 전시 - 키워드로 검색하기(미완성)
-projectExhibitionBoardRouter.get('/keyword', async (req, res, next) => {
-  try {
-    const keyword = req.query.keyword;
-    console.log(keyword);
-    const posts = await projectExhibitionBoardService.getPosts();
-    let resultArr = [];
+projectExhibitionBoardRouter.get(
+  '/keyword/:keyword',
+  async (req, res, next) => {
+    try {
+      const keyword = req.query.keyword;
+      console.log(keyword);
+      const posts = await projectExhibitionBoardService.getPosts();
+      let resultArr = [];
 
-    for (let i = 0; i < posts.length; i++) {
-      if (posts[i].title.includes(keyword)) {
-        resultArr.push(posts[i]);
+      for (let i = 0; i < posts.length; i++) {
+        if (posts[i].title.includes(keyword)) {
+          resultArr.push(posts[i]);
+        }
       }
-    }
 
-    res.status(200).json(resultArr);
-  } catch (error) {
-    next(error);
+      res.status(200).json(resultArr);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 // 프로젝트 전시 - 게시글 수정
 projectExhibitionBoardRouter.patch(
-  '/edit/:postId',
+  '/postId/:postId',
   loginRequired,
   async (req, res, next) => {
     try {
       // 본인 글인지 확인하는 절차 삽입
-
       const postId = req.params.postId;
-      const title = req.body.title;
-      const nickName = req.body.currentNickName;
-      const url = req.body.url;
-      const tag = req.body.tag;
-      const description = req.body.description;
-      const images = req.body.images;
-      const intro = req.body.intro;
-      const updateLog = req.body.updateLog;
+      const nickName = req.currentNickName;
+      const { title, url, tags, description, images, intro, updateLog } =
+        req.body;
+
+      const owner = await projectExhibitionBoardService.getPostById(postId)
+        .nickName;
+      if (owner !== nickName) {
+        throw new Error('전시물을 수정할 권한이 없습니다.');
+      }
 
       const toUpdate = {
         ...(title && { title }),
         ...(nickName && { nickName }),
         ...(url && { url }),
-        ...(tag && { tag }),
+        ...(tags && { tags }),
         ...(description && { description }),
         ...(images && { images }),
         ...(intro && { intro }),
@@ -158,14 +156,18 @@ projectExhibitionBoardRouter.patch(
 
 // 프로젝트 전시 - 게시글 삭제
 projectExhibitionBoardRouter.delete(
-  '/delete',
+  '/postId/:postId',
   loginRequired,
   async (req, res, next) => {
     try {
-      // 본인 글인지 확인하는 절차 삽입
+      const owner = await projectExhibitionBoardService.getPostById(postId)
+        .nickName;
+      if (owner !== nickName) {
+        throw new Error('전시물을 수정할 권한이 없습니다.');
+      }
 
       const deletedPost = await projectExhibitionBoardService.deletePost(
-        req.body.postId
+        req.params.postId
       );
 
       res.status(200).json(deletedPost);
