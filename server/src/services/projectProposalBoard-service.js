@@ -13,9 +13,7 @@ class ProjectProposalBoardService {
 
   // 프로젝트 제안 정보 조회
   async getProposalById(postId) {
-    const proposal = await this.projectProposalBoardModel.findById({
-      postId,
-    });
+    const proposal = await this.projectProposalBoardModel.findById(postId);
     return proposal;
   }
 
@@ -27,11 +25,10 @@ class ProjectProposalBoardService {
 
   // 프로젝트 제안 수정
   async editProposal(postId, toUpdate) {
-    const editedProposal =
-      await this.proposalprojectProposalBoardModelModel.update({
-        postId,
-        update: toUpdate,
-      });
+    const editedProposal = await this.projectProposalBoardModel.update({
+      postId,
+      update: toUpdate,
+    });
 
     return editedProposal;
   }
