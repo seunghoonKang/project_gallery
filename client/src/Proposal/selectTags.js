@@ -39,13 +39,14 @@ function SelectTags({ projects }) {
 
 const Button = styled.button`
   border-radius: 5px;
-  width: 100px;
+  width: 150px;
   height: 40px;
   color: white;
   background-color: rgb(42, 53, 200);
   border: none;
   margin-right: 10px;
   :hover {
+    background-color: rgb(42, 180, 200);
   }
 `;
 export default SelectTags;

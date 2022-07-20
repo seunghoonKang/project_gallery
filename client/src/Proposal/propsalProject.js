@@ -31,15 +31,15 @@ const PropsalProject = ({ projects }) => {
             key={i}
             component="img"
             height="180"
-            image={project.image}
+            image={project.images}
             alt="image"
             onClick={() => {
-              navigate(`/proposalDetail/${i}`);
+              navigate(`/proposalDetail/${project._id}`);
             }}
           />
           <CardContent
             onClick={() => {
-              navigate(`/proposalDetail/${i}`);
+              navigate(`/proposalDetail/${project._id}`);
             }}
           >
             <Typography
@@ -61,7 +61,7 @@ const PropsalProject = ({ projects }) => {
                   color: 'white',
                 }}
               >
-                {project.contents}
+                {project.description}
               </Typography>
             </div>
           </CardContent>

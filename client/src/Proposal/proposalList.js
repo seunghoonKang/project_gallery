@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PaginationContents from './paginationContents';
 import WriteComp from './writeComponent';
 import PropsalProject from './propsalProject';
-import data from '../data/data';
+import { exhibition } from '../api/exhibition/exhibitionProject';
 import SelectTags from './selectTags';
 
 const ProposalList = () => {
@@ -11,22 +11,24 @@ const ProposalList = () => {
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [project, setProject] = useState([]);
 
+  useEffect(() => {
+    exhibition.exhibitionProjects().then((res) => {
+      setProject(res.data);
+    });
+  }, []);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = project.slice(indexOfFirstPost, indexOfLastPost);
 
-  useEffect(() => {
-    setProject(data);
-  }, []);
   //
+
   return (
     <Section>
       <h2>제안</h2>
       <h5>다양한 아이디어를 제안합니다. </h5>
       <h5>이런 아이디어는 어떠신가요 ?!</h5>
-
       <PaginationContents
         project={project}
         postsPerPage={postsPerPage}
