@@ -5,13 +5,10 @@ import { userService } from '../services';
 const userRouter = Router();
 
 // 회원 가입 api 호출
-userRouter.post('/register', async (req, res, next) => {
+userRouter.post('/', async (req, res, next) => {
   try {
     // req (request)의 body 에서 데이터 가져오기
-    const email = req.body.email;
-    const nickName = req.body.nickName;
-    const password = req.body.password;
-    console.log(email);
+    const { email, nickName, password } = req.body;
 
     // 위 데이터를 유저 db에 추가하기
     const newUser = await userService.addUser({
@@ -31,8 +28,7 @@ userRouter.post('/register', async (req, res, next) => {
 // 로그인
 userRouter.post('/login', async (req, res, next) => {
   try {
-    const email = req.body.email;
-    const password = req.body.password;
+    const { email, password } = req.body;
 
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const userToken = await userService.getUserToken({ email, password });
@@ -45,7 +41,7 @@ userRouter.post('/login', async (req, res, next) => {
 });
 
 // 회원 정보 조회
-userRouter.get('/info', loginRequired, async (req, res, next) => {
+userRouter.get('/', loginRequired, async (req, res, next) => {
   try {
     const userInfo = await userService.getUserInfo(req.currentUserId);
     res.status(200).json(userInfo);
@@ -55,13 +51,12 @@ userRouter.get('/info', loginRequired, async (req, res, next) => {
 });
 
 // 회원 정보 수정
-userRouter.patch('/edit', loginRequired, async (req, res, next) => {
+userRouter.patch('/', loginRequired, async (req, res, next) => {
   try {
     const userId = req.currentUserId;
     const email = req.currentEmail;
-    const nickName = req.body.nickName;
-    const password = req.body.password;
     const role = req.currentRole;
+    const { nickName, password } = req.body;
 
     const toUpdate = {
       ...(email && { email }),
@@ -93,7 +88,7 @@ userRouter.get('/recheck', loginRequired, async (req, res, next) => {
 });
 
 // 회원 탈퇴
-userRouter.delete('/delete', loginRequired, async (req, res, next) => {
+userRouter.delete('/', loginRequired, async (req, res, next) => {
   try {
     const deletedUser = await userService.deleteUser(req.currentUserId);
 

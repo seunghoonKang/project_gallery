@@ -14,7 +14,7 @@ const ProjectExhibitionBoardSchema = new Schema(
       type: String,
       required: true,
     },
-    tag: {
+    tags: {
       type: [String],
       required: true,
     },
@@ -33,7 +33,7 @@ const ProjectExhibitionBoardSchema = new Schema(
     updateLog: {
       type: String,
       required: false,
-      // default : 업데이트 내역이 없습니다.
+      default: '업데이트 내역이 없습니다.',
     },
   },
   {
