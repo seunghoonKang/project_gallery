@@ -36,9 +36,7 @@ teamRecruitmentBoardRouter.get('/list', async (req, res, next) => {
 teamRecruitmentBoardRouter.get('/postId/:postId', async (req, res, next) => {
   try {
     const postId = req.params.postId;
-    const team = await teamRecruitmentBoardService.getRecruitmentById({
-      postId,
-    });
+    const team = await teamRecruitmentBoardService.getRecruitmentById(postId);
     res.status(200).json(team);
   } catch (error) {
     next(error);
