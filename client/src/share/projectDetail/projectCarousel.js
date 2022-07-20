@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
+import { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 
 function ProjectCarousel({ exhibitionProject }) {
+  const arr = Object.entries(exhibitionProject);
   return (
     <>
       <Carousel
@@ -11,8 +14,7 @@ function ProjectCarousel({ exhibitionProject }) {
           padding: 'auto',
         }}
       >
-        if()
-        {exhibitionProject.length > 0
+        {arr.length > 0
           ? exhibitionProject.images.map((image, i) => {
               return (
                 <Carousel.Item>

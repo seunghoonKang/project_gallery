@@ -82,7 +82,7 @@ const ExhibitionProject = ({ projects }) => {
             </Button>
           </CardActions>
           <Stack direction="row" spacing={1}>
-            {project.tag.map((tag, i) => {
+            {project.tags.map((tag, i) => {
               return (
                 <Chip
                   key={i}

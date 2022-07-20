@@ -7,9 +7,11 @@ const projectProposalBoardRouter = Router();
 // 프로젝트 제안 추가 api 호출
 projectProposalBoardRouter.post('/', loginRequired, async (req, res, next) => {
   try {
+    const nickName = req.currentNickName;
     const { title, tags, description } = req.body;
 
     const newProposal = await projectProposalBoardService.addProposal({
+      nickName,
       title,
       tags,
       description,
