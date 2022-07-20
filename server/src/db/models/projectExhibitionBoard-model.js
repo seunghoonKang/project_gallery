@@ -7,8 +7,8 @@ const ProjectExhibitionBoard = model(
 );
 
 class ProjectExhibitionBoardModel {
-  async create(projectInfo) {
-    const newPost = await ProjectExhibitionBoard.create(projectInfo);
+  async create(postInfo) {
+    const newPost = await ProjectExhibitionBoard.create(postInfo);
     return newPost;
   }
 
@@ -17,8 +17,8 @@ class ProjectExhibitionBoardModel {
     return posts;
   }
 
-  async findById(projectId) {
-    const post = await ProjectExhibitionBoard.findOne({ _id: projectId });
+  async findById(postId) {
+    const post = await ProjectExhibitionBoard.findOne({ _id: postId });
     return post;
   }
 
