@@ -4,18 +4,10 @@ const TeamRecruitmentBoardSchema = new Schema(
   {
     nickName: {
       type: String,
-      required: false,
+      required: true,
     },
     title: {
       type: String,
-      required: true,
-    },
-    position: {
-      type: String,
-      required: false,
-    },
-    tag: {
-      type: [String],
       required: true,
     },
     description: {
