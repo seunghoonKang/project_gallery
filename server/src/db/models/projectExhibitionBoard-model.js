@@ -23,7 +23,7 @@ class ProjectExhibitionBoardModel {
   }
 
   async findByNickName(nickName) {
-    const posts = await ProjectExhibitionBoard.find(nickName);
+    const posts = await ProjectExhibitionBoard.find({ nickName: nickName });
     return posts;
   }
 
@@ -31,7 +31,7 @@ class ProjectExhibitionBoardModel {
     const filter = { _id: postId };
     const option = { returnOriginal: false };
 
-    const updatedPost = await ProjectExhibitionBoard.findByIdAndUpdate(
+    const updatedPost = await ProjectExhibitionBoard.findOneAndUpdate(
       filter,
       update,
       option
