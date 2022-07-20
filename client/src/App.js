@@ -17,9 +17,11 @@ import exhibitionProject from './data/data';
 import { exhibitionProjects } from './api/exhibition/exhibitionProject';
 import { PropsalDetail } from './proposal/proposalDetail';
 function App() {
-  useEffect(() => {
-    exhibitionProjects();
-  }, []);
+  // useEffect(() => {
+  //   exhibitionProjects().then((res) => {
+  //     console.log(res.data);
+  //   });
+  // }, []);
   return (
     <BrowserRouter>
       <div className="App">

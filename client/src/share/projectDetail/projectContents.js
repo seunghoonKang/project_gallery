@@ -4,7 +4,6 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import ShareIcon from '@mui/icons-material/Share';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { useParams } from 'react-router-dom';
 
 //url공유하는 코드
 function urlShare() {
@@ -14,13 +13,10 @@ function urlShare() {
   });
 }
 
-function ProductContents({ exhibitionProject }) {
-  const { id } = useParams();
-  console.log(id);
-  console.log(exhibitionProject[id].nickname);
-
+function ProjectContents({ exhibitionProject }) {
+  console.log();
   function projectShare() {
-    navigator.clipboard.writeText(exhibitionProject[id].url).then(() => {
+    navigator.clipboard.writeText(exhibitionProject.url).then(() => {
       alert('링크를 복사했습니다');
     });
   }
@@ -28,24 +24,24 @@ function ProductContents({ exhibitionProject }) {
     <>
       <div style={{ color: 'white' }}>
         <Container>
-          <Nick>{exhibitionProject[id].nickname}</Nick>
+          <Nick>{exhibitionProject.nickName}</Nick>
           <Stack direction="row" spacing={1}>
-            {exhibitionProject[id].tags.map((tag, i) => {
-              return (
-                <Chip
-                  label={tag}
-                  clickable
-                  component="a"
-                  href="/"
-                  style={{ backgroundColor: 'gray' }}
-                />
-              );
-            })}
+            {exhibitionProject.length > 0
+              ? exhibitionProject.tags.map((tag, i) => {
+                  return (
+                    <Chip
+                      label={tag}
+                      clickable
+                      component="a"
+                      href="/"
+                      style={{ backgroundColor: 'gray' }}
+                    />
+                  );
+                })
+              : null}
           </Stack>
           <Hr />
-          <h2 style={{ display: 'inline-block' }}>
-            {exhibitionProject[id].title}
-          </h2>
+          <h2 style={{ display: 'inline-block' }}>{exhibitionProject.title}</h2>
           ;
           <h4
             onClick={urlShare}
@@ -61,7 +57,7 @@ function ProductContents({ exhibitionProject }) {
           </h4>
           <div>
             <div style={{ display: 'inline-block' }}>
-              {exhibitionProject[id].url}
+              {exhibitionProject.url}
             </div>
             <ShareIcon
               onClick={projectShare}
@@ -72,11 +68,9 @@ function ProductContents({ exhibitionProject }) {
               }}
             ></ShareIcon>
           </div>
-          <div style={{ fontSize: '12px' }}>{exhibitionProject[id].time}</div>
+          <div style={{ fontSize: '12px' }}>{exhibitionProject.createdAt}</div>
           <Hr />
-          <ContentsContainer>
-            {exhibitionProject[id].contents}
-          </ContentsContainer>
+          <ContentsContainer>{exhibitionProject.description}</ContentsContainer>
         </Container>
       </div>
     </>
@@ -106,4 +100,4 @@ const ProjectName = styled.h2`
   display: inline-block;
 `;
 
-export default ProductContents;
+export default ProjectContents;
