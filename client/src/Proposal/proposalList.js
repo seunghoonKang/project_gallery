@@ -4,6 +4,7 @@ import PaginationContents from './paginationContents';
 import WriteComp from './writeComponent';
 import PropsalProject from './propsalProject';
 import { exhibition } from '../api/exhibition/exhibitionProject';
+import { proposal } from '../api/proposal/proposalProject';
 import SelectTags from './selectTags';
 
 const ProposalList = () => {
@@ -12,8 +13,9 @@ const ProposalList = () => {
   const [project, setProject] = useState([]);
 
   useEffect(() => {
-    exhibition.exhibitionProjects().then((res) => {
+    proposal.proposalProjectList().then((res) => {
       setProject(res.data);
+      console.log(project);
     });
   }, []);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);

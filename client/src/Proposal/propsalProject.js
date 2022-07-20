@@ -27,7 +27,7 @@ const PropsalProject = ({ projects }) => {
             color: 'white',
           }}
         >
-          <CardMedia
+          {/* <CardMedia
             key={i}
             component="img"
             height="180"
@@ -36,7 +36,7 @@ const PropsalProject = ({ projects }) => {
             onClick={() => {
               navigate(`/proposalDetail/${project._id}`);
             }}
-          />
+          /> */}
           <CardContent
             onClick={() => {
               navigate(`/proposalDetail/${project._id}`);
