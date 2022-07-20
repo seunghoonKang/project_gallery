@@ -85,7 +85,7 @@ projectProposalBoardRouter.delete(
   loginRequired,
   async (req, res, next) => {
     try {
-      const postId = req.body.postId;
+      const postId = req.params.postId;
       const deletedProposal = await projectProposalBoardService.deleteProposal(
         postId
       );
