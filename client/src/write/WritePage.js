@@ -1,8 +1,12 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import './WritePage.css';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios';
+
+const editorConfiguration = {
+    toolbar: ["bold", "italic"],
+};
 
 function WritePage() {
   const [movieContent, setMovieContent] = useState({
@@ -12,16 +16,21 @@ function WritePage() {
 
  const [viewContent, setViewContent ] = useState([]);
 
- useEffect(() => {
-  axios.get('http://localhost:3000/api/exhibition/write').then((response)=> { //api/insert
-    setViewContent(response.data);
-  })
- },[viewContent])
-
+ // useEffect(() => {
+ //  axios.get('http://localhost:3000/api/exhibition/write').then((response)=> { //api/insert
+ //    setViewContent(response.data);
+ //  })
+ // },[viewContent])
  const submitReview = ()=>{
-  axios.post('http://localhost:3000/api/exhibition/write', {  //api/get
-    title: movieContent.title,
-    content: movieContent.title
+  axios.post('http://localhost:8000/api/exhibition/register', {  //api/get
+      title: 'test',
+      nickName: 'test',
+      url: 'testUrl',
+      tag: ['test'],
+      description: 'test',
+      images: 'test',
+      intro: 'test',
+      updateLog: 'test',
   }).then(()=>{
     alert('등록 완료!');
   })
@@ -35,6 +44,10 @@ function WritePage() {
   })
  }
 
+ useEffect(() => console.log(2));
+
+ console.log(1);
+ console.log('CKEditor: ', CKEditor);
   return (
     <div className="App">
       <h1>글쓰기</h1>
@@ -54,30 +67,32 @@ function WritePage() {
         placeholder='제목'
         onChange={getValue}
         name='title'
-/>
-        <CKEditor
-          editor={ClassicEditor}
-          data="<p>Hello from CKEditor 5!</p>"
-          onReady={editor => {
-            // You can store the "editor" and use when it is needed.
-            console.log('Editor is ready to use!', editor);
-          }}
-          onChange={(event, editor) => {
-            const data = editor.getData();
-            console.log({ event, editor, data });
-            setMovieContent({
-              ...movieContent,
-              content: data
-            })
-            console.log(movieContent);
-          }}
-          onBlur={(event, editor) => {
-            console.log('Blur.', editor);
-          }}
-          onFocus={(event, editor) => {
-            console.log('Focus.', editor);
-          }}
-        />
+      />
+      <CKEditor
+        editor={ClassicEditor}
+        config={editorConfiguration}
+        data="<p>Hello from CKEditor 5!</p>"
+        onReady={editor => {
+          // You can store the "editor" and use when it is needed.
+          console.log('Editor is ready to use!', editor);
+        }}
+        onChange={(event, editor) => {
+          const data = editor.getData();
+          console.log({ event, editor, data });
+          setMovieContent({
+            ...movieContent,
+            content: data
+          })
+          console.log(movieContent);
+        }}
+        onBlur={(event, editor) => {
+          console.log('Blur.', editor);
+        }}
+        onFocus={(event, editor) => {
+          console.log('Focus.', editor);
+        }}
+        onError={() => console.log('Error')}
+      />
       </div>
       <button className="submit-button"
       onClick={submitReview}

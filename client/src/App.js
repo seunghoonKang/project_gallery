@@ -20,9 +20,9 @@ import WritePage from './write/WritePage';
 
 
 function App() {
-  useEffect(() => {
-    exhibitionProjects();
-  }, []);
+  // useEffect(() => {
+  //   exhibitionProjects();
+  // }, []);
   return (
     <BrowserRouter>
       <div className="App">
