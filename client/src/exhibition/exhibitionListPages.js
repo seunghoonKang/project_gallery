@@ -7,15 +7,18 @@ import { useState, useEffect } from 'react';
 import ExhibitionProject from './exhibitionProject';
 import PaginationContents from '../proposal/paginationContents';
 import WriteComp from '../proposal/writeComponent';
+import { exhibition } from '../api/exhibition/exhibitionProject';
 
 const ExhibitionList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(9);
   const [project, setProject] = useState([]);
   useEffect(() => {
-    setProject(displayData);
+    exhibition.exhibitionProjects().then((res) => {
+      setProject(res.data);
+    });
   }, []);
-  console.log(project);
+
   const totalPosts = project.length;
   console.log(totalPosts);
 

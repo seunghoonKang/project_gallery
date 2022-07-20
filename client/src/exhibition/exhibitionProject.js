@@ -33,15 +33,15 @@ const ExhibitionProject = ({ projects }) => {
             key={i}
             component="img"
             height="180"
-            image={project.image}
+            image={project.images[0]}
             alt="image"
             onClick={() => {
-              navigate(`/exhibitionDetail/${i}`);
+              navigate(`/exhibitionDetail/${project._id}`);
             }}
           />
           <CardContent
             onClick={() => {
-              navigate(`/exhibitionDetail/${i}`);
+              navigate(`/exhibitionDetail/${project._id}`);
             }}
           >
             <Typography
@@ -63,7 +63,7 @@ const ExhibitionProject = ({ projects }) => {
                   color: 'white',
                 }}
               >
-                {project.contents}
+                {project.intro}
               </Typography>
             </div>
           </CardContent>
@@ -82,7 +82,7 @@ const ExhibitionProject = ({ projects }) => {
             </Button>
           </CardActions>
           <Stack direction="row" spacing={1}>
-            {project.tags.map((tag, i) => {
+            {project.tag.map((tag, i) => {
               return (
                 <Chip
                   key={i}
