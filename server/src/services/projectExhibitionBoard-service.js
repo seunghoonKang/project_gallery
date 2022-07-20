@@ -30,7 +30,7 @@ class ProjectExhibitionBoardService {
     return postById;
   }
 
-  async getPostByNickName(nickName) {
+  async getPostsByNickName(nickName) {
     const postByNickName =
       await this.projectExhibitionBoardModel.findByNickName({ nickName });
 

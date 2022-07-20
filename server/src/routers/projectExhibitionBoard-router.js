@@ -61,12 +61,12 @@ projectExhibitionBoardRouter.get(
   '/nickName/:nickName',
   async (req, res, next) => {
     try {
-      const postByNickName =
-        await projectExhibitionBoardService.getPostByNickName(
+      const postsByNickName =
+        await projectExhibitionBoardService.getPostsByNickName(
           req.params.nickName
         );
 
-      res.status(200).json(postByNickName);
+      res.status(200).json(postsByNickName);
     } catch (error) {
       next(error);
     }
@@ -77,8 +77,8 @@ projectExhibitionBoardRouter.get(
 projectExhibitionBoardRouter.get('/tags/:tags', async (req, res, next) => {
   try {
     const posts = await projectExhibitionBoardService.getPosts();
-    const searchTag = req.params.tags.split(' ');
-    let resultArr = [];
+    const searchTag = req.params.tags.split('&');
+    const resultArr = [];
 
     for (let i = 0; i < posts.length; i++) {
       // posts의 태그와 tags가 포함관계인 게시글의 아이디와 게시글 제목만 리턴
@@ -95,10 +95,9 @@ projectExhibitionBoardRouter.get(
   '/keyword/:keyword',
   async (req, res, next) => {
     try {
-      const keyword = req.query.keyword;
-      console.log(keyword);
+      const keyword = req.params.keyword;
       const posts = await projectExhibitionBoardService.getPosts();
-      let resultArr = [];
+      const resultArr = [];
 
       for (let i = 0; i < posts.length; i++) {
         if (posts[i].title.includes(keyword)) {
@@ -160,6 +159,8 @@ projectExhibitionBoardRouter.delete(
   loginRequired,
   async (req, res, next) => {
     try {
+      const postId = req.params.postId;
+      const nickName = req.currentNickName;
       const owner = await projectExhibitionBoardService.getPostById(postId)
         .nickName;
       if (owner !== nickName) {
@@ -167,7 +168,7 @@ projectExhibitionBoardRouter.delete(
       }
 
       const deletedPost = await projectExhibitionBoardService.deletePost(
-        req.params.postId
+        postId
       );
 
       res.status(200).json(deletedPost);
