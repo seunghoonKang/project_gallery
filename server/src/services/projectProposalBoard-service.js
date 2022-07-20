@@ -6,30 +6,30 @@ class ProjectProposalBoardService {
   }
 
   // 프로젝트 제안 정보 조회
-  async getProposal(titleId) {
-    const proposal = await this.projectProposalBoardModel.findByTitle({
-      _id: titleId,
+  async getProposalById(postId) {
+    const proposal = await this.projectProposalBoardModel.findById({
+      postId,
     });
     return proposal;
   }
 
   // 프로젝트 제안 전체 조회
   async getProposals() {
-    const proposals = await this.projectProposalBoardModel.findAllProposal();
+    const proposals = await this.projectProposalBoardModel.getAll();
     return proposals;
   }
 
   // 프로젝트 제안 추가
-  async addProposal(titleInfo) {
-    const newProposal = await this.projectProposalBoardModel.create(titleInfo);
+  async addProposal(postId) {
+    const newProposal = await this.projectProposalBoardModel.create(postId);
     return newProposal;
   }
 
   // 프로젝트 제안 수정
-  async setProposal(titleId, toUpdate) {
+  async setProposal(postId, toUpdate) {
     const editedProposal =
       await this.proposalprojectProposalBoardModelModel.update({
-        _id: titleId,
+        postId,
         update: toUpdate,
       });
 
@@ -37,9 +37,9 @@ class ProjectProposalBoardService {
   }
 
   // 프로젝트 제안 삭제
-  async deleteProposal(titleId) {
+  async deleteProposal(postId) {
     const deletedProposal = await this.projectProposalBoardModel.delete({
-      _id: titleId,
+      postId,
     });
 
     if (!deletedProposal) {
