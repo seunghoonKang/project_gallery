@@ -10,7 +10,7 @@ function ExhReviw() {
   const [myReviw, setMyReviw] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/Comment').then((res) => {
+    axios.get('http://localhost:8000/api/comment').then((res) => {
       console.log(res);
     });
   }, []);
@@ -23,7 +23,7 @@ function ExhReviw() {
 
   function onSubmitHandler(e) {
     e.preventDefault();
-    return axios.post('http://localhost:8000/api/Comment', body).then((res) => {
+    return axios.post('http://localhost:8000/api/comment', body).then((res) => {
       console.log(res);
     });
   }
@@ -37,7 +37,7 @@ function ExhReviw() {
           </MyReviwCard>
         ) : (
           <ReviwCard>
-            <div>쓴사람: {nickName}</div>
+            <ProjectNickname>작성자: {nickName}</ProjectNickname>
             <Contents>글내용</Contents>
           </ReviwCard>
         )}
@@ -90,4 +90,7 @@ const MyReviwCard = styled.div`
   border-width: 1px;
   background-color: rgb(205, 205, 187);
   color: black;
+`;
+const ProjectNickname = styled.div`
+  diplay: float;
 `;

@@ -18,15 +18,12 @@ import { exhibition } from './api/exhibition/exhibitionProject';
 import { PropsalDetail } from './proposal/proposalDetail';
 
 function App() {
-  const [exhibitionProject, setExhibitionProject] = useState([]);
+  // useEffect(() => {
+  //   exhibitionProjects().then((res) => {
+  //     console.log(res.data);
+  //   });
+  // }, []);
 
-  useEffect(() => {
-    exhibition.exhibitionProjects().then((res) => {
-      setExhibitionProject(res.data);
-    });
-  }, []);
-
-  console.log(exhibitionProject);
   return (
     <BrowserRouter>
       <div className="App">

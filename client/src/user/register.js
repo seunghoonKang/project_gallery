@@ -68,7 +68,10 @@ function Register() {
         nickName: inputNickname,
       };
       // 회원가입 이후에는 로그인 창으로 가기
-      userApi.registerApi(body);
+      userApi.registerApi(body).then((res) => {
+        alert('회원가입 정상적으로 되었습니다 ');
+        window.location.href = '/login';
+      });
     } else {
       alert('비밀번호,이메일,닉네임을 한번 더 확인해주세요');
     }
