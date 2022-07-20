@@ -1,9 +1,9 @@
 import {useState} from 'react';
-import './App.css';
+import './WritePage.css';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-function App() {
+function WritePage() {
   const [movieContent, setMovieContent] = useState({
     title: '',
     content: ''
@@ -72,4 +72,4 @@ function App() {
   );
 }
 
-export default App;
+export default WritePage;

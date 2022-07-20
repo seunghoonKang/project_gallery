@@ -16,6 +16,9 @@ import ExhibitionList from './exhibition/exhibitionListPages';
 import exhibitionProject from './data/data';
 import { exhibitionProjects } from './api/exhibition/exhibitionProject';
 import { PropsalDetail } from './proposal/proposalDetail';
+import WritePage from './write/WritePage';
+
+
 function App() {
   useEffect(() => {
     exhibitionProjects();
@@ -37,6 +40,8 @@ function App() {
           <Route
             path="/exhibitionDetail/:id"
             element={<ExhibitionDetail exhibitionProject={exhibitionProject} />}
+          />
+          <Route path="proposalList/write" element={<WritePage />}
           />
         </Routes>
       </div>
