@@ -50,11 +50,19 @@ teamRecruitmentBoardRouter.patch(
   async (req, res, next) => {
     try {
       const postId = req.params.postId;
-      const { title, tag, description } = req.body;
+      const nickName = req.currentNickName;
+      const { title, tags, description } = req.body;
+
+      const originRecruitment =
+        await projectProposalBoardService.getProposalById(postId);
+
+      if (originRecruitment.nickName !== nickName) {
+        throw new Error('모집을 수정할 권한이 없습니다.');
+      }
 
       const toUpdate = {
         ...(title && { title }),
-        ...(tag && { tag }),
+        ...(tags && { tags }),
         ...(description && { description }),
       };
 
@@ -76,7 +84,15 @@ teamRecruitmentBoardRouter.delete(
   loginRequired,
   async (req, res, next) => {
     try {
-      const postId = req.body.postId;
+      const postId = req.params.postId;
+      const nickName = req.currentNickName;
+
+      const originRecruitment =
+        await projectProposalBoardService.getProposalById(postId);
+
+      if (originRecruitment.nickName !== nickName) {
+        throw new Error('모집을 삭제할 권한이 없습니다.');
+      }
       const deletedTeam = await teamRecruitmentBoardService.deleteRecruitment(
         postId
       );

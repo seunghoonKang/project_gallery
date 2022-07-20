@@ -54,11 +54,11 @@ projectProposalBoardRouter.patch(
       const nickName = req.currentNickName;
       const { title, tags, description } = req.body;
 
-      const originPost = await projectProposalBoardService.getProposalById(
+      const originProposal = await projectProposalBoardService.getProposalById(
         postId
       );
 
-      if (originPost.nickName !== nickName) {
+      if (originProposal.nickName !== nickName) {
         throw new Error('제안을 수정할 권한이 없습니다.');
       }
 
@@ -86,6 +86,16 @@ projectProposalBoardRouter.delete(
   async (req, res, next) => {
     try {
       const postId = req.params.postId;
+      const nickName = req.currentNickName;
+
+      const originProposal = await projectProposalBoardService.getProposalById(
+        postId
+      );
+
+      if (originProposal.nickName !== nickName) {
+        throw new Error('제안을 삭제할 권한이 없습니다.');
+      }
+
       const deletedProposal = await projectProposalBoardService.deleteProposal(
         postId
       );
