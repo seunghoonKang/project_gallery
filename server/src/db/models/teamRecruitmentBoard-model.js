@@ -13,9 +13,9 @@ export class TeamRecruitmentBoardModel {
     return newTeam;
   }
 
-  // 팀원 모집 조회 - 닉네임
-  async findByNickName(nickName) {
-    const team = await TeamRecruitmentBoard.findOne({ nickName });
+  // 팀원 모집 조회 - 아이디
+  async findById(postId) {
+    const team = await TeamRecruitmentBoard.findOne({ _id: postId });
     return team;
   }
 
