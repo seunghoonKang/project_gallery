@@ -2,14 +2,30 @@ import {useState} from 'react';
 import './WritePage.css';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import axios from 'axios';
 
 function WritePage() {
   const [movieContent, setMovieContent] = useState({
     title: '',
-    content: ''
+    content: '',
   })
 
  const [viewContent, setViewContent ] = useState([]);
+
+ useEffect(() => {
+  axios.get('http://localhost:3000/api/exhibition/write').then((response)=> { //api/insert
+    setViewContent(response.data);
+  })
+ },[viewContent])
+
+ const submitReview = ()=>{
+  axios.post('http://localhost:3000/api/exhibition/write', {  //api/get
+    title: movieContent.title,
+    content: movieContent.title
+  }).then(()=>{
+    alert('등록 완료!');
+  })
+};
 
  const getValue = e => {
   const { name, value } = e.target;
@@ -25,7 +41,7 @@ function WritePage() {
       <div className='movie-container'>
         {viewContent.map(element =>
           <div>
-            <h2>{element.content}</h2>
+            <h2>{element.title}</h2>
             <div>
               {element.content}
             </div>
@@ -64,10 +80,8 @@ function WritePage() {
         />
       </div>
       <button className="submit-button"
-      onClick={() => {
-        setViewContent(viewContent.concat({...movieContent}));
-      }
-      }>입력</button>
+      onClick={submitReview}
+      >입력</button>
     </div>
   );
 }
