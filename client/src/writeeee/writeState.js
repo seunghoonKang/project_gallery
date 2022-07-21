@@ -3,6 +3,9 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import styled from 'styled-components';
 import { useState } from 'react';
+import { ProposalForm } from './writeForm/propsalForm';
+import { RecruitmentForm } from './writeForm/recruitmentForm';
+import { ExhibitionForm } from './writeForm/exhibitionForm';
 
 const stateWrite = [
   {
@@ -27,10 +30,13 @@ function WriteState() {
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label={Writestate} />}
       />
+      {WriteState === '전시' ? <ExhibitionForm /> : null}
+      {WriteState === '제안' ? <ProposalForm /> : null}
+      {WriteState === '팀원모집' ? <RecruitmentForm /> : null}
     </Container>
   );
 }
 export default WriteState;
 const Container = styled.div`
-  color: white;
+  background-color: white;
 `;
