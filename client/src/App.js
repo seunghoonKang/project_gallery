@@ -14,18 +14,12 @@ import HomeNav from './home/homenav';
 import ProposalList from './proposal/proposalList';
 import ExhibitionList from './exhibition/exhibitionListPages';
 import exhibitionProject from './data/data';
-import { exhibition } from './api/exhibition/exhibitionProject';
 import { PropsalDetail } from './proposal/proposalDetail';
+import Write from './writeeee/write';
 
 import WritePage from './write/WritePage';
 
 function App() {
-  // useEffect(() => {
-  //   exhibitionProjects().then((res) => {
-  //     console.log(res.data);
-  //   });
-  // }, []);
-
   return (
     <BrowserRouter>
       <div className="App">
@@ -34,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/write" element={<Write />} />
           <Route path="/proposalList" element={<ProposalList />} />
           <Route path="/proposalDetail/:id" element={<PropsalDetail />} />
           <Route path="/register" element={<Register />} />
