@@ -30,25 +30,25 @@ class ProjectExhibitionBoardService {
     return postById;
   }
 
-  async getPostByNickName(nickName) {
-    const postByNickName =
-      await this.projectExhibitionBoardModel.findByNickName({ nickName });
+  async getPostsByNickName(nickName) {
+    const postsByNickName =
+      await this.projectExhibitionBoardModel.findByNickName(nickName);
 
-    if (!postByNickName) {
+    if (!postsByNickName) {
       throw new Error('해당 유저가 작성한 글이 존재하지 않습니다.');
     }
 
-    return postByNickName;
+    return postsByNickName;
   }
 
   async editPost(postId, toUpdate) {
-    let editedPost = await this.projectExhibitionBoardModel.findById(postId);
+    const originPost = await this.projectExhibitionBoardModel.findById(postId);
 
-    if (!editedPost) {
+    if (!originPost) {
       throw new Error('존재하지 않는 게시글입니다.');
     }
 
-    editedPost = await this.projectExhibitionBoardModel.update({
+    const editedPost = await this.projectExhibitionBoardModel.update({
       postId,
       update: toUpdate,
     });

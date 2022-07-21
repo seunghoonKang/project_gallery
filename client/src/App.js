@@ -21,7 +21,9 @@ import WritePage from './write/WritePage';
 
 function App() {
   // useEffect(() => {
-  //   exhibitionProjects();
+  //   exhibitionProjects().then((res) => {
+  //     console.log(res.data);
+  //   });
   // }, []);
   return (
     <BrowserRouter>
