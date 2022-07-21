@@ -3,22 +3,27 @@ import styled from 'styled-components';
 import PaginationContents from './paginationContents';
 import WriteComp from './writeComponent';
 import PropsalProject from './propsalProject';
-import data from '../data/data';
+import { exhibition } from '../api/exhibition/exhibitionProject';
+import { proposal } from '../api/proposal/proposalProject';
+import SelectTags from './selectTags';
 
 const ProposalList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [project, setProject] = useState([]);
 
+  useEffect(() => {
+    proposal.proposalProjectList().then((res) => {
+      setProject(res.data);
+      console.log(project);
+    });
+  }, []);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = project.slice(indexOfFirstPost, indexOfLastPost);
 
-  useEffect(() => {
-    setProject(data);
-  }, []);
   //
 
   return (
@@ -33,6 +38,7 @@ const ProposalList = () => {
         currentPage={currentPage}
       />
       <WriteComp />
+      <SelectTags projects={project} />
       <Container>
         <PropsalProject projects={currentPosts} />
       </Container>
