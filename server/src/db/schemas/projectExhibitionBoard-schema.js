@@ -37,7 +37,7 @@ const ProjectExhibitionBoardSchema = new Schema(
     },
     commentBoxId: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   {

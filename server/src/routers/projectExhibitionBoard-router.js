@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { loginRequired } from '../middlewares';
-import { projectExhibitionBoardService, commentService } from '../services';
+import { projectExhibitionBoardService, commentBoxService } from '../services';
 
 const projectExhibitionBoardRouter = Router();
 
@@ -13,7 +13,6 @@ projectExhibitionBoardRouter.post(
       const { title, url, tags, description, images, intro, updateLog } =
         req.body;
       const nickName = req.currentNickName;
-      const commentBoxId = await commentService.addCommentBox();
 
       const newPost = await projectExhibitionBoardService.addPost({
         title,
@@ -24,10 +23,7 @@ projectExhibitionBoardRouter.post(
         images,
         intro,
         updateLog,
-        commentBoxId,
       });
-
-      await commentService.editCommentBox(commentBoxId, newPost._id);
 
       res.status(200).json(newPost);
     } catch (error) {
@@ -171,6 +167,9 @@ projectExhibitionBoardRouter.delete(
         throw new Error('전시물을 삭제할 권한이 없습니다.');
       }
 
+      const deletedCommentBox = await commentBoxService.deleteCommentBox(
+        postId
+      );
       const deletedPost = await projectExhibitionBoardService.deletePost(
         postId
       );

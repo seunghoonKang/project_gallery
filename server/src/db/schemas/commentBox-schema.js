@@ -2,14 +2,9 @@ import { Schema } from 'mongoose';
 
 const CommentBoxSchema = new Schema(
   {
-    // user: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'users',
-    //   required: true,
-    // },
     postId: {
       type: String,
-      required: false,
+      required: true,
     },
     commentList: {
       type: [
@@ -25,6 +20,7 @@ const CommentBoxSchema = new Schema(
     collection: 'comments',
     timestamps: true,
     versionKey: false,
+    _id: false,
   }
 );
 
