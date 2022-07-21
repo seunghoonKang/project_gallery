@@ -1,16 +1,15 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Chip, Stack } from '@mui/material';
 import styled from '@emotion/styled';
+
 function SelectTags({ projects }) {
   const [state, setState] = useState();
 
   const handleBtns = (e) => {
     const tag = e.target.value;
-    const filtered = projects.filter(
-      (item, index) => item.tags[index] === 'C++'
-    );
-    console.log(filtered);
+    const mapped = projects.map((item) => item.tags);
+    const filtered = mapped.filter((a) => a === tag);
+    console.log(mapped);
     // if (tag === 'ALL') {
     //   setState();
     // } else if (tag === 'JAVA') {
@@ -33,7 +32,11 @@ function SelectTags({ projects }) {
   const tagArr = [...tagSet];
 
   return tagArr.map((elem) => {
-    return <Button onClick={handleBtns}>{elem}</Button>;
+    return (
+      <Button onClick={handleBtns} value={elem}>
+        {elem}
+      </Button>
+    );
   });
 }
 

@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useState, useMemo } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './home/home';
 //import Footer from './footer/Footer';
@@ -14,9 +13,8 @@ import HomeNav from './home/homenav';
 import ProposalList from './proposal/proposalList';
 import ExhibitionList from './exhibition/exhibitionListPages';
 import exhibitionProject from './data/data';
-import { exhibition } from './api/exhibition/exhibitionProject';
 import { PropsalDetail } from './proposal/proposalDetail';
-
+import RecruitmentList from './recruitment/recruitmentList';
 import WritePage from './write/WritePage';
 
 function App() {
@@ -46,6 +44,7 @@ function App() {
             element={<ExhibitionDetail exhibitionProject={exhibitionProject} />}
           />
           <Route path="proposalList/write" element={<WritePage />} />
+          <Route path="/recruitmentList" element={<RecruitmentList />} />
         </Routes>
       </div>
     </BrowserRouter>
