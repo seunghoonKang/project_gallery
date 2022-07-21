@@ -12,7 +12,6 @@ function Write() {
   return (
     <Container>
       <WriteState />
-      <RecruitmentForm />
     </Container>
   );
 }
