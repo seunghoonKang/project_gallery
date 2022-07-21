@@ -25,7 +25,7 @@ projectExhibitionBoardRouter.post(
         updateLog,
       });
 
-      res.status(200).json(JSON.stringify(newPost));
+      res.status(200).json(newPost);
     } catch (error) {
       next(error);
     }
