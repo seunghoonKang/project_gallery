@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { useState } from 'react';
 import WriteState from './writeState';
-import { ExhibitionForm } from './writeForm/exhibitionForm';
-import { ProposalForm } from './writeForm/propsalForm';
-import { RecruitmentForm } from './writeForm/recruitmentForm';
+import { ExhibitionForm, ProposalForm, RecruitmentForm } from './writeForm';
+// import { ExhibitionForm } from './writeForm/exhibitionForm';
+// import { ProposalForm } from './writeForm/propsalForm';
+// import { RecruitmentForm } from './writeForm/recruitmentForm';
 
 import styled from 'styled-components';
 

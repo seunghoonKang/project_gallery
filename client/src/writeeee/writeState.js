@@ -19,7 +19,7 @@ const stateWrite = [
   },
 ];
 function WriteState() {
-  const [Writestate, WriteSetState] = useState('전시');
+  const [Writestate, setWriteState] = useState('전시');
   return (
     <Container>
       <Autocomplete
@@ -28,7 +28,16 @@ function WriteState() {
         id="combo-box-demo"
         options={stateWrite}
         sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label={Writestate} />}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label={Writestate}
+            onChange={(label) => {
+              console.log(label);
+              setWriteState(label.currentTarget.value);
+            }}
+          />
+        )}
       />
       {WriteState === '전시' ? <ExhibitionForm /> : null}
       {WriteState === '제안' ? <ProposalForm /> : null}
