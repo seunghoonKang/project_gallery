@@ -4,33 +4,32 @@ class CommentService {
   constructor(commentModel) {
     this.commentModel = commentModel;
   }
-
-  async getComment(postId) {
-    const comment = await this.reviewModel.findById(postId);
-    return comment;
+  async addCommentBox() {
+    const newCommentBox = await this.commentModel.create();
+    return newCommentBox._id;
   }
 
-  async getComments(title) {
-    const comments = await this.commentModel.findByTitle(title);
+  async addComment({ postId, commentInfo }) {
+    const commentBox = await this.commentModel.findById(postId);
+    commentBox.commentList.push(commentInfo);
+    return commentBox;
+  }
+
+  async getCommentBox(postId) {
+    const comments = await this.commentModel.findById(postId);
     return comments;
   }
 
-  async addComment(commentInfo) {
-    const newComment = await this.commentModel.create(commentInfo);
-    return newComment;
-  }
-
-  async editComment(postId, toUpdate) {
-    const editedComment = await this.commentModel.update({
+  async editCommentBox(commentBoxId, postId) {
+    const editedCommentBox = await this.commentModel.update({
+      commentBoxId,
       postId,
-      update: toUpdate,
     });
-
-    return editedComment;
+    return editedCommentBox;
   }
 
-  async deleteComment(postId) {
-    const deletedComment = await this.commentModel.delete(postId);
+  async deleteComment(commentId) {
+    const deletedComment = await this.commentModel.delete(commentId);
     return deletedComment;
   }
 }

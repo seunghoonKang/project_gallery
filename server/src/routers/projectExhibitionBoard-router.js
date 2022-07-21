@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { loginRequired } from '../middlewares';
-import { projectExhibitionBoardService } from '../services';
+import { projectExhibitionBoardService, commentService } from '../services';
 
 const projectExhibitionBoardRouter = Router();
 
@@ -13,6 +13,7 @@ projectExhibitionBoardRouter.post(
       const { title, url, tags, description, images, intro, updateLog } =
         req.body;
       const nickName = req.currentNickName;
+      const commentBoxId = await commentService.addCommentBox();
 
       const newPost = await projectExhibitionBoardService.addPost({
         title,
@@ -23,7 +24,10 @@ projectExhibitionBoardRouter.post(
         images,
         intro,
         updateLog,
+        commentBoxId,
       });
+
+      await commentService.editCommentBox(commentBoxId, newPost._id);
 
       res.status(200).json(newPost);
     } catch (error) {

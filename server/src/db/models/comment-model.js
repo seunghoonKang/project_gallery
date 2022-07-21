@@ -1,39 +1,38 @@
 import { model } from 'mongoose';
-import { CommentSchema } from '../schemas/comment-schema';
+import { CommentBoxSchema } from '../schemas/comment-schema';
 
-const Comment = model('comments', CommentSchema);
+const Comment = model('comments', CommentBoxSchema);
 
-export class CommentModel {
+class CommentModel {
+  async create() {
+    const emptyStr = '';
+    const emptyArr = [];
+    const newCommentBox = await Comment.create({ emptyStr, emptyArr });
+    return newCommentBox;
+  }
+
   async findById(postId) {
-    const comment = await Comment.findOne({ postId });
-    return comment;
+    const commentBox = await Comment.findById(postId);
+    return commentBox;
   }
 
-  async findByTitle(title) {
-    const comments = await Comment.find({ title });
-    return comments;
-  }
-
-  async create(commentInfo) {
-    const newComment = await Comment.create(commentInfo);
-    return newComment;
-  }
-
-  async update({ postId, update }) {
-    const filter = { postId: postId };
+  async update({ commentBoxId, update }) {
+    const filter = { _id: commentBoxId };
     const option = { returnOriginal: false };
 
-    const updatedComment = await Comment.findOneAndUpdate(
+    const updatedCommentBox = await Comment.findOneAndUpdate(
       filter,
       update,
       option
     );
-    return updatedComment;
+    return updatedCommentBox;
   }
 
-  async delete(postId) {
-    const comment = await Comment.deleteOne({ postId });
-    return comment;
+  async delete(commentId) {
+    const commentBox = await Comment.findOneAndDelete({
+      _id: commentId,
+    });
+    return commentBox;
   }
 }
 

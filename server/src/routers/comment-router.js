@@ -4,72 +4,45 @@ import { commentService } from '../services';
 
 const commentRouter = Router();
 
-commentRouter.get('/', async (req, res, next) => {
+commentRouter.post('/post/:postId', loginRequired, async (req, res, next) => {
   try {
-    const postId = req.body.postId;
-    const comment = await commentService.getComment(postId);
-    res.status(201).json(comment);
-  } catch (error) {
-    next(error);
-  }
-});
+    const postId = req.params.postId;
+    const { commentInfo } = req.body;
 
-commentRouter.get('/', async (req, res, next) => {
-  try {
-    const title = req.body.title;
-    const comments = await commentService.getComments(title);
-    res.status(201).json(comments);
-  } catch (error) {
-    next(error);
-  }
-});
-
-commentRouter.post('/', loginRequired, async (req, res, next) => {
-  try {
-    const { postId, nickName, comment } = req.body;
-
-    const new_comment = await commentService.addComment({
+    const newComment = await commentService.addComment({
       postId,
-      nickName,
-      comment,
+      commentInfo,
     });
 
-    res.status(201).json(new_comment);
+    res.status(200).json(newComment);
   } catch (error) {
     next(error);
   }
 });
 
-commentRouter.patch('/', loginRequired, async (req, res, next) => {
+commentRouter.get('/post/:postId', async (req, res, next) => {
   try {
-    const { postId, nickName, comment } = req.body;
+    const postId = req.params.postId;
+    const comments = await commentService.getCommentBox(postId);
+    res.status(200).json(comments);
+  } catch (error) {
+    next(error);
+  }
+});
 
-    const comment_origin = await commentService.getComment(postId);
+commentRouter.delete(
+  '/:commentId',
+  loginRequired,
+  async function (req, res, next) {
+    try {
+      const commentId = req.params.commentId;
 
-    if (comment_origin.nickName !== nickName) {
-      throw new Error('리뷰를 수정할 권한이 없습니다.');
+      const deletedComment = await commentService.deleteComment(commentId);
+      res.status(200).json(deletedComment);
+    } catch (error) {
+      next(error);
     }
-
-    const toUpdate = {
-      ...(comment && { comment }),
-    };
-
-    const editedComment = await commentService.editComment(postId, toUpdate);
-
-    res.status(200).json(editedComment);
-  } catch (error) {
-    next(error);
   }
-});
-
-commentRouter.delete('/', loginRequired, async function (req, res, next) {
-  try {
-    const postId = req.body.postId;
-    const deletedComment = await commentService.deleteComment(postId);
-    res.status(200).json(deletedComment);
-  } catch (error) {
-    next(error);
-  }
-});
+);
 
 export { commentRouter };

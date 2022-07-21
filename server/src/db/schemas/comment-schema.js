@@ -1,26 +1,22 @@
 import { Schema } from 'mongoose';
 
-const CommentSchema = new Schema(
+const CommentBoxSchema = new Schema(
   {
+    // user: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: 'users',
+    //   required: true,
+    // },
     postId: {
-      type: String,
-      required: true,
-    },
-    title: {
       type: String,
       required: false,
     },
     commentList: {
       type: [
-        new Schema(
-          {
-            nickName: { type: String, required: false },
-            comment: { type: String, required: true },
-          },
-          {
-            __id: true,
-          }
-        ),
+        new Schema({
+          nickName: { type: String, required: true },
+          comment: { type: String, required: true },
+        }),
       ],
       required: true,
     },
@@ -32,8 +28,4 @@ const CommentSchema = new Schema(
   }
 );
 
-export { CommentSchema };
-
-// const orderedDate = createdAt.sort(
-//   (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-// );
+export { CommentBoxSchema };
