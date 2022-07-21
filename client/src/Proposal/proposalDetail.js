@@ -2,21 +2,25 @@ import { useParams } from 'react-router-dom';
 import { ProjectDetail } from '../share/projectDetail';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import ExhReviw from '../exhibition/exhReviw';
+import { Container } from '@mui/system';
 
 function PropsalDetail() {
-  const [proposalContent, setProposalContent] = useState({});
+  const [exhibitionProject, setExhibitionProject] = useState({});
   const { id } = useParams();
-  //const [project, setProject] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/exhibition/postId/${id}`)
-      .then((res) => setProposalContent(res.data));
+      .get(`http://localhost:8000/api/proposal/postId/${id}`)
+      .then((res) => setExhibitionProject(res.data));
   }, []);
-
+  console.log(exhibitionProject);
   return (
     <>
-      <ProjectDetail />
+      <ProjectDetail exhibitionProject={exhibitionProject} />
+      <Container sx={{ mx: 30 }}>
+        <ExhReviw />
+      </Container>
     </>
   );
 }
