@@ -11,16 +11,15 @@ import {
   Typography,
 } from '@mui/material';
 import styled from 'styled-components';
-
 const PropsalProject = ({ projects }) => {
   let navigate = useNavigate();
 
   return projects.map((project, i) => {
     return (
-      <CardHoverEffect>
+      <CardHoverEffect key={i}>
         <Card
           key={i}
-          classname="propsalCard"
+          className="propsalCard"
           sx={{
             maxWidth: 350,
             p: 1,
@@ -28,26 +27,26 @@ const PropsalProject = ({ projects }) => {
             color: 'white',
           }}
         >
-          <CardMedia
+          {/* <CardMedia
             key={i}
             component="img"
             height="180"
-            image={project.image}
+            image={project.images}
             alt="image"
             onClick={() => {
-              navigate(`/proposalDetail/${i}`);
+              navigate(`/proposalDetail/${project._id}`);
             }}
-          />
+          /> */}
           <CardContent
             onClick={() => {
-              navigate(`/proposalDetail/${i}`);
+              navigate(`/proposalDetail/${project._id}`);
             }}
           >
             <Typography
               gutterBottom
               variant="h5"
               component="div"
-              textAlign="center"
+              textalign="center"
             >
               {project.title}
               <hr />
@@ -62,14 +61,14 @@ const PropsalProject = ({ projects }) => {
                   color: 'white',
                 }}
               >
-                {project.contents}
+                {project.description}
               </Typography>
             </div>
           </CardContent>
           <CardActions>
             <Button
               size="small"
-              textAlign="center"
+              textalign="center"
               style={{
                 color: 'white',
               }}

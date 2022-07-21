@@ -27,7 +27,7 @@ export class ProjectProposalBoardModel {
     const filter = { _id: postId };
     const option = { returnOriginal: false };
 
-    const updatedProposal = await ProjectProposalBoard.findByIdAndUpdate(
+    const updatedProposal = await ProjectProposalBoard.findOneAndUpdate(
       filter,
       update,
       option

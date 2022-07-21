@@ -5,11 +5,15 @@ class ProjectProposalBoardService {
     this.projectProposalBoardModel = projectProposalBoardModel;
   }
 
+  // 프로젝트 제안 추가
+  async addProposal(postinfo) {
+    const newProposal = await this.projectProposalBoardModel.create(postinfo);
+    return newProposal;
+  }
+
   // 프로젝트 제안 정보 조회
   async getProposalById(postId) {
-    const proposal = await this.projectProposalBoardModel.findById({
-      postId,
-    });
+    const proposal = await this.projectProposalBoardModel.findById(postId);
     return proposal;
   }
 
@@ -19,28 +23,19 @@ class ProjectProposalBoardService {
     return proposals;
   }
 
-  // 프로젝트 제안 추가
-  async addProposal(postId) {
-    const newProposal = await this.projectProposalBoardModel.create(postId);
-    return newProposal;
-  }
-
   // 프로젝트 제안 수정
-  async setProposal(postId, toUpdate) {
-    const editedProposal =
-      await this.proposalprojectProposalBoardModelModel.update({
-        postId,
-        update: toUpdate,
-      });
+  async editProposal(postId, toUpdate) {
+    const editedProposal = await this.projectProposalBoardModel.update({
+      postId,
+      update: toUpdate,
+    });
 
     return editedProposal;
   }
 
   // 프로젝트 제안 삭제
   async deleteProposal(postId) {
-    const deletedProposal = await this.projectProposalBoardModel.delete({
-      postId,
-    });
+    const deletedProposal = await this.projectProposalBoardModel.delete(postId);
 
     if (!deletedProposal) {
       throw new Error('삭제에 실패했습니다. 다시 한 번 확인해 주세요.');

@@ -7,9 +7,7 @@ class TeamRecruitmentBoardService {
 
   // 팀원 모집 조회
   async getRecruitmentById(postId) {
-    const team = await this.teamRecruitmentBoardModel.findById({
-      postId,
-    });
+    const team = await this.teamRecruitmentBoardModel.findById(postId);
     return team;
   }
 

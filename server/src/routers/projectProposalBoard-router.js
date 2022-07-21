@@ -7,9 +7,11 @@ const projectProposalBoardRouter = Router();
 // 프로젝트 제안 추가 api 호출
 projectProposalBoardRouter.post('/', loginRequired, async (req, res, next) => {
   try {
+    const nickName = req.currentNickName;
     const { title, tags, description } = req.body;
 
     const newProposal = await projectProposalBoardService.addProposal({
+      nickName,
       title,
       tags,
       description,
@@ -22,7 +24,7 @@ projectProposalBoardRouter.post('/', loginRequired, async (req, res, next) => {
 });
 
 // 프로젝트 제안 전체 정보 조회 api 호출
-projectProposalBoardRouter.get('/', async (req, res, next) => {
+projectProposalBoardRouter.get('/list', async (req, res, next) => {
   try {
     const proposals = await projectProposalBoardService.getProposals();
 
@@ -54,11 +56,11 @@ projectProposalBoardRouter.patch(
       const nickName = req.currentNickName;
       const { title, tags, description } = req.body;
 
-      const originPost = await projectProposalBoardService.getProposalById(
+      const originProposal = await projectProposalBoardService.getProposalById(
         postId
       );
 
-      if (originPost.nickName !== nickName) {
+      if (originProposal.nickName !== nickName) {
         throw new Error('제안을 수정할 권한이 없습니다.');
       }
 
@@ -69,10 +71,8 @@ projectProposalBoardRouter.patch(
         ...(description && { description }),
       };
 
-      const updatedProposalInfo = await projectProposalBoardService.setProposal(
-        postId,
-        toUpdate
-      );
+      const updatedProposalInfo =
+        await projectProposalBoardService.editProposal(postId, toUpdate);
 
       res.status(200).json(updatedProposalInfo);
     } catch (error) {
@@ -83,11 +83,21 @@ projectProposalBoardRouter.patch(
 
 // 프로젝트 제안 삭제 api 호출
 projectProposalBoardRouter.delete(
-  '/',
+  '/postId/:postId',
   loginRequired,
   async (req, res, next) => {
     try {
-      const postId = req.body.postId;
+      const postId = req.params.postId;
+      const nickName = req.currentNickName;
+
+      const originProposal = await projectProposalBoardService.getProposalById(
+        postId
+      );
+
+      if (originProposal.nickName !== nickName) {
+        throw new Error('제안을 삭제할 권한이 없습니다.');
+      }
+
       const deletedProposal = await projectProposalBoardService.deleteProposal(
         postId
       );

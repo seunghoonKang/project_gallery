@@ -43,7 +43,9 @@ userRouter.post('/login', async (req, res, next) => {
 // 회원 정보 조회
 userRouter.get('/', loginRequired, async (req, res, next) => {
   try {
-    const userInfo = await userService.getUserInfo(req.currentUserId);
+    const userId = req.currentUserId;
+    const userInfo = await userService.getUserInfo(userId);
+
     res.status(200).json(userInfo);
   } catch (error) {
     next(error);
@@ -73,24 +75,11 @@ userRouter.patch('/', loginRequired, async (req, res, next) => {
   }
 });
 
-// 회원 정보 수정 - 비밀번호 확인
-userRouter.get('/recheck', loginRequired, async (req, res, next) => {
-  try {
-    const userId = req.currentUserId;
-    const inputPassword = req.body.password;
-
-    await userService.recheckPassword({ userId, inputPassword });
-
-    res.status(200).json({ result: '비밀번호가 일치합니다.' });
-  } catch (error) {
-    next(error);
-  }
-});
-
 // 회원 탈퇴
 userRouter.delete('/', loginRequired, async (req, res, next) => {
   try {
-    const deletedUser = await userService.deleteUser(req.currentUserId);
+    const userId = req.currentUserId;
+    const deletedUser = await userService.deleteUser(userId);
 
     res.status(200).json(deletedUser);
   } catch (error) {
