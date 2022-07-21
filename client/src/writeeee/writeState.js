@@ -19,7 +19,7 @@ const stateWrite = [
   },
 ];
 function WriteState() {
-  const [Writestate, setWriteState] = useState('전시');
+  const [writestate, setWriteState] = useState('전시');
   return (
     <Container>
       <Autocomplete
@@ -31,7 +31,7 @@ function WriteState() {
         renderInput={(params) => (
           <TextField
             {...params}
-            label={Writestate}
+            label={writestate}
             onChange={(label) => {
               console.log(label);
               setWriteState(label.currentTarget.value);
@@ -39,9 +39,9 @@ function WriteState() {
           />
         )}
       />
-      {WriteState === '전시' ? <ExhibitionForm /> : null}
-      {WriteState === '제안' ? <ProposalForm /> : null}
-      {WriteState === '팀원모집' ? <RecruitmentForm /> : null}
+      {writestate === '전시' ? <ExhibitionForm /> : null}
+      {writestate === '제안' ? <ProposalForm /> : null}
+      {writestate === '팀원모집' ? <RecruitmentForm /> : null}
     </Container>
   );
 }
