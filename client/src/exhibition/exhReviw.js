@@ -7,7 +7,7 @@ import axios from 'axios';
 function ExhReviw() {
   const [review, setReview] = useState('');
   const [nickName, setNickname] = useState('');
-  const [myReviw, setMyReviw] = useState(true);
+  const [myReviw, setMyReviw] = useState(false);
 
   useEffect(() => {
     axios.get('http://localhost:8000/api/comment').then((res) => {
