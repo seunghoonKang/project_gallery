@@ -15,7 +15,7 @@ function urlShare() {
 
 function ProjectContents({ exhibitionProject }) {
   const arr = Object.entries(exhibitionProject);
-  console.log();
+
   function projectShare() {
     navigator.clipboard.writeText(exhibitionProject.url).then(() => {
       alert('링크를 복사했습니다');
