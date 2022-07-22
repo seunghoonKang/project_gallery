@@ -1,10 +1,9 @@
 import { useParams } from 'react-router-dom';
-import { ProjectDetail } from '../share/projectDetail';
+import RecruitmentContents from './recruitmentContents';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Box } from '@mui/material';
 import ExhReviw from '../exhibition/exhReviw';
-import { Container } from '@mui/system';
-
 const RecrutmentDetail = () => {
   const [exhibitionProject, setExhibitionProject] = useState({});
   const { id } = useParams();
@@ -16,10 +15,10 @@ const RecrutmentDetail = () => {
   }, []);
   return (
     <>
-      <ProjectDetail exhibitionProject={exhibitionProject} />
-      <Container sx={{ mx: 30 }}>
-        <ExhReviw />
-      </Container>
+      <RecruitmentContents exhibitionProject={exhibitionProject} />
+      <Box sx={{ width: '100%' }} className="displayTapBox">
+        <ExhReviw exhibitionProject={exhibitionProject} />
+      </Box>
     </>
   );
 };

@@ -69,7 +69,9 @@ function ProjectContents({ exhibitionProject }) {
               }}
             ></ShareIcon>
           </div>
-          <div style={{ fontSize: '12px' }}>{exhibitionProject.createdAt}</div>
+          <div style={{ fontSize: '12px' }}>
+            {new Date(exhibitionProject.createdAt).toLocaleDateString()}
+          </div>
           <Hr />
           <ContentsContainer>{exhibitionProject.updateLog}</ContentsContainer>
         </Container>
