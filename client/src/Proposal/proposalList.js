@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import PaginationContents from './paginationContents';
 import WriteComp from './writeComponent';
 import PropsalProject from './propsalProject';
-import { exhibition } from '../api/exhibition/exhibitionProject';
 import { proposal } from '../api/proposal/proposalProject';
 import SelectTags from './selectTags';
 

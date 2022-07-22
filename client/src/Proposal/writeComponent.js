@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-
 import { useNavigate } from 'react-router-dom';
 
 const WriteComp = () => {
   const navigate = useNavigate();
   return (
-    <Button onClick={() => navigate('/write')}>
+    <Button onClick={() => navigate('write')}>
       <BorderColorIcon />
     </Button>
   );
