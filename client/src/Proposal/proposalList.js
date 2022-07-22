@@ -7,7 +7,7 @@ import { proposal } from '../api/proposal/proposalProject';
 
 const ProposalList = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [postsPerPage, setPostsPerPage] = useState(9);
   const [project, setProject] = useState([]);
 
   useEffect(() => {
