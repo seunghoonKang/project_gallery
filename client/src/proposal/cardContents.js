@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import styled from 'styled-components';
 
+
 const CardContents = ({ projects }) => {
   // const [page, setPage] = useState(1);
   const handleCardClick = () => {

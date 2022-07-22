@@ -12,6 +12,7 @@ const Home = () => {
   );
 };
 
+
 const Container = styled.div`
   background-color: #27262b;
 `;
