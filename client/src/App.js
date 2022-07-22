@@ -17,6 +17,7 @@ import { PropsalDetail } from './proposal/proposalDetail';
 import RecruitmentList from './recruitment/recruitmentList';
 import { RecrutmentDetail } from './recruitment/recruitmentDetail';
 import Write from './write/write';
+import WriteMiddle from './write/writeMiddle';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/write" element={<Write />} />
+          <Route path="/writeMiddle" element={<WriteMiddle />} />
           <Route path="/proposalList" element={<ProposalList />} />
           <Route path="/proposalDetail/:id" element={<PropsalDetail />} />
           <Route path="/register" element={<Register />} />
