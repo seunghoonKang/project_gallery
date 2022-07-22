@@ -4,7 +4,6 @@ import PaginationContents from './paginationContents';
 import WriteComp from './writeComponent';
 import PropsalProject from './propsalProject';
 import { proposal } from '../api/proposal/proposalProject';
-// import SelectTags from './selectTags';
 
 const ProposalList = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,7 +13,6 @@ const ProposalList = () => {
   useEffect(() => {
     proposal.proposalProjectList().then((res) => {
       setProject(res.data);
-      console.log(project);
     });
   }, []);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -37,7 +35,6 @@ const ProposalList = () => {
         currentPage={currentPage}
       />
       <WriteComp />
-      {/* <SelectTags projects={project} /> */}
       <Container>
         <PropsalProject projects={currentPosts} />
       </Container>

@@ -5,7 +5,7 @@ const headers = {
 const reviewApi = {
   postReviewApi: function postReviwApi(commentData, projectReviewId) {
     return axios.post(
-      `http://localhost:8000/api/comment/postId/${projectReviewId.postId}`,
+      `/api/comment/postId/${projectReviewId.postId}`,
       commentData,
       {
         headers,
@@ -13,9 +13,7 @@ const reviewApi = {
     );
   },
   getReviewApi: function getReviewApi(postIdData) {
-    return axios.get(
-      `http://localhost:8000/api/comment/postId/${postIdData.postId}`
-    );
+    return axios.get(`/api/comment/postId/${postIdData.postId}`);
   },
 };
 export { reviewApi };

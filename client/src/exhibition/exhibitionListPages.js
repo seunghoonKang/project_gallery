@@ -1,8 +1,5 @@
 import React from 'react';
-import displayData from '../data/data';
 import styled from 'styled-components';
-import CardContent from '../proposal/cardContents';
-import Pagination from '../share/projectList/pagination';
 import { useState, useEffect } from 'react';
 import ExhibitionProject from './exhibitionProject';
 import PaginationContents from '../proposal/paginationContents';
@@ -51,7 +48,6 @@ const ExhibitionList = () => {
 };
 
 const Container = styled.div`
-  border: 1px solid white;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-template-rows: repeat(3, 1fr);

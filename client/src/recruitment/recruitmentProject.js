@@ -1,14 +1,9 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { styled } from '@mui/material/styles';
-import { useState } from 'react';
-import TableCell from '@mui/material/TableCell';
-import TableRow from '@mui/material/TableRow';
+import { styled, TableCell, TableRow } from '@mui/material';
 
 const RecruitmentProject = ({ projects }) => {
   let navigate = useNavigate();
-  const [number, setNumber] = useState(0);
-  //nickName, _id, title, description, createdAt,
   return projects.map((project, i) => {
     return (
       <CustomizedTableRow

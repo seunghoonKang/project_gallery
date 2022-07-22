@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import * as React from 'react';
-import ShareIcon from '@mui/icons-material/Share';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 //url공유하는 코드
 

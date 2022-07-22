@@ -12,7 +12,6 @@ import './App.css';
 import HomeNav from './home/homenav';
 import ProposalList from './proposal/proposalList';
 import ExhibitionList from './exhibition/exhibitionListPages';
-import exhibitionProject from './data/data';
 import { PropsalDetail } from './proposal/proposalDetail';
 import RecruitmentList from './recruitment/recruitmentList';
 import { RecrutmentDetail } from './recruitment/recruitmentDetail';
@@ -33,14 +32,8 @@ function App() {
           <Route path="/proposalList" element={<ProposalList />} />
           <Route path="/proposalDetail/:id" element={<PropsalDetail />} />
           <Route path="/register" element={<Register />} />
-          <Route
-            path="/exhibitionList"
-            element={<ExhibitionList exhibitionProject={exhibitionProject} />}
-          />
-          <Route
-            path="/exhibitionDetail/:id"
-            element={<ExhibitionDetail exhibitionProject={exhibitionProject} />}
-          />
+          <Route path="/exhibitionList" element={<ExhibitionList />} />
+          <Route path="/exhibitionDetail/:id" element={<ExhibitionDetail />} />
 
           <Route path="/recruitmentList" element={<RecruitmentList />} />
           <Route path="/recruitmentDetail/:id" element={<RecrutmentDetail />} />

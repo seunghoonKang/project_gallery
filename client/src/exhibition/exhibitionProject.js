@@ -14,7 +14,6 @@ import styled from 'styled-components';
 
 const ExhibitionProject = ({ projects }) => {
   let navigate = useNavigate();
-  console.log(projects);
 
   return projects.map((project, i) => {
     return (
