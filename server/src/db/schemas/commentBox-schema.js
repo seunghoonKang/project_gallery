@@ -18,9 +18,7 @@ const CommentBoxSchema = new Schema(
   },
   {
     collection: 'comments',
-    timestamps: true,
     versionKey: false,
-    _id: false,
   }
 );
 

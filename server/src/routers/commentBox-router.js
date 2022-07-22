@@ -5,7 +5,7 @@ import { commentBoxService } from '../services';
 const commentBoxRouter = Router();
 
 commentBoxRouter.post(
-  '/post/:postId',
+  '/postId/:postId',
   loginRequired,
   async (req, res, next) => {
     try {
@@ -15,20 +15,31 @@ commentBoxRouter.post(
       const commentInfo = { nickName, comment };
 
       const commentBox = await commentBoxService.getCommentBox(postId);
-
       // 첫 댓글인 경우 commentBox를 생성
       if (!commentBox || commentBox === 'null') {
-        const newCommentBox = await commentBoxService.addCommentBox({
-          postId,
-          commentInfo,
-        });
-        res.status(200).json(newCommentBox);
-      } else {
-        const commentBox = await commentBoxService.addComment(
+        const newCommentBox = await commentBoxService.addCommentBox(
           postId,
           commentInfo
         );
-        res.status(200).json(commentBox);
+        res.status(200).json(newCommentBox);
+      }
+      // 첫 댓글이 아닌 경우 기존의 commentBox에 추가
+      else {
+        const commentList = await commentBoxService.addComment(
+          postId,
+          commentInfo
+        );
+        const toUpdate = {
+          postId,
+          commentList,
+        };
+
+        const editedCommentBox = await commentBoxService.editCommentBox(
+          postId,
+          toUpdate
+        );
+
+        res.status(200).json(editedCommentBox);
       }
     } catch (error) {
       next(error);
@@ -40,6 +51,9 @@ commentBoxRouter.get('/postId/:postId', async (req, res, next) => {
   try {
     const postId = req.params.postId;
     const commentBox = await commentBoxService.getCommentBox(postId);
+    if (!commentBox || commentBox === 'null') {
+      throw new Error('작성된 댓글이 없습니다.');
+    }
     const commentList = await commentBox.commentList;
 
     res.status(200).json(commentList);

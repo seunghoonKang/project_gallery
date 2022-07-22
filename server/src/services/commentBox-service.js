@@ -5,10 +5,11 @@ class CommentBoxService {
     this.commentBoxModel = commentBoxModel;
   }
 
-  async addCommentBox(postId, commentBoxInfo) {
+  // 댓글 box에 대한 동작들
+  async addCommentBox(postId, commentInfo) {
     const newCommentBox = await this.commentBoxModel.create({
       postId,
-      commentList: [commentBoxInfo],
+      commentList: commentInfo,
     });
     return newCommentBox;
   }
@@ -19,10 +20,12 @@ class CommentBoxService {
   }
 
   async editCommentBox(postId, toUpdate) {
+    console.log(toUpdate);
     const editedCommentBox = await this.commentBoxModel.update({
       postId,
       update: toUpdate,
     });
+    //console.log(editedCommentBox);
     return editedCommentBox;
   }
 
@@ -31,11 +34,12 @@ class CommentBoxService {
     return deletedCommentBox;
   }
 
-  // 댓글 하나가 추가된 commentBox를 리턴
+  // 댓글 하나에 대한 동작들
   async addComment(postId, commentInfo) {
     const commentBox = await this.commentBoxModel.findByPostId(postId);
-    const commentList = await commentBox.commentList.push({ commentInfo });
-    return commentBox;
+    const commentList = await commentBox.commentList;
+    await commentList.push(commentInfo);
+    return commentList;
   }
 
   async getComment(postId, commentId) {
@@ -49,7 +53,6 @@ class CommentBoxService {
     }
   }
 
-  // 댓글 하나가 삭제된 commentBox를 리턴
   async deleteComment(postId, commentId) {
     const commentBox = await this.commentBoxModel.findByPostId(postId);
     const commentList = await commentBox.commentList;
@@ -61,7 +64,7 @@ class CommentBoxService {
       }
     }
 
-    return commentBox;
+    return commentList;
   }
 }
 
