@@ -35,6 +35,10 @@ const ProjectExhibitionBoardSchema = new Schema(
       required: false,
       default: '업데이트 내역이 없습니다.',
     },
+    commentBoxId: {
+      type: String,
+      required: false,
+    },
   },
   {
     collection: 'exhibitions',

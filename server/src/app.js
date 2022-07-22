@@ -5,7 +5,7 @@ import {
   projectExhibitionBoardRouter,
   projectProposalBoardRouter,
   teamRecruitmentBoardRouter,
-  commentRouter,
+  commentBoxRouter,
 } from './routers';
 import { errorHandler } from './middlewares';
 
@@ -22,7 +22,7 @@ app.use('/api/user', userRouter);
 app.use('/api/exhibition', projectExhibitionBoardRouter);
 app.use('/api/proposal', projectProposalBoardRouter);
 app.use('/api/recruitment', teamRecruitmentBoardRouter);
-app.use('/api/comment', commentRouter);
+app.use('/api/comment', commentBoxRouter);
 
 app.use(errorHandler);
 
