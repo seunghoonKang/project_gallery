@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { loginRequired } from '../middlewares';
-import { projectExhibitionBoardService } from '../services';
+import { projectExhibitionBoardService, commentBoxService } from '../services';
 
 const projectExhibitionBoardRouter = Router();
 
@@ -167,6 +167,9 @@ projectExhibitionBoardRouter.delete(
         throw new Error('전시물을 삭제할 권한이 없습니다.');
       }
 
+      const deletedCommentBox = await commentBoxService.deleteCommentBox(
+        postId
+      );
       const deletedPost = await projectExhibitionBoardService.deletePost(
         postId
       );
