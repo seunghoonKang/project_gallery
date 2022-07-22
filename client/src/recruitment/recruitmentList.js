@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import RecruitmentProject from './recruitmentProject';
 import { recruitment } from '../api/recruitment/recruitmentProject';
 import PaginationContents from '../proposal/paginationContents';
 import WriteComp from '../proposal/writeComponent';
+import styled from 'styled-components';
+import { css } from '@emotion/react';
+import {
+  Table,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableBody,
+  TableRow,
+  Paper,
+} from '@mui/material';
 
 const RecruitmentList = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(8);
+  const [postsPerPage, setPostsPerPage] = useState(20);
   const [project, setProject] = useState([]);
 
   useEffect(() => {
@@ -34,7 +45,25 @@ const RecruitmentList = () => {
       />
       <WriteComp />
       <Container>
-        <RecruitmentProject projects={currentPosts} />
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead
+              css={css`
+                background-color: #6c757d;
+              `}
+            >
+              <TableRow>
+                <TableCell align="center">번호</TableCell>
+                <TableCell align="center">작성자</TableCell>
+                <TableCell align="center">제목</TableCell>
+                <TableCell align="center">작성일</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <RecruitmentProject projects={currentPosts} />
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Container>
     </Section>
   );
@@ -42,7 +71,6 @@ const RecruitmentList = () => {
 
 const Container = styled.div`
   border-top: 1px solid white;
-  grid-gap: 5px;
   width: 80%;
   margin: 75px auto auto auto;
   padding-top: 20px;

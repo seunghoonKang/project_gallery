@@ -1,54 +1,52 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
+import { useState } from 'react';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+
 const RecruitmentProject = ({ projects }) => {
   let navigate = useNavigate();
+  const [number, setNumber] = useState(0);
   //nickName, _id, title, description, createdAt,
   return projects.map((project, i) => {
     return (
-      <Div
+      <CustomizedTableRow
+        key={i}
         onClick={() => {
           navigate(`/recruitmentDetail/${project._id}`);
         }}
       >
-        <UList>
-          <List>
-            닉네임: {project.nickName}
-            제목: {project.title}
-            <span>
-              작성시간: {new Date(project.createdAt).toLocaleString()}
-            </span>
-          </List>
-        </UList>
-      </Div>
+        <CustomizedTableCell component="th" scope="row" align="center">
+          {i + 1}
+        </CustomizedTableCell>
+        <CustomizedTableCell align="center">
+          {project.nickName}
+        </CustomizedTableCell>
+        <CustomizedTableCell align="center">
+          {project.title}
+        </CustomizedTableCell>
+        <CustomizedTableCell align="center">
+          {new Date(project.createdAt).toLocaleString()}
+        </CustomizedTableCell>
+      </CustomizedTableRow>
     );
   });
 };
 
-const Div = styled.div`
-  background-color: white;
-  width: 80vw;
-  height: 4vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1vw;
-  position: relative;
+const CustomizedTableRow = styled(TableRow)`
   :hover {
-    background-color: gray;
+    background: gray;
     transition: 0.3s ease-in-out;
     cursor: pointer;
   }
 `;
 
-const UList = styled.ul`
-  margin-top: auto;
-  position: absolute;
-  top: 29%;
-`;
-
-const List = styled.li`
-  list-style: none;
+const CustomizedTableCell = styled(TableCell)`
+  :hover {
+    color: white;
+    //transition: 0.3s ease-in-out;
+  }
 `;
 
 export default RecruitmentProject;
