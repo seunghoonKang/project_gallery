@@ -16,15 +16,9 @@ import exhibitionProject from './data/data';
 import { PropsalDetail } from './proposal/proposalDetail';
 import RecruitmentList from './recruitment/recruitmentList';
 import { RecrutmentDetail } from './recruitment/recruitmentDetail';
-import WritePage from './write/WritePage';
+import Write from './write/write';
 
 function App() {
-  // useEffect(() => {
-  //   exhibitionProjects().then((res) => {
-  //     console.log(res.data);
-  //   });
-  // }, []);
-
   return (
     <BrowserRouter>
       <div className="App">
@@ -33,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/write" element={<Write />} />
           <Route path="/proposalList" element={<ProposalList />} />
           <Route path="/proposalDetail/:id" element={<PropsalDetail />} />
           <Route path="/register" element={<Register />} />
@@ -44,7 +39,7 @@ function App() {
             path="/exhibitionDetail/:id"
             element={<ExhibitionDetail exhibitionProject={exhibitionProject} />}
           />
-          <Route path="proposalList/write" element={<WritePage />} />
+
           <Route path="/recruitmentList" element={<RecruitmentList />} />
           <Route path="/recruitmentDetail/:id" element={<RecrutmentDetail />} />
         </Routes>
