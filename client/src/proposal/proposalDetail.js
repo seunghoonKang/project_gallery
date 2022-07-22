@@ -3,7 +3,7 @@ import { ProjectDetail } from '../share/projectDetail';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import ExhReviw from '../exhibition/exhReviw';
-import { Container } from '@mui/system';
+import { Box } from '@mui/material';
 
 function PropsalDetail() {
   const [exhibitionProject, setExhibitionProject] = useState({});
@@ -18,9 +18,9 @@ function PropsalDetail() {
   return (
     <>
       <ProjectDetail exhibitionProject={exhibitionProject} />
-      <Container sx={{ mx: 30 }}>
-        <ExhReviw />
-      </Container>
+      <Box sx={{ width: '100%' }} className="displayTapBox">
+        <ExhReviw exhibitionProject={exhibitionProject} />
+      </Box>
     </>
   );
 }

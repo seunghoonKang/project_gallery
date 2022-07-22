@@ -31,9 +31,12 @@ const Container = styled.div`
   height: 400px;
   border-style: solid;
   border-color: white;
-  float: center;
   color: white;
   text-align: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 const Link = styled.div`
   cursor: pointer;
