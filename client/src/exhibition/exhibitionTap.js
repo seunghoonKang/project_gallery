@@ -87,7 +87,7 @@ export default function ExhibitionTap({ exhibitionProject }) {
         {exhibitionProject.description}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ExhReviw />
+        <ExhReviw exhibitionProject={exhibitionProject} />
       </TabPanel>
       <TabPanel value={value} index={2}>
         ?

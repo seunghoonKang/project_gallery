@@ -7,7 +7,7 @@ import { writeApi } from '../../api/write/writeApi';
 import styled from 'styled-components';
 
 function ExhibitionForm() {
-  const [file, setFile] = useState();
+  const [file, setFile] = useState([]);
   const [inputTags, setInputTags] = useState([]);
 
   const tagsOption = [
@@ -72,8 +72,10 @@ function ExhibitionForm() {
             type="file"
             name="image"
             accept="image/jpg"
+            multiple
             onChange={(e) => {
               const currFile = e.target.files[0];
+              console.log(currFile);
               setFile(currFile);
             }}
           />
