@@ -83,8 +83,8 @@ const Button = styled.button`
 const Container = styled.div`
   padding-left: 0px;
   padding-right: 0px;
-  margin-left: -65px;
-  margin-right: -300px;
+  margin-left: -25px;
+  margin-right: 375px;
 `;
 const ReviwCard = styled.div`
   padding-top: 8px;
