@@ -7,7 +7,9 @@ function ProjectDetail({ exhibitionProject }) {
       {exhibitionProject.images !== undefined ? (
         <ProjectCarousel exhibitionProject={exhibitionProject} />
       ) : null}
-      <ProjectContents exhibitionProject={exhibitionProject} />
+      {exhibitionProject.tags !== undefined ? (
+        <ProjectContents exhibitionProject={exhibitionProject} />
+      ) : null}
     </>
   );
 }
