@@ -2,11 +2,9 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { reviewApi } from '../api/review/reviewApi';
 
 function ExhReviw({ exhibitionProject }) {
-  console.log(exhibitionProject);
   const projectNickname = exhibitionProject.nickName;
   const [getReview, setGetRevies] = useState([]);
   const [reLoadReview, setReLoadReview] = useState();
@@ -15,8 +13,7 @@ function ExhReviw({ exhibitionProject }) {
     reviewApi.getReviewApi(projectReviewId).then((res) => {
       setGetRevies(res.data);
     });
-  }, []);
-  console.log('리뷰:', getReview);
+  }, [getReview]);
 
   // post 보낼때 보내는 id와 DATA
   const projectReviewId = {
@@ -31,8 +28,10 @@ function ExhReviw({ exhibitionProject }) {
     e.preventDefault();
     return reviewApi.postReviewApi(commentData, projectReviewId).then((res) => {
       console.log(res);
+      setReviewDescription('');
     });
   }
+
   return (
     <>
       <Container>

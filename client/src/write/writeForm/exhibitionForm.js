@@ -1,8 +1,6 @@
 import Form from 'react-bootstrap/Form';
 import { useRef, useState } from 'react';
-import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
+import { Autocomplete, TextField, Stack } from '@mui/material';
 import { writeApi } from '../../api/write/writeApi';
 import styled from 'styled-components';
 

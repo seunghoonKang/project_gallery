@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import styled from 'styled-components';
 import RecruitmentProject from './recruitmentProject';
 import { recruitment } from '../api/recruitment/recruitmentProject';
 import PaginationContents from '../proposal/paginationContents';
