@@ -65,10 +65,14 @@ function ExhReviw() {
 export default ExhReviw;
 const Button = styled.button`
   border-radius: 10%;
+  padding: 0.375rem 0.75rem;
 `;
 
 const Container = styled.div`
-  margin-right: 200px;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: -65px;
+  margin-right: -300px;
 `;
 const ReviwCard = styled.div`
   padding-top: 8px;
