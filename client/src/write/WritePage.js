@@ -86,13 +86,14 @@ function WritePage() {
           name="title"
         />
 
-        <input
-          className="url-input"
-          type="text"
-          placeholder="url"
-          onChange={getValue}
-          name="url"
-        />
+        <div>
+          <input
+            type="file"
+            accept="image/jpg,impge/png,image/jpeg,image/gif"
+            name="profile_img"
+            onChange={this.handleFileOnChange}
+          ></input>
+        </div>
 
         <CKEditor
           editor={ClassicEditor}

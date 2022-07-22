@@ -87,6 +87,14 @@ function WritePage() {
           onChange={getValue}
           name="title"
         />
+
+        <input
+          className="url-input"
+          type="text"
+          placeholder="url"
+          onChange={getValue}
+          name="url"
+        />
         <CKEditor
           editor={ClassicEditor}
           config={editorConfiguration}
