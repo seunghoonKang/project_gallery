@@ -30,8 +30,8 @@ const ExhibitionList = () => {
   return (
     <Section>
       <h2>프로젝트 전시 </h2>
-      <h5>여러 다양한 프로젝트들을 볼 수 있는 기회! </h5>
-      <h5>이런 프로젝트는 어떠신가요 ?!</h5>
+      <h5>다양한 프로젝트를 </h5>
+      <h5>탐색해보세요</h5>
 
       <PaginationContents
         project={project}

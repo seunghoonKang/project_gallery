@@ -19,7 +19,8 @@ const Button = styled.button`
   color: white;
   background-color: rgb(42, 53, 200);
   border: none;
-  margin-left: 5vw;
+  margin-left: 92%;
+  margin-top: 60vh;
   position: fixed;
   :hover {
     background-color: rgb(42, 180, 200);

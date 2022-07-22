@@ -26,8 +26,8 @@ const ProposalList = () => {
   return (
     <Section>
       <h2>제안</h2>
-      <h5>다양한 아이디어를 제안합니다. </h5>
-      <h5>이런 아이디어는 어떠신가요 ?!</h5>
+      <h5>넘치는 아이디어를 </h5>
+      <h5>선보입니다</h5>
       <PaginationContents
         project={project}
         postsPerPage={postsPerPage}

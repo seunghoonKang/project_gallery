@@ -1,10 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
+import { Tabs, Tab, Typography, Box, styled } from '@mui/material';
 import ExhReviw from './exhReviw';
 
 const WhiteTabs = styled(Tabs)({
