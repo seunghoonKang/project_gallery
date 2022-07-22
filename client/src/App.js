@@ -15,6 +15,7 @@ import ExhibitionList from './exhibition/exhibitionListPages';
 import exhibitionProject from './data/data';
 import { PropsalDetail } from './proposal/proposalDetail';
 import RecruitmentList from './recruitment/recruitmentList';
+import { RecrutmentDetail } from './recruitment/recruitmentDetail';
 import WritePage from './write/WritePage';
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
           />
           <Route path="proposalList/write" element={<WritePage />} />
           <Route path="/recruitmentList" element={<RecruitmentList />} />
+          <Route path="/recruitmentDetail/:id" element={<RecrutmentDetail />} />
         </Routes>
       </div>
     </BrowserRouter>
