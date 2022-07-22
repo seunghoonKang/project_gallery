@@ -14,6 +14,7 @@ function urlShare() {
 }
 
 function ProjectContents({ exhibitionProject }) {
+  const arr = Object.entries(exhibitionProject);
   console.log();
   function projectShare() {
     navigator.clipboard.writeText(exhibitionProject.url).then(() => {
@@ -26,7 +27,7 @@ function ProjectContents({ exhibitionProject }) {
         <Container>
           <Nick>{exhibitionProject.nickName}</Nick>
           <Stack direction="row" spacing={1}>
-            {exhibitionProject.length > 0
+            {arr.length > 0
               ? exhibitionProject.tags.map((tag, i) => {
                   return (
                     <Chip
@@ -70,7 +71,7 @@ function ProjectContents({ exhibitionProject }) {
           </div>
           <div style={{ fontSize: '12px' }}>{exhibitionProject.createdAt}</div>
           <Hr />
-          <ContentsContainer>{exhibitionProject.description}</ContentsContainer>
+          <ContentsContainer>{exhibitionProject.updateLog}</ContentsContainer>
         </Container>
       </div>
     </>
