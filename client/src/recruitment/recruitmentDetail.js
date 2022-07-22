@@ -4,13 +4,14 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Box } from '@mui/material';
 import ExhReviw from '../exhibition/exhReviw';
+
 const RecrutmentDetail = () => {
   const [exhibitionProject, setExhibitionProject] = useState({});
   const { id } = useParams();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/recruitment/postId/${id}`)
+      .get(`/api/recruitment/postId/${id}`)
       .then((res) => setExhibitionProject(res.data));
   }, []);
   return (

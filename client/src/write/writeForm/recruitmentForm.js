@@ -1,6 +1,5 @@
 import Form from 'react-bootstrap/Form';
 import { useRef, useState } from 'react';
-import axios from 'axios';
 import { writeApi } from '../../api/write/writeApi';
 function RecruitmentForm() {
   const [file, setFile] = useState();

@@ -1,10 +1,6 @@
 import Form from 'react-bootstrap/Form';
 import { useRef, useState } from 'react';
-import axios from 'axios';
-import Chip from '@mui/material/Chip';
-import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
+import { Autocomplete, TextField, Stack } from '@mui/material';
 import { writeApi } from '../../api/write/writeApi';
 
 function ProposalForm() {
@@ -26,7 +22,6 @@ function ProposalForm() {
     const tags = tagsRef.current.value;
 
     const data = { title, description, tags };
-    console.log(data);
 
     const headers = {
       Authorization: `Bearer ${localStorage.getItem('token')}`,

@@ -6,15 +6,12 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import ExhReviw from './exhReviw';
-//import { styled } from '@emotion/styled';
+
 const WhiteTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
     backgroundColor: 'white',
   },
 });
-// const CustomTap = styled(Tab)`
-//   background-color: white;
-// `;
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -79,7 +76,6 @@ export default function ExhibitionTap({ exhibitionProject }) {
               label={<span style={{ color: 'white' }}>사용후기 및 질문</span>}
               {...a11yProps(1)}
             />
-            <Tab label="Item Three" {...a11yProps(2)} />
           </WhiteTabs>
         </div>
       </Box>
@@ -88,9 +84,6 @@ export default function ExhibitionTap({ exhibitionProject }) {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <ExhReviw exhibitionProject={exhibitionProject} />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        ?
       </TabPanel>
     </Box>
   );

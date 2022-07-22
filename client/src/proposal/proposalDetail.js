@@ -11,10 +11,10 @@ function PropsalDetail() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/proposal/postId/${id}`)
+      .get(`/api/proposal/postId/${id}`)
       .then((res) => setExhibitionProject(res.data));
   }, []);
-  console.log(exhibitionProject);
+
   return (
     <>
       <ProjectDetail exhibitionProject={exhibitionProject} />
