@@ -49,7 +49,7 @@ const HomeNav = () => {
   return (
     <NavContainer>
       <Link to={'/'}>
-        <LogoName>Gallery</LogoName>
+        <LogoName>Project Gallery</LogoName>
       </Link>
       <Navigations>
         {navItems.map((item, index) => {
