@@ -40,11 +40,11 @@ function WritePage() {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     const body = {
-      title: 'test2',
+      title: movieContent.title,
       nickName: 'test',
       url: 'testUrl',
       tags: ['test'],
-      description: 'test',
+      description: movieContent.content,
       images: 'test',
       intro: 'test',
       updateLog: 'test',
@@ -85,6 +85,15 @@ function WritePage() {
           onChange={getValue}
           name="title"
         />
+
+        <input
+          className="url-input"
+          type="text"
+          placeholder="url"
+          onChange={getValue}
+          name="url"
+        />
+
         <CKEditor
           editor={ClassicEditor}
           config={editorConfiguration}
