@@ -39,8 +39,12 @@
     - AWS S3
     - babel
 - 기획안
-  - MVP 모델 작성 후 구현
+  - MVP 모델 구상 후 구현 (노션 참조)
+  - API 명세를 구상해 구조도 작성 (노션 참조)
+- 기록
+  - 모든 회의, 오피스아워, 팀 소개, 규칙, 참고 자료, 설계안 등은 전부 열심 정리해서 노션에 기록해둠
   - https://www.notion.so/rainfall3363/15-5043dd39682b4c9bbd1c63cb501cfff7
+  - postMan을 활용하여 API test를 진행했고, API document를 작성하여, 사용법을 정리했음
 
 ##### 5. 구성원 역할
 
