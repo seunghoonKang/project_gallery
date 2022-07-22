@@ -9,6 +9,7 @@ function ExhReviw({ exhibitionProject }) {
   console.log(exhibitionProject);
   const projectNickname = exhibitionProject.nickName;
   const [getReview, setGetRevies] = useState([]);
+  const [reLoadReview, setReLoadReview] = useState();
   const [reviewDescription, setReviewDescription] = useState('');
   useEffect(() => {
     reviewApi.getReviewApi(projectReviewId).then((res) => {
