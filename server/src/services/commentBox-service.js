@@ -20,7 +20,6 @@ class CommentBoxService {
   }
 
   async editCommentBox(postId, toUpdate) {
-    console.log(toUpdate);
     const editedCommentBox = await this.commentBoxModel.update({
       postId,
       update: toUpdate,
@@ -58,7 +57,7 @@ class CommentBoxService {
     const commentList = await commentBox.commentList;
 
     for (const i in commentList) {
-      if (commentList[i]._id === commentId) {
+      if (commentList[i]._id == commentId) {
         commentList.splice(i, 1);
         break;
       }
