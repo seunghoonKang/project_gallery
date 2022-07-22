@@ -31,11 +31,13 @@ const Container = styled.div`
   height: 400px;
   border-style: solid;
   border-color: white;
-  float: center;
+  margin: auto;
   color: white;
+
   text-align: center;
 `;
 const Link = styled.div`
   cursor: pointer;
   margin-bottom: 10px;
+  padding: auto;
 `;
