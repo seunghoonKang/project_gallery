@@ -71,7 +71,7 @@ function ProjectContents({ exhibitionProject }) {
           </div>
           <div style={{ fontSize: '12px' }}>{exhibitionProject.createdAt}</div>
           <Hr />
-          <ContentsContainer>{exhibitionProject.description}</ContentsContainer>
+          <ContentsContainer>{exhibitionProject.updateLog}</ContentsContainer>
         </Container>
       </div>
     </>

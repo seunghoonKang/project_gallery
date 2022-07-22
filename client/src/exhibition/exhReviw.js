@@ -10,7 +10,7 @@ function ExhReviw() {
   const [myReviw, setMyReviw] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/comments').then((res) => {
+    axios.get('/').then((res) => {
       console.log(res);
     });
   }, []);
@@ -23,11 +23,9 @@ function ExhReviw() {
 
   function onSubmitHandler(e) {
     e.preventDefault();
-    return axios
-      .post('http://localhost:8000/api/comments', body)
-      .then((res) => {
-        console.log(res);
-      });
+    return axios.post('/', body).then((res) => {
+      console.log(res);
+    });
   }
   return (
     <>
