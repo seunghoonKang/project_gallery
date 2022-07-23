@@ -9,6 +9,7 @@ function ExhReviw({ exhibitionProject }) {
   const [getReview, setGetRevies] = useState([]);
   const [reLoadReview, setReLoadReview] = useState(false);
   const [reviewDescription, setReviewDescription] = useState('');
+  const [deleteReview, setDeleteReview] = useState(false);
   useEffect(() => {
     reviewApi.getReviewApi(projectReviewId).then((res) => {
       setGetRevies(res.data);
