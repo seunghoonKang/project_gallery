@@ -1,7 +1,7 @@
 import { Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import userApi from '../api/user/userApi';
 
 const Div = styled.div`
   font-size: 10px;
@@ -10,6 +10,11 @@ const Div = styled.div`
   margin-right: 10px;
   cursor: pointer;
   text-decoration: underline;
+`;
+
+const Section = styled.section`
+  background-color: #27262b;
+  height: 100vh;
 `;
 
 function Login() {
@@ -36,9 +41,8 @@ function Login() {
       email: inputEmail,
       password: inputPwd,
     };
-
-    axios
-      .post('http://localhost:8000/api/user/login', body)
+    userApi
+      .loginApi(body)
       .then((res) => {
         alert(' 정상적으로 로그인 되었습니다 ');
         const user = res.data;
@@ -53,55 +57,57 @@ function Login() {
   };
 
   return (
-    <div
-      style={{
-        maxWidth: '800px',
-        margin: '2rem auto',
-        borderRadius: '10px',
-        backgroundColor: '#3e383899',
-        borderStyle: 'solid',
-        borderColor: 'rgb(123, 120, 120)',
-      }}
-    >
-      <Form
-        onSubmit={onSubmitHandler}
-        style={{ maxWidth: '600px', margin: '2rem auto' }}
+    <Section>
+      <div
+        style={{
+          maxWidth: '800px',
+          margin: '2rem auto',
+          borderRadius: '10px',
+          backgroundColor: '#3e383899',
+          borderStyle: 'solid',
+          borderColor: 'rgb(123, 120, 120)',
+        }}
       >
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label style={{ color: 'white' }}>이메일</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            value={inputEmail}
-            onChange={onInputEmailHandler}
-          />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label style={{ color: 'white' }}>비밀번호</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            value={inputPwd}
-            onChange={onInputPwdHandler}
-          />
-        </Form.Group>
-        <Button
-          variant="primary"
-          type="submit"
-          style={{ backgroundColor: '#6b6a6d', borderColor: 'white' }}
+        <Form
+          onSubmit={onSubmitHandler}
+          style={{ maxWidth: '600px', margin: '2rem auto' }}
         >
-          Submit
-        </Button>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label style={{ color: 'white' }}>이메일</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              value={inputEmail}
+              onChange={onInputEmailHandler}
+            />
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
+          </Form.Group>
 
-        <Div onClick={register}>회원가입을 하시겠습니까?</Div>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label style={{ color: 'white' }}>비밀번호</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              value={inputPwd}
+              onChange={onInputPwdHandler}
+            />
+          </Form.Group>
+          <Button
+            variant="primary"
+            type="submit"
+            style={{ backgroundColor: '#6b6a6d', borderColor: 'white' }}
+          >
+            Submit
+          </Button>
 
-        <Div onClick={findPwd}>비밀번호 찾기</Div>
-      </Form>
-    </div>
+          <Div onClick={register}>회원가입을 하시겠습니까?</Div>
+
+          <Div onClick={findPwd}>비밀번호 찾기</Div>
+        </Form>
+      </div>
+    </Section>
   );
 }
 

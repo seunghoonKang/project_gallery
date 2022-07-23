@@ -1,13 +1,15 @@
 import ProjectCarousel from './projectDetail/projectCarousel';
 import ProjectContents from './projectDetail/projectContents';
-import styled from 'styled-components';
 
-function ProjectDetail({ exhibitionProject, id }) {
-  console.log(id);
+function ProjectDetail({ exhibitionProject }) {
   return (
     <>
-      <ProjectCarousel exhibitionProject={exhibitionProject} id={id} />
-      <ProjectContents exhibitionProject={exhibitionProject} id={id} />
+      {exhibitionProject.images !== undefined ? (
+        <ProjectCarousel exhibitionProject={exhibitionProject} />
+      ) : null}
+      {exhibitionProject.tags !== undefined ? (
+        <ProjectContents exhibitionProject={exhibitionProject} />
+      ) : null}
     </>
   );
 }

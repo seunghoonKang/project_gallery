@@ -1,27 +1,24 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Card,
   CardActions,
   CardContent,
-  CardMedia,
   Chip,
   Stack,
   Button,
   Typography,
 } from '@mui/material';
 import styled from 'styled-components';
-
 const PropsalProject = ({ projects }) => {
-  const handleCardClick = () => {
-    alert('누르면 넘어가게할거야');
-  };
+  let navigate = useNavigate();
 
   return projects.map((project, i) => {
     return (
-      <CardHoverEffect>
+      <CardHoverEffect key={i}>
         <Card
           key={i}
-          classname="propsalCard"
+          className="propsalCard"
           sx={{
             maxWidth: 350,
             p: 1,
@@ -29,20 +26,16 @@ const PropsalProject = ({ projects }) => {
             color: 'white',
           }}
         >
-          <CardMedia
-            key={i}
-            component="img"
-            height="180"
-            image={project.image}
-            alt="image"
-            onClick={handleCardClick}
-          />
-          <CardContent onClick={handleCardClick}>
+          <CardContent
+            onClick={() => {
+              navigate(`/proposalDetail/${project._id}`);
+            }}
+          >
             <Typography
               gutterBottom
               variant="h5"
               component="div"
-              textAlign="center"
+              textalign="center"
             >
               {project.title}
               <hr />
@@ -57,14 +50,14 @@ const PropsalProject = ({ projects }) => {
                   color: 'white',
                 }}
               >
-                {project.contents}
+                {project.description}
               </Typography>
             </div>
           </CardContent>
           <CardActions>
             <Button
               size="small"
-              textAlign="center"
+              textalign="center"
               style={{
                 color: 'white',
               }}

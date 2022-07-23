@@ -21,10 +21,7 @@ function loginRequired(req, res, next) {
     const secretKey = process.env.JWT_SECRET_KEY;
     const jwtDecoded = jwt.verify(userToken, secretKey);
 
-    const userId = jwtDecoded.userId;
-    const email = jwtDecoded.email;
-    const nickName = jwtDecoded.nickName;
-    const role = jwtDecoded.role;
+    const { userId, email, nickName, role } = jwtDecoded;
 
     // 라우터에서 req.current를 통해 유저의 정보 열람 가능
     req.currentUserId = userId;

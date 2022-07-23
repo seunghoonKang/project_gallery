@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 
+import { useNavigate } from 'react-router-dom';
+
 const WriteComp = () => {
+  const navigate = useNavigate();
   return (
-    <Button>
+    <Button onClick={() => navigate('/write')}>
       <BorderColorIcon />
     </Button>
   );
@@ -16,9 +19,12 @@ const Button = styled.button`
   color: white;
   background-color: rgb(42, 53, 200);
   border: none;
-  float: right;
-  margin-right: 10vw;
+  margin-left: 92%;
+  margin-top: 48vh;
+  position: fixed;
   :hover {
+    background-color: rgb(42, 180, 200);
+    transition: 0.3s ease-in-out;
   }
 `;
 

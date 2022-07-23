@@ -3,19 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^34.2.0",
+    "@ckeditor/ckeditor5-react": "^5.0.2",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.1.3",
+    "http-proxy-middleware": "^2.0.6",
+    "node-html-parser": "^5.3.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.2.0",
     "react-js-pagination": "^3.0.3",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,6 +47,11 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ],
+    "eslintIgnore": [
+      "ignoredfile.js",
+      "ignoredfile2.js"
     ]
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

@@ -1,19 +1,21 @@
 import React from 'react';
-import displayData from '../data/data';
 import styled from 'styled-components';
-import CardContent from '../proposal/cardContents';
-import Pagination from '../share/projectList/pagination';
 import { useState, useEffect } from 'react';
 import ExhibitionProject from './exhibitionProject';
+import PaginationContents from '../proposal/paginationContents';
+import WriteComp from '../proposal/writeComponent';
+import { exhibition } from '../api/exhibition/exhibitionProject';
 
 const ExhibitionList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(9);
   const [project, setProject] = useState([]);
   useEffect(() => {
-    setProject(displayData);
+    exhibition.exhibitionProjects().then((res) => {
+      setProject(res.data);
+    });
   }, []);
-  console.log(project);
+
   const totalPosts = project.length;
   console.log(totalPosts);
 
@@ -28,23 +30,24 @@ const ExhibitionList = () => {
   return (
     <Section>
       <h2>프로젝트 전시 </h2>
-      <h5>여러 다양한 프로젝트들을 볼 수 있는 기회! </h5>
-      <h5>이런 프로젝트는 어떠신가요 ?!</h5>
+      <h5>다양한 프로젝트를 </h5>
+      <h5>탐색해보세요</h5>
 
-      <Pagination
+      <PaginationContents
+        project={project}
         postsPerPage={postsPerPage}
-        totalPosts={totalPosts}
         paginate={paginate}
+        currentPage={currentPage}
       />
+      <WriteComp />
       <Container>
-        <ExhibitionProject project={currentPosts}></ExhibitionProject>
+        <ExhibitionProject projects={currentPosts}></ExhibitionProject>
       </Container>
     </Section>
   );
 };
 
 const Container = styled.div`
-  border: 1px solid white;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-template-rows: repeat(3, 1fr);

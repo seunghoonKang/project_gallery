@@ -2,37 +2,58 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { minWidth } from '@mui/system';
+import { reviewApi } from '../api/review/reviewApi';
 
-function ExhReviw() {
-  const [review, setReview] = useState('');
-
+function ExhReviw({ exhibitionProject }) {
+  const projectNickname = exhibitionProject.nickName;
+  const [getReview, setGetRevies] = useState([]);
+  const [reLoadReview, setReLoadReview] = useState();
+  const [reviewDescription, setReviewDescription] = useState('');
   useEffect(() => {
-    axios.get('http://localhost:8000/api/Comment').then((res) => {
-      console.log(res);
+    reviewApi.getReviewApi(projectReviewId).then((res) => {
+      setGetRevies(res.data);
     });
-  }, []);
+  }, [getReview]);
 
-  const body = {
-    comment: review,
-    project: 'kdjfkasdj',
+  // post 보낼때 보내는 id와 DATA
+  const projectReviewId = {
+    postId: exhibitionProject._id,
   };
-  console.log(body);
+  const commentData = {
+    comment: reviewDescription,
+  };
+  console.log(commentData);
 
   function onSubmitHandler(e) {
     e.preventDefault();
-    return axios.post('http://localhost:8000/api/Comment', body).then((res) => {
+    return reviewApi.postReviewApi(commentData, projectReviewId).then((res) => {
       console.log(res);
+      setReviewDescription('');
     });
   }
+
   return (
     <>
       <Container>
-        <ReviwCard>
-          <div>쓴사람: 나다</div>
-          <Contents>글내용</Contents>
-        </ReviwCard>
+        {getReview.map((comment, i) => {
+          if (projectNickname === getReview[i].nickName) {
+            return (
+              <MyReviwCard>
+                <ProjectNickname>
+                  👑작성자: {getReview[i].nickName}
+                </ProjectNickname>
+                <MyContents>{getReview[i].comment}</MyContents>
+              </MyReviwCard>
+            );
+          } else {
+            return (
+              <ReviwCard>
+                <div>닉네임: {getReview[i].nickName}</div>
+                <Contents>{getReview[i].comment}</Contents>
+              </ReviwCard>
+            );
+          }
+        })}
         <hr />
         <Form onSubmit={onSubmitHandler}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -40,9 +61,9 @@ function ExhReviw() {
             <Form.Control
               as="textarea"
               rows={3}
-              value={review}
+              value={reviewDescription}
               onChange={(e) => {
-                setReview(e.currentTarget.value);
+                setReviewDescription(e.currentTarget.value);
               }}
             />
             <Button>댓글쓰기</Button>
@@ -56,10 +77,14 @@ function ExhReviw() {
 export default ExhReviw;
 const Button = styled.button`
   border-radius: 10%;
+  padding: 0.375rem 0.75rem;
 `;
 
 const Container = styled.div`
-  margin-right: 200px;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: -25px;
+  margin-right: 375px;
 `;
 const ReviwCard = styled.div`
   padding-top: 8px;
@@ -68,7 +93,28 @@ const ReviwCard = styled.div`
   min-height: 150px;
   border-radius: 10px;
   border-width: 1px;
+  margin-bottom: 20px;
 `;
 const Contents = styled.div`
   margin-top: 10px;
+  margin-left: 20px;
+`;
+const MyContents = styled.div`
+  margin-top: 20px;
+  margin-left: 20px;
+`;
+const MyReviwCard = styled.div`
+  padding-top: 8px;
+  padding-left: 10px;
+  border-style: solid;
+  min-height: 150px;
+  border-radius: 10px;
+  border-width: 1px;
+  background-color: rgb(205, 205, 187);
+  color: black;
+  margin-bottom: 20px;
+`;
+const ProjectNickname = styled.div`
+  float: right;
+  margin-right: 15px;
 `;

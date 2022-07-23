@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useParams } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './home/home';
 //import Footer from './footer/Footer';
@@ -11,30 +10,33 @@ import { Login, Register, DeleteUser, ReviseUser } from './user';
 //const User = lazy(() => import('./user'));
 import './App.css';
 import HomeNav from './home/homenav';
-import Proposal from './proposal/proposal';
+import ProposalList from './proposal/proposalList';
 import ExhibitionList from './exhibition/exhibitionListPages';
-import exhibitionProject from './data/data';
+import { PropsalDetail } from './proposal/proposalDetail';
+import RecruitmentList from './recruitment/recruitmentList';
+import { RecrutmentDetail } from './recruitment/recruitmentDetail';
+import Write from './write/write';
+import WriteMiddle from './write/writeMiddle';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
         <HomeNav />
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/proposal" element={<Proposal />} />
+          <Route path="/write" element={<Write />} />
+          <Route path="/writeMiddle" element={<WriteMiddle />} />
+          <Route path="/proposalList" element={<ProposalList />} />
+          <Route path="/proposalDetail/:id" element={<PropsalDetail />} />
           <Route path="/register" element={<Register />} />
-          <Route
-            path="/exhibitionDetail/:id"
-            element={
-              <ExhibitionDetail
-                exhibitionProject={exhibitionProject}
-                useParams={useParams}
-              />
-            }
-          />
-          <Route path="/Exhibition" element={<ExhibitionList />} />
+          <Route path="/exhibitionList" element={<ExhibitionList />} />
+          <Route path="/exhibitionDetail/:id" element={<ExhibitionDetail />} />
+
+          <Route path="/recruitmentList" element={<RecruitmentList />} />
+          <Route path="/recruitmentDetail/:id" element={<RecrutmentDetail />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -13,12 +13,11 @@ function urlShare() {
   });
 }
 
-function ProductContents({ exhibitionProject, id }) {
-  console.log(exhibitionProject);
-  console.log(id);
+function ProjectContents({ exhibitionProject }) {
+  const arr = Object.entries(exhibitionProject);
 
   function projectShare() {
-    navigator.clipboard.writeText(exhibitionProject[id].url).then(() => {
+    navigator.clipboard.writeText(exhibitionProject.url).then(() => {
       alert('링크를 복사했습니다');
     });
   }
@@ -26,24 +25,24 @@ function ProductContents({ exhibitionProject, id }) {
     <>
       <div style={{ color: 'white' }}>
         <Container>
-          <Nick>{exhibitionProject[id].nickname}</Nick>
+          <Nick>{exhibitionProject.nickName}</Nick>
           <Stack direction="row" spacing={1}>
-            {exhibitionProject[id].tags.map((tag, i) => {
-              return (
-                <Chip
-                  label={tag}
-                  clickable
-                  component="a"
-                  href="/"
-                  style={{ backgroundColor: 'gray' }}
-                />
-              );
-            })}
+            {arr.length > 0
+              ? exhibitionProject.tags.map((tag, i) => {
+                  return (
+                    <Chip
+                      label={tag}
+                      clickable
+                      component="a"
+                      href="/"
+                      style={{ backgroundColor: 'gray' }}
+                    />
+                  );
+                })
+              : null}
           </Stack>
           <Hr />
-          <h2 style={{ display: 'inline-block' }}>
-            {exhibitionProject[id].title}
-          </h2>
+          <h2 style={{ display: 'inline-block' }}>{exhibitionProject.title}</h2>
           ;
           <h4
             onClick={urlShare}
@@ -59,7 +58,7 @@ function ProductContents({ exhibitionProject, id }) {
           </h4>
           <div>
             <div style={{ display: 'inline-block' }}>
-              {exhibitionProject[id].url}
+              {exhibitionProject.url}
             </div>
             <ShareIcon
               onClick={projectShare}
@@ -70,11 +69,11 @@ function ProductContents({ exhibitionProject, id }) {
               }}
             ></ShareIcon>
           </div>
-          <div style={{ fontSize: '12px' }}>{exhibitionProject[id].time}</div>
+          <div style={{ fontSize: '12px' }}>
+            {new Date(exhibitionProject.createdAt).toLocaleDateString()}
+          </div>
           <Hr />
-          <ContentsContainer>
-            {exhibitionProject[id].contents}
-          </ContentsContainer>
+          <ContentsContainer>{exhibitionProject.updateLog}</ContentsContainer>
         </Container>
       </div>
     </>
@@ -104,4 +103,4 @@ const ProjectName = styled.h2`
   display: inline-block;
 `;
 
-export default ProductContents;
+export default ProjectContents;

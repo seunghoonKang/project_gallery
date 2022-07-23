@@ -1,18 +1,18 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import userApi from '../api/user/userApi';
 
 const HomeNav = () => {
   const NavItem = {
-    Recruitment: 'Recruitment',
-    Proposal: 'Proposal',
-    Exhibition: 'Exhibition',
+    Exhibition: 'exhibitionList',
+    Proposal: 'proposalList',
+    Recruitment: 'recruitmentList',
   };
   const NavItemKo = {
-    Recruitment: '채용',
-    Proposal: '제안',
-    Exhibition: '전시',
+    proposalList: '제안',
+    exhibitionList: '전시',
+    recruitmentList: '팀원모집',
   };
   const navItems = Object.values(NavItem);
   const navigate = useNavigate();
@@ -33,24 +33,23 @@ const HomeNav = () => {
   useEffect(() => {
     if (token) {
       setLoginState(true);
-      async function checkNickname() {
-        const url = 'http://localhost:8000/api/user/info';
-        const response = await axios.get(url, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+
+      userApi
+        .homeNavApi(token)
+        .then((res) => {
+          const nickName = res.data.nickName;
+          setNickname(nickName);
+        })
+        .catch(function (err) {
+          alert(`${err.response.data.reason}`);
         });
-        const nickName = response.data.nickName;
-        setNickname(nickName);
-      }
-      checkNickname();
     }
   }, []);
 
   return (
     <NavContainer>
       <Link to={'/'}>
-        <LogoName>Gallery</LogoName>
+        <LogoName>Project Gallery</LogoName>
       </Link>
       <Navigations>
         {navItems.map((item, index) => {
