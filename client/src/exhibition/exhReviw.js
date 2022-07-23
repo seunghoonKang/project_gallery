@@ -7,13 +7,20 @@ import { reviewApi } from '../api/review/reviewApi';
 function ExhReviw({ exhibitionProject }) {
   const projectNickname = exhibitionProject.nickName;
   const [getReview, setGetRevies] = useState([]);
-  const [reLoadReview, setReLoadReview] = useState();
+  const [reLoadReview, setReLoadReview] = useState(false);
   const [reviewDescription, setReviewDescription] = useState('');
   useEffect(() => {
     reviewApi.getReviewApi(projectReviewId).then((res) => {
       setGetRevies(res.data);
     });
-  }, [getReview]);
+  }, []);
+
+  useEffect(() => {
+    reviewApi.getReviewApi(projectReviewId).then((res) => {
+      setGetRevies(res.data);
+    });
+  }, [reLoadReview]);
+  console.log('리뷰우:', reLoadReview);
 
   // post 보낼때 보내는 id와 DATA
   const projectReviewId = {
@@ -26,10 +33,16 @@ function ExhReviw({ exhibitionProject }) {
 
   function onSubmitHandler(e) {
     e.preventDefault();
-    return reviewApi.postReviewApi(commentData, projectReviewId).then((res) => {
-      console.log(res);
-      setReviewDescription('');
-    });
+    const token = localStorage.getItem('token');
+    if (token) {
+      reviewApi.postReviewApi(commentData, projectReviewId).then((res) => {
+        console.log(res);
+        setReviewDescription('');
+        setReLoadReview(true);
+      });
+    } else {
+      alert('로그인 또는 회원가입을 먼저 해주세요');
+    }
   }
 
   return (
@@ -40,7 +53,8 @@ function ExhReviw({ exhibitionProject }) {
             return (
               <MyReviwCard>
                 <ProjectNickname>
-                  👑작성자: {getReview[i].nickName}
+                  👑작성자: {getReview[i].nickName} <MyDiv>수정</MyDiv>
+                  <MyDiv>삭제</MyDiv>
                 </ProjectNickname>
                 <MyContents>{getReview[i].comment}</MyContents>
               </MyReviwCard>
@@ -48,13 +62,18 @@ function ExhReviw({ exhibitionProject }) {
           } else {
             return (
               <ReviwCard>
-                <div>닉네임: {getReview[i].nickName}</div>
+                <div>
+                  <span>닉네임: {getReview[i].nickName}</span>
+                  <Div>수정</Div>
+                  <Div>삭제</Div>
+                </div>
                 <Contents>{getReview[i].comment}</Contents>
               </ReviwCard>
             );
           }
         })}
         <hr />
+
         <Form onSubmit={onSubmitHandler}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Label>댓글쓰기</Form.Label>
@@ -117,4 +136,18 @@ const MyReviwCard = styled.div`
 const ProjectNickname = styled.div`
   float: right;
   margin-right: 15px;
+`;
+const Div = styled.span`
+  font-size: 10px;
+  color: white;
+  margin-left: 10px;
+  cursor: pointer;
+  text-decoration: underline;
+`;
+const MyDiv = styled.span`
+  font-size: 10px;
+  color: black;
+  margin-left: 10px;
+  cursor: pointer;
+  text-decoration: underline;
 `;

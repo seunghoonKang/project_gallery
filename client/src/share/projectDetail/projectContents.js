@@ -25,7 +25,19 @@ function ProjectContents({ exhibitionProject }) {
     <>
       <div style={{ color: 'white' }}>
         <Container>
-          <Nick>{exhibitionProject.nickName}</Nick>
+          <h2 style={{ display: 'inline-block' }}>{exhibitionProject.title}</h2>
+          <h4
+            onClick={urlShare}
+            style={{
+              display: 'inline-block',
+              marginLeft: '20px',
+            }}
+          >
+            <ShareIcon style={{ marginBottom: '10px' }}></ShareIcon>
+            <FavoriteBorderIcon
+              style={{ marginLeft: '20px', marginBottom: '10px' }}
+            ></FavoriteBorderIcon>
+          </h4>
           <Stack direction="row" spacing={1}>
             {arr.length > 0
               ? exhibitionProject.tags.map((tag, i) => {
@@ -41,21 +53,9 @@ function ProjectContents({ exhibitionProject }) {
                 })
               : null}
           </Stack>
+
           <Hr />
-          <h2 style={{ display: 'inline-block' }}>{exhibitionProject.title}</h2>
-          ;
-          <h4
-            onClick={urlShare}
-            style={{
-              display: 'inline-block',
-              marginLeft: '20px',
-            }}
-          >
-            <ShareIcon style={{ marginBottom: '10px' }}></ShareIcon>
-            <FavoriteBorderIcon
-              style={{ marginLeft: '20px', marginBottom: '10px' }}
-            ></FavoriteBorderIcon>
-          </h4>
+          <Nick>{exhibitionProject.nickName}</Nick>
           <div>
             <div style={{ display: 'inline-block' }}>
               {exhibitionProject.url}
