@@ -22,16 +22,22 @@ function ProposalForm() {
     const title = titleRef.current.value;
     const description = descriptionRef.current.value;
     const tags = tagsRef.current.value;
+    const token = localStorage.getItem('token');
 
     const data = { title, description, tags };
 
     const headers = {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     };
-    writeApi.propsoalInputApi(data, headers).then((res) => {
-      console.log(res);
-    });
-    navigate('/writemiddle');
+
+    if (token) {
+      writeApi.propsoalInputApi(data, headers).then((res) => {
+        console.log(res);
+      });
+      navigate('/writemiddle');
+    } else {
+      alert('로그인 또는 회원가입을 해주세요!');
+    }
   }
 
   const titleRef = useRef('글제목'); // 돔의 위치를 알려준다.

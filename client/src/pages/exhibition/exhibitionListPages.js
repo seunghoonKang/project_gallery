@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import ExhibitionProject from './exhibitionProject';
-import PaginationContents from '../proposal/paginationContents';
-import WriteComp from '../proposal/writeComponent';
-import { exhibition } from '../api/exhibition/exhibitionProject';
+import ExhibitionProject from '../../exhibition/exhibitionProject';
+import PaginationContents from '../../proposal/paginationContents';
+import WriteComp from '../../proposal/writeComponent';
+import { exhibition } from '../../api/exhibition/exhibitionProject';
 
-const ExhibitionList = () => {
+const ExhibitionListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(9);
   const [project, setProject] = useState([]);
@@ -66,4 +66,4 @@ const Section = styled.section`
   }
 `;
 
-export default ExhibitionList;
+export default ExhibitionListPage;

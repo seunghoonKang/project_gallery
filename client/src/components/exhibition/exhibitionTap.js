@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab, Typography, Box, styled } from '@mui/material';
-import ExhReviw from './exhReviw';
+import ExhReview from './exhReview';
 
 const WhiteTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
@@ -79,7 +79,7 @@ export default function ExhibitionTap({ exhibitionProject }) {
         {exhibitionProject.description}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ExhReviw exhibitionProject={exhibitionProject} />
+        <ExhReview exhibitionProject={exhibitionProject} />
       </TabPanel>
     </Box>
   );
