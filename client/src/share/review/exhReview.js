@@ -3,24 +3,47 @@ import Form from 'react-bootstrap/Form';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { reviewApi } from '../../api/review/reviewApi';
+import userApi from '../api/user/userApi';
 
 function ExhReviw({ exhibitionProject }) {
   const projectNickname = exhibitionProject.nickName;
   const [getReview, setGetRevies] = useState([]);
   const [reLoadReview, setReLoadReview] = useState(false);
   const [reviewDescription, setReviewDescription] = useState('');
-  const [deleteReview, setDeleteReview] = useState(false);
+
+  const [user, setUser] = useState('');
+
+  const token = localStorage.getItem('token');
+
   useEffect(() => {
     reviewApi.getReviewApi(projectReviewId).then((res) => {
+      if (token) {
+        userApi.homeNavApi(token).then((res) => {
+          setUser(res.data.nickName);
+        });
+      }
       setGetRevies(res.data);
     });
   }, []);
+
+  // 로그인 체크 그리고 유저 정보가지고오기
+  function loginCheck() {
+    if (token) {
+      userApi.homeNavApi(token).then((res) => {
+        setUser(res.data.nickName);
+      });
+    } else {
+      alert('로그인 또는 회원가입을 해주세요');
+      window.location.href = '/login';
+    }
+  }
 
   useEffect(() => {
     reviewApi.getReviewApi(projectReviewId).then((res) => {
       setGetRevies(res.data);
     });
   }, [reLoadReview]);
+  console.log(getReview);
   console.log('리뷰우:', reLoadReview);
 
   // post 보낼때 보내는 id와 DATA
@@ -31,19 +54,20 @@ function ExhReviw({ exhibitionProject }) {
     comment: reviewDescription,
   };
   console.log(commentData);
-
+  //댓글 post날리는 부분
   function onSubmitHandler(e) {
     e.preventDefault();
-    const token = localStorage.getItem('token');
-    if (token) {
-      reviewApi.postReviewApi(commentData, projectReviewId).then((res) => {
-        console.log(res);
-        setReviewDescription('');
-        setReLoadReview(true);
-      });
-    } else {
-      alert('로그인 또는 회원가입을 먼저 해주세요');
-    }
+
+    reviewApi.postReviewApi(commentData, projectReviewId).then((res) => {
+      console.log(res);
+      setReviewDescription('');
+      setReLoadReview(true);
+    });
+  }
+
+  // 댓글 delete
+  function deleteReview() {
+    return console.log();
   }
 
   return (
@@ -54,8 +78,13 @@ function ExhReviw({ exhibitionProject }) {
             return (
               <MyReviwCard>
                 <ProjectNickname>
-                  👑작성자: {getReview[i].nickName} <MyDiv>수정</MyDiv>
-                  <MyDiv>삭제</MyDiv>
+                  👑작성자: {getReview[i].nickName}
+                  {user === getReview[i].nickName ? (
+                    <>
+                      <MyDiv onClick={deleteReview}>삭제</MyDiv>
+                      <MyDiv>수정</MyDiv>
+                    </>
+                  ) : null}
                 </ProjectNickname>
                 <MyContents>{getReview[i].comment}</MyContents>
               </MyReviwCard>
@@ -65,8 +94,11 @@ function ExhReviw({ exhibitionProject }) {
               <ReviwCard>
                 <div>
                   <span>닉네임: {getReview[i].nickName}</span>
-                  <Div>수정</Div>
-                  <Div>삭제</Div>
+                  {user === getReview[i].nickName ? (
+                    <>
+                      <Div>삭제</Div> <Div>수정</Div>
+                    </>
+                  ) : null}
                 </div>
                 <Contents>{getReview[i].comment}</Contents>
               </ReviwCard>
@@ -82,6 +114,7 @@ function ExhReviw({ exhibitionProject }) {
               as="textarea"
               rows={3}
               value={reviewDescription}
+              onClick={loginCheck}
               onChange={(e) => {
                 setReviewDescription(e.currentTarget.value);
               }}
