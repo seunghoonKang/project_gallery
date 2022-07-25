@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './home/home';
-//import Footer from './footer/Footer';
+
+import Home from './pages/home/home';
 import { ExhibitionDetailPage } from './pages/exhibition/exhibitionDetailtPages';
 
 import { Login, Register, DeleteUser, ReviseUser } from './user';
@@ -9,14 +9,15 @@ import { Login, Register, DeleteUser, ReviseUser } from './user';
 //const Login=lazy(()=>import('./user/login'))
 //const User = lazy(() => import('./user'));
 import './App.css';
-import HomeNav from './home/homenav';
+
+import HomeNav from './components/home/homenav';
+import Write from './pages/write/write';
+import WriteMiddle from './components/write/writeMiddle';
 import ProposalListPage from './pages/proposal/proposalListPage';
 import ExhibitionListPage from './pages/exhibition/exhibitionListPages';
 import { PropsalDetailPage } from './pages/proposal/proposalDetailPage';
 import RecruitmentListPage from './pages/recruitment/recruitmentListPage';
 import { RecrutmentDetailPage } from './pages/recruitment/recruitmentDetailPage';
-import Write from './write/write';
-import WriteMiddle from './write/writeMiddle';
 
 function App() {
   return (
