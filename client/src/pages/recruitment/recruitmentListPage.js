@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import RecruitmentProject from './recruitmentProject';
-import { recruitment } from '../api/recruitment/recruitmentProject';
-import PaginationContents from '../proposal/paginationContents';
-import WriteComp from '../proposal/writeComponent';
+import RecruitmentProject from '../../recruitment/recruitmentProject';
+import { recruitment } from '../../api/recruitment/recruitmentProject';
+import PaginationContents from '../../share/pagination/paginationContents';
+import WriteComp from '../../share/middlewares/writeComponent';
 import styled from 'styled-components';
 import { css } from '@emotion/react';
 import {
@@ -15,7 +15,7 @@ import {
   Paper,
 } from '@mui/material';
 
-const RecruitmentList = () => {
+const RecruitmentListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(20);
   const [project, setProject] = useState([]);
@@ -86,4 +86,4 @@ const Section = styled.section`
   }
 `;
 
-export default RecruitmentList;
+export default RecruitmentListPage;

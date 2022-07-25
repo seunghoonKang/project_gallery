@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import PaginationContents from './paginationContents';
-import WriteComp from './writeComponent';
-import PropsalProject from './propsalProject';
-import { proposal } from '../api/proposal/proposalProject';
+import PaginationContents from '../../share/pagination/paginationContents';
+import WriteComp from '../../share/middlewares/writeComponent';
+import PropsalProject from '../../components/proposal/propsalProject';
+import { proposal } from '../../api/proposal/proposalProject';
 
-const ProposalList = () => {
+const ProposalListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(9);
   const [project, setProject] = useState([]);
@@ -63,4 +63,4 @@ const Section = styled.section`
   }
 `;
 
-export default ProposalList;
+export default ProposalListPage;
