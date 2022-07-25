@@ -1,5 +1,5 @@
 import * as React from 'react';
-import WriteState from './writeState';
+import WriteState from '../../components/write/writeState';
 import styled from 'styled-components';
 
 function Write() {

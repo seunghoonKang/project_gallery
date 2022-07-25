@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab, Typography, Box } from '@mui/material';
 import styled from 'styled-components';
-import { ProposalForm, RecruitmentForm, ExhibitionForm } from './writeForm';
+import { ProposalForm, RecruitmentForm, ExhibitionForm } from './writeFoam';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
