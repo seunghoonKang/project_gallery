@@ -23,6 +23,7 @@ function RecruitmentForm() {
 
     const title = titleRef.current.value;
     const description = descriptionRef.current.value;
+    const token = localStorage.getItem('token');
 
     const data = { title, description };
     console.log(data);
@@ -30,9 +31,13 @@ function RecruitmentForm() {
     const headers = {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     };
-    writeApi.recruitment(data, headers).then((res) => console.log(res));
+    if (token) {
+      writeApi.recruitment(data, headers).then((res) => console.log(res));
 
-    navigate('/writemiddle');
+      navigate('/writemiddle');
+    } else {
+      alert('로그인 또는 회원가입을 해주세요!');
+    }
   }
 
   const titleRef = useRef('글제목'); // 돔의 위치를 알려준다.

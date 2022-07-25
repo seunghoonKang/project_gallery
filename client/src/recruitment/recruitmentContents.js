@@ -21,7 +21,7 @@ function RecruitmentContents({ exhibitionProject }) {
             {new Date(exhibitionProject.createdAt).toLocaleDateString()}
           </div>
           <Hr />
-          <ContentsContainer>{exhibitionProject.updateLog}</ContentsContainer>
+          <ContentsContainer>{exhibitionProject.description}</ContentsContainer>
         </Container>
       </div>
     </>
@@ -42,9 +42,8 @@ const Hr = styled.hr`
 `;
 const ContentsContainer = styled.div`
   color: white;
-  border-style: solid;
   min-width: 800px;
-  min-height: 800px;
+  min-height: 200px;
   border-width: 1px;
 `;
 

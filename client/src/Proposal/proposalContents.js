@@ -13,14 +13,9 @@ function urlShare() {
   });
 }
 
-function ProjectContents({ exhibitionProject }) {
+function ProposalContents({ exhibitionProject }) {
   const arr = Object.entries(exhibitionProject);
 
-  function projectShare() {
-    navigator.clipboard.writeText(exhibitionProject.url).then(() => {
-      alert('링크를 복사했습니다');
-    });
-  }
   return (
     <>
       <div style={{ color: 'white' }}>
@@ -56,24 +51,12 @@ function ProjectContents({ exhibitionProject }) {
 
           <Hr />
           <Nick>{exhibitionProject.nickName}</Nick>
-          <div>
-            <div style={{ display: 'inline-block' }}>
-              {exhibitionProject.url}
-            </div>
-            <ShareIcon
-              onClick={projectShare}
-              style={{
-                fontSize: '17px',
-                marginLeft: '20px',
-                cursor: 'pointer',
-              }}
-            ></ShareIcon>
-          </div>
+
           <div style={{ fontSize: '12px' }}>
             {new Date(exhibitionProject.createdAt).toLocaleDateString()}
           </div>
           <Hr />
-          <ContentsContainer>{exhibitionProject.updateLog}</ContentsContainer>
+          <ContentsContainer>{exhibitionProject.description}</ContentsContainer>
         </Container>
       </div>
     </>
@@ -96,11 +79,11 @@ const ContentsContainer = styled.div`
   color: white;
 
   min-width: 800px;
-  min-height: 300px;
+  min-height: 400px;
   border-width: 1px;
 `;
 const ProjectName = styled.h2`
   display: inline-block;
 `;
 
-export default ProjectContents;
+export { ProposalContents };

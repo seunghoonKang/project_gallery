@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { ProjectDetail } from '../share/projectDetail';
+import { ProposalContents } from './proposalContents';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import ExhReviw from '../exhibition/exhReviw';
@@ -17,7 +17,7 @@ function PropsalDetail() {
 
   return (
     <>
-      <ProjectDetail exhibitionProject={exhibitionProject} />
+      <ProposalContents exhibitionProject={exhibitionProject} />
       <Box sx={{ width: '100%' }} className="displayTapBox">
         <ExhReviw exhibitionProject={exhibitionProject} />
       </Box>
