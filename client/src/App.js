@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './home/home';
 //import Footer from './footer/Footer';
-import { ExhibitionDetailPage } from './exhibition/exhibitionDetailt';
+import { ExhibitionDetailPage } from './pages/exhibition/exhibitionDetailtPages';
 
 import { Login, Register, DeleteUser, ReviseUser } from './user';
 
@@ -10,11 +10,11 @@ import { Login, Register, DeleteUser, ReviseUser } from './user';
 //const User = lazy(() => import('./user'));
 import './App.css';
 import HomeNav from './home/homenav';
-import ProposalList from './proposal/proposalList';
+import ProposalListPage from './pages/proposal/proposalListPage';
 import ExhibitionListPage from './pages/exhibition/exhibitionListPages';
-import { PropsalDetail } from './proposal/proposalDetail';
-import RecruitmentList from './recruitment/recruitmentList';
-import { RecrutmentDetail } from './recruitment/recruitmentDetail';
+import { PropsalDetailPage } from './pages/proposal/proposalDetailPage';
+import RecruitmentListPage from './pages/recruitment/recruitmentListPage';
+import { RecrutmentDetailPage } from './pages/recruitment/recruitmentDetailPage';
 import Write from './write/write';
 import WriteMiddle from './write/writeMiddle';
 
@@ -29,8 +29,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/write" element={<Write />} />
           <Route path="/writeMiddle" element={<WriteMiddle />} />
-          <Route path="/proposalList" element={<ProposalList />} />
-          <Route path="/proposalDetail/:id" element={<PropsalDetail />} />
+          <Route path="/proposalList" element={<ProposalListPage />} />
+          <Route path="/proposalDetail/:id" element={<PropsalDetailPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/exhibitionList" element={<ExhibitionListPage />} />
           <Route
@@ -38,8 +38,11 @@ function App() {
             element={<ExhibitionDetailPage />}
           />
 
-          <Route path="/recruitmentList" element={<RecruitmentList />} />
-          <Route path="/recruitmentDetail/:id" element={<RecrutmentDetail />} />
+          <Route path="/recruitmentList" element={<RecruitmentListPage />} />
+          <Route
+            path="/recruitmentDetail/:id"
+            element={<RecrutmentDetailPage />}
+          />
         </Routes>
       </div>
     </BrowserRouter>
