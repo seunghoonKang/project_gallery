@@ -83,6 +83,7 @@ const NavContainer = styled.nav`
   padding-left: 20px;
   padding-right: 20px;
   background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100;
 `;
 
 const LogoName = styled.div`
