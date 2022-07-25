@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import userApi from '../api/user/userApi';
+import userApi from '../../api/user/userApi';
 
 const HomeNav = () => {
   const NavItem = {

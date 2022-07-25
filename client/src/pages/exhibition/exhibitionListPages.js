@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import ExhibitionProject from '../../exhibition/exhibitionProject';
+import ExhibitionProject from '../../components/exhibition/exhibitionProject';
 import PaginationContents from '../../proposal/paginationContents';
 import WriteComp from '../../proposal/writeComponent';
 import { exhibition } from '../../api/exhibition/exhibitionProject';

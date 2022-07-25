@@ -3,7 +3,7 @@ import RecruitmentContents from './recruitmentContents';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Box } from '@mui/material';
-import ExhReviw from '../exhibition/exhReviw';
+import ExhReviw from '../components/exhibition/exhReview';
 
 const RecrutmentDetail = () => {
   const [exhibitionProject, setExhibitionProject] = useState({});

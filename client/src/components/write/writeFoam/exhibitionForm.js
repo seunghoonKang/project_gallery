@@ -1,11 +1,12 @@
 import Form from 'react-bootstrap/Form';
 import { useRef, useState } from 'react';
 import { Autocomplete, TextField, Stack, Button } from '@mui/material';
-import { writeApi } from '../../api/write/writeApi';
+import { writeApi } from '../../../api/write/writeApi';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 
-function ProposalForm() {
+function ExhibitionForm() {
+  const [file, setFile] = useState([]);
   const [inputTags, setInputTags] = useState([]);
   const navigate = useNavigate();
   const tagsOption = [
@@ -15,23 +16,38 @@ function ProposalForm() {
     { tags: ' C++' },
   ];
 
+  console.log(inputTags);
+
   function onSubmitHandling(e) {
     //e.preventDefault();
     console.log(inputTags);
+    const tagsArray = [];
+    inputTags.map((tag, i) => {
+      return tagsArray.push(tag.tags);
+    });
 
     const title = titleRef.current.value;
     const description = descriptionRef.current.value;
-    const tags = tagsRef.current.value;
+    const tags = tagsArray;
+    const url = urlRef.current.value;
+    const intro = introRef.current.value;
+
     const token = localStorage.getItem('token');
 
-    const data = { title, description, tags };
+    const formData = new FormData();
+
+    formData.append('image', file);
+    console.log(file);
+
+    const data = { title, description, tags, url, intro };
+    console.log(data);
 
     const headers = {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     };
 
     if (token) {
-      writeApi.propsoalInputApi(data, headers).then((res) => {
+      writeApi.exhibitionInputApi(data, headers).then((res) => {
         console.log(res);
       });
       navigate('/writemiddle');
@@ -42,7 +58,9 @@ function ProposalForm() {
 
   const titleRef = useRef('글제목'); // 돔의 위치를 알려준다.
   const descriptionRef = useRef('내용');
-  const tagsRef = useRef('');
+  const urlRef = useRef('');
+  const introRef = useRef('');
+
   return (
     <>
       <Section>
@@ -62,13 +80,41 @@ function ProposalForm() {
 
               <Form.Control
                 type="text"
-                required
                 placeholder={titleRef.current}
                 ref={titleRef}
               />
               <div style={{ maxWidth: '700px', margin: '2rem auto' }}></div>
-            </Form.Group>
+              <Form.Label>사진</Form.Label>
+              <Form.Control
+                type="file"
+                name="image"
+                accept="image/jpg"
+                multiple
+                onChange={(e) => {
+                  const currFile = e.target.files[0];
+                  console.log(currFile);
+                  setFile(currFile);
+                }}
+              />
+              <div style={{ maxWidth: '700px', margin: '2rem auto' }}></div>
+              <Form.Label>프로젝트url</Form.Label>
 
+              <Form.Control
+                type="text"
+                required
+                placeholder={urlRef.current}
+                ref={urlRef}
+              />
+
+              <div style={{ maxWidth: '700px', margin: '2rem auto' }}></div>
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+              <Form.Label>한줄소개</Form.Label>
+              <Form.Control required as="textarea" rows={2} ref={introRef} />
+            </Form.Group>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
@@ -81,6 +127,7 @@ function ProposalForm() {
                 ref={descriptionRef}
               />
             </Form.Group>
+
             <Stack spacing={3} sx={{ width: '100%' }}>
               <Autocomplete
                 multiple
@@ -93,9 +140,8 @@ function ProposalForm() {
                 isOptionEqualToValue={(option, value) =>
                   option.tags === value.tags
                 }
-                onChange={(e) => {
-                  setInputTags(e.currentTarget.value);
-                  console.log(inputTags);
+                onChange={(event, value) => {
+                  setInputTags(value);
                 }}
                 renderInput={(params) => (
                   <TextField
@@ -114,6 +160,7 @@ function ProposalForm() {
   );
 }
 
+export { ExhibitionForm };
 const SubmitButton = styled(Button)`
   color: white;
   background-color: rgb(42, 53, 200);
@@ -130,5 +177,3 @@ const Section = styled.section`
   background-color: #27262b;
   height: 100%;
 `;
-
-export { ProposalForm };

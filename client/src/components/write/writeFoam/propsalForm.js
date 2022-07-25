@@ -1,15 +1,13 @@
 import Form from 'react-bootstrap/Form';
 import { useRef, useState } from 'react';
-import { writeApi } from '../../api/write/writeApi';
-import { Button } from '@mui/material';
+import { Autocomplete, TextField, Stack, Button } from '@mui/material';
+import { writeApi } from '../../../api/write/writeApi';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 
-function RecruitmentForm() {
-  const [file, setFile] = useState();
+function ProposalForm() {
   const [inputTags, setInputTags] = useState([]);
   const navigate = useNavigate();
-
   const tagsOption = [
     { tags: 'javaScript' },
     { tags: 'JAVA' },
@@ -18,22 +16,24 @@ function RecruitmentForm() {
   ];
 
   function onSubmitHandling(e) {
-    e.preventDefault();
+    //e.preventDefault();
     console.log(inputTags);
 
     const title = titleRef.current.value;
     const description = descriptionRef.current.value;
+    const tags = tagsRef.current.value;
     const token = localStorage.getItem('token');
 
-    const data = { title, description };
-    console.log(data);
+    const data = { title, description, tags };
 
     const headers = {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     };
-    if (token) {
-      writeApi.recruitment(data, headers).then((res) => console.log(res));
 
+    if (token) {
+      writeApi.propsoalInputApi(data, headers).then((res) => {
+        console.log(res);
+      });
       navigate('/writemiddle');
     } else {
       alert('로그인 또는 회원가입을 해주세요!');
@@ -42,8 +42,7 @@ function RecruitmentForm() {
 
   const titleRef = useRef('글제목'); // 돔의 위치를 알려준다.
   const descriptionRef = useRef('내용');
-
-  //onSubmit={onSubmitHandling}
+  const tagsRef = useRef('');
   return (
     <>
       <Section>
@@ -82,7 +81,31 @@ function RecruitmentForm() {
                 ref={descriptionRef}
               />
             </Form.Group>
-
+            <Stack spacing={3} sx={{ width: '100%' }}>
+              <Autocomplete
+                multiple
+                required
+                style={{ backgroundColor: 'white' }}
+                id="tags-standard"
+                options={tagsOption}
+                getOptionLabel={(option) => option.tags}
+                defaultValue={[tagsOption[3]]}
+                isOptionEqualToValue={(option, value) =>
+                  option.tags === value.tags
+                }
+                onChange={(e) => {
+                  setInputTags(e.currentTarget.value);
+                  console.log(inputTags);
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="standard"
+                    label="태그를 추가해주세요"
+                  />
+                )}
+              />
+            </Stack>
             <SubmitButton type="submit">작성완료</SubmitButton>
           </Form>
         </div>
@@ -108,4 +131,4 @@ const Section = styled.section`
   height: 100%;
 `;
 
-export { RecruitmentForm };
+export { ProposalForm };

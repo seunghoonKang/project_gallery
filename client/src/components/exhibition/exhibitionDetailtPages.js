@@ -1,4 +1,4 @@
-import { ProjectDetail } from '../share/projectDetail';
+import { ProjectDetail } from '../../share/projectDetail';
 import ExhibitionTap from './exhibitionTap';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';

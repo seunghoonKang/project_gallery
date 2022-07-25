@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { ProposalContents } from './proposalContents';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import ExhReviw from '../exhibition/exhReviw';
+import ExhReviw from '../components/exhibition/exhReview';
 import { Box } from '@mui/material';
 
 function PropsalDetail() {
