@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom';
-import RecruitmentContents from './recruitmentContents';
+import RecruitmentContents from '../../recruitment/recruitmentContents';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Box } from '@mui/material';
-import ExhReviw from '../components/exhibition/exhReview';
+import ExhReviw from '../../share/review/exhReview';
 
-const RecrutmentDetail = () => {
+const RecrutmentDetailPage = () => {
   const [exhibitionProject, setExhibitionProject] = useState({});
   const { id } = useParams();
 
@@ -24,4 +24,4 @@ const RecrutmentDetail = () => {
   );
 };
 
-export { RecrutmentDetail };
+export { RecrutmentDetailPage };

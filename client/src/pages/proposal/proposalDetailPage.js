@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom';
-import { ProposalContents } from './proposalContents';
+import { ProposalContents } from '../../components/proposal/proposalContents';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import ExhReviw from '../components/exhibition/exhReview';
+import ExhReviw from '../../share/review/exhReview';
 import { Box } from '@mui/material';
 
-function PropsalDetail() {
+function PropsalDetailPage() {
   const [exhibitionProject, setExhibitionProject] = useState({});
   const { id } = useParams();
 
@@ -25,4 +25,4 @@ function PropsalDetail() {
   );
 }
 
-export { PropsalDetail };
+export { PropsalDetailPage };

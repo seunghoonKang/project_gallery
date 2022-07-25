@@ -1,5 +1,5 @@
 import axios from 'axios';
-const exhibition = {
+const exhibitionApi = {
   exhibitionProjects: function exhibitionProjects() {
     return axios.get('/api/exhibition/list');
   },
@@ -8,4 +8,4 @@ const exhibition = {
   },
 };
 
-export { exhibition };
+export { exhibitionApi };

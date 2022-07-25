@@ -1,5 +1,5 @@
-import ProjectCarousel from './projectDetail/projectCarousel';
-import ProjectContents from './projectDetail/projectContents';
+import ProjectCarousel from './ProjectDetail/projectCarousel';
+import ProjectContents from './ProjectDetail/projectContents';
 
 function ProjectDetail({ exhibitionProject }) {
   return (
