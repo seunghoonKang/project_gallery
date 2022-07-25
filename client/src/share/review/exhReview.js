@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { reviewApi } from '../../api/review/reviewApi';
-import userApi from '../api/user/userApi';
+import userApi from '../../api/user/userApi';
 
 function ExhReviw({ exhibitionProject }) {
   const projectNickname = exhibitionProject.nickName;
