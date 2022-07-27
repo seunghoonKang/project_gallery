@@ -66,7 +66,6 @@ function Register() {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (inputPwdCheck === true && inputPwd2Check === true) {
-      alert('hi');
       const body = {
         email: inputEmail,
         password: inputPwd2,

@@ -1,5 +1,5 @@
 import { ProjectDetail } from '../../components/exhibition/projectDetail';
-import ExhibitionTap from '../../share/review/exhibitionTap';
+import ExhibitionTap from '../../components/exhibition/exhibitionTap';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
