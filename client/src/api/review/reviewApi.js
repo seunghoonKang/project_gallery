@@ -12,8 +12,9 @@ const reviewApi = {
       }
     );
   },
-  getReviewApi: function getReviewApi(postIdData) {
-    return axios.get(`/api/comment/postId/${postIdData.postId}`);
+  getReviewApi: function getReviewApi(projectReviewId) {
+    console.log('여긴 api폴더:', projectReviewId);
+    return axios.get(`/api/comment/postId/${projectReviewId.postId}`);
   },
 };
 export { reviewApi };

@@ -4,7 +4,7 @@ const proposal = {
     return axios.get('/api/proposal/list');
   },
   proposalProject: function proposalProject(id) {
-    return axios.get(`/api/proposal/postId/${id}`);
+    return axios.get(`/api/{proposal}/postId/${id}`);
   },
 };
 

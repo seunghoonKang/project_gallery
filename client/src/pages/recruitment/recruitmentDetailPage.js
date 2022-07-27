@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
-import RecruitmentContents from '../../recruitment/recruitmentContents';
+import RecruitmentContents from '../../components/recruitment/recruitmentContents';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Box } from '@mui/material';
-import ExhReviw from '../../share/review/exhReview';
+import Reviews from '../../share/review/reviews';
 
 const RecrutmentDetailPage = () => {
   const [exhibitionProject, setExhibitionProject] = useState({});
@@ -18,7 +18,7 @@ const RecrutmentDetailPage = () => {
     <>
       <RecruitmentContents exhibitionProject={exhibitionProject} />
       <Box sx={{ width: '100%' }} className="displayTapBox">
-        <ExhReviw exhibitionProject={exhibitionProject} />
+        <Reviews exhibitionProject={exhibitionProject} apiUrl={'recruitment'} />
       </Box>
     </>
   );

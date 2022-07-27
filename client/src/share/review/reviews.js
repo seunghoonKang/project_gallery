@@ -5,10 +5,12 @@ import { useState, useEffect } from 'react';
 import { reviewApi } from '../../api/review/reviewApi';
 import userApi from '../../api/user/userApi';
 
-function ExhReviw({ exhibitionProject }) {
+function Reviews({ exhibitionProject, apiUrl }) {
   const projectNickname = exhibitionProject.nickName;
-  const [getReview, setGetRevies] = useState([]);
-  const [reLoadReview, setReLoadReview] = useState(false);
+  // const projectReviewId2 = exhibitionProject._id;
+  // console.log(projectReviewId2);
+
+  const [getReview, setGetReview] = useState([]);
   const [reviewDescription, setReviewDescription] = useState('');
 
   const [user, setUser] = useState('');
@@ -17,12 +19,9 @@ function ExhReviw({ exhibitionProject }) {
 
   useEffect(() => {
     reviewApi.getReviewApi(projectReviewId).then((res) => {
-      if (token) {
-        userApi.homeNavApi(token).then((res) => {
-          setUser(res.data.nickName);
-        });
-      }
-      setGetRevies(res.data);
+      console.log('프로젝트id:', projectReviewId);
+      console.log('들어왓냐?');
+      setGetReview(res.data);
     });
   }, []);
 
@@ -38,18 +37,11 @@ function ExhReviw({ exhibitionProject }) {
     }
   }
 
-  useEffect(() => {
-    reviewApi.getReviewApi(projectReviewId).then((res) => {
-      setGetRevies(res.data);
-    });
-  }, [reLoadReview]);
-  console.log(getReview);
-  console.log('리뷰우:', reLoadReview);
-
   // post 보낼때 보내는 id와 DATA
   const projectReviewId = {
     postId: exhibitionProject._id,
   };
+
   const commentData = {
     comment: reviewDescription,
   };
@@ -61,47 +53,51 @@ function ExhReviw({ exhibitionProject }) {
     reviewApi.postReviewApi(commentData, projectReviewId).then((res) => {
       console.log(res);
       setReviewDescription('');
-      setReLoadReview(true);
+    });
+    reviewApi.getReviewApi(projectReviewId).then((res) => {
+      setGetReview(res.data);
     });
   }
 
   // 댓글 delete
-  function deleteReview() {
-    return console.log();
+  function deleteReview(delete_id) {
+    return console.log(delete_id);
   }
 
   return (
     <>
       <Container>
-        {getReview.map((comment, i) => {
-          if (projectNickname === getReview[i].nickName) {
+        {getReview.map((commentObj, i) => {
+          if (projectNickname === commentObj.nickName) {
             return (
-              <MyReviwCard>
+              <MyReviewCard>
                 <ProjectNickname>
-                  👑작성자: {getReview[i].nickName}
-                  {user === getReview[i].nickName ? (
+                  👑작성자: {commentObj.nickName}
+                  {user === commentObj.nickName ? (
                     <>
-                      <MyDiv onClick={deleteReview}>삭제</MyDiv>
+                      <MyDiv>
+                        <div>삭제</div>
+                      </MyDiv>
                       <MyDiv>수정</MyDiv>
                     </>
                   ) : null}
                 </ProjectNickname>
-                <MyContents>{getReview[i].comment}</MyContents>
-              </MyReviwCard>
+                <MyContents>{commentObj.comment}</MyContents>
+              </MyReviewCard>
             );
           } else {
             return (
-              <ReviwCard>
+              <ReviewCard>
                 <div>
-                  <span>닉네임: {getReview[i].nickName}</span>
-                  {user === getReview[i].nickName ? (
+                  <span>닉네임: {commentObj.nickName}</span>
+                  {user === commentObj.nickName ? (
                     <>
                       <Div>삭제</Div> <Div>수정</Div>
                     </>
                   ) : null}
                 </div>
-                <Contents>{getReview[i].comment}</Contents>
-              </ReviwCard>
+                <Contents>{commentObj.comment}</Contents>
+              </ReviewCard>
             );
           }
         })}
@@ -127,7 +123,7 @@ function ExhReviw({ exhibitionProject }) {
   );
 }
 
-export default ExhReviw;
+export default Reviews;
 const Button = styled.button`
   border-radius: 10%;
   padding: 0.375rem 0.75rem;
@@ -139,7 +135,7 @@ const Container = styled.div`
   margin-left: -25px;
   margin-right: 375px;
 `;
-const ReviwCard = styled.div`
+const ReviewCard = styled.div`
   padding-top: 8px;
   padding-left: 10px;
   border-style: solid;
@@ -156,7 +152,7 @@ const MyContents = styled.div`
   margin-top: 20px;
   margin-left: 20px;
 `;
-const MyReviwCard = styled.div`
+const MyReviewCard = styled.div`
   padding-top: 8px;
   padding-left: 10px;
   border-style: solid;
