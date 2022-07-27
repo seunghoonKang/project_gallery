@@ -2,7 +2,8 @@ import { useParams } from 'react-router-dom';
 import { ProposalContents } from '../../components/proposal/proposalContents';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import ExhReviw from '../../share/review/exhReview';
+import ProposalTap from '../../components/proposal/proposalTap';
+//import Reviews from '../../share/review/reviews';
 import { Box } from '@mui/material';
 
 function PropsalDetailPage() {
@@ -19,7 +20,7 @@ function PropsalDetailPage() {
     <>
       <ProposalContents exhibitionProject={exhibitionProject} />
       <Box sx={{ width: '100%' }} className="displayTapBox">
-        <ExhReviw exhibitionProject={exhibitionProject} />
+        <ProposalTap exhibitionProject={exhibitionProject} />
       </Box>
     </>
   );
