@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { reviewApi } from '../../api/review/reviewApi';
 import userApi from '../../api/user/userApi';
+import axios from 'axios';
 
 function Reviews({ exhibitionProject, apiUrl }) {
   const projectNickname = exhibitionProject.nickName;
@@ -12,16 +13,14 @@ function Reviews({ exhibitionProject, apiUrl }) {
 
   const [getReview, setGetReview] = useState([]);
   const [reviewDescription, setReviewDescription] = useState('');
-
   const [user, setUser] = useState('');
-
   const token = localStorage.getItem('token');
 
+  //처음 리뷰 가지고 오기
   useEffect(() => {
     reviewApi.getReviewApi(projectReviewId).then((res) => {
-      console.log('프로젝트id:', projectReviewId);
-      console.log('들어왓냐?');
       setGetReview(res.data);
+      loginCheck();
     });
   }, []);
 
@@ -29,13 +28,14 @@ function Reviews({ exhibitionProject, apiUrl }) {
   function loginCheck() {
     if (token) {
       userApi.homeNavApi(token).then((res) => {
-        setUser(res.data.nickName);
+        setUser(res.data);
       });
     } else {
       alert('로그인 또는 회원가입을 해주세요');
       window.location.href = '/login';
     }
   }
+  console.log('로그인 아이디 :', user.nickName);
 
   // post 보낼때 보내는 id와 DATA
   const projectReviewId = {
@@ -60,10 +60,19 @@ function Reviews({ exhibitionProject, apiUrl }) {
   }
 
   // 댓글 delete
-  function deleteReview(delete_id) {
-    return console.log(delete_id);
+  function onDeleteReview(e) {
+    const commentId = e.currentTarget.getAttribute('value');
+    const deleteReview = window.confirm('댓글을 삭제하시겠습니까?');
+    if (deleteReview) {
+      reviewApi.deleteReviewApi(projectReviewId, commentId).then((res) => {
+        console.log(res.data);
+        alert('댓글이 삭제되었습니다');
+      });
+    } else {
+      alert('댓글이 삭제되지 않았습니다');
+    }
   }
-
+  console.log(getReview);
   return (
     <>
       <Container>
@@ -73,11 +82,9 @@ function Reviews({ exhibitionProject, apiUrl }) {
               <MyReviewCard>
                 <ProjectNickname>
                   👑작성자: {commentObj.nickName}
-                  {user === commentObj.nickName ? (
+                  {user.nickName === commentObj.nickName ? (
                     <>
-                      <MyDiv>
-                        <div>삭제</div>
-                      </MyDiv>
+                      <MyDiv>삭제</MyDiv>
                       <MyDiv>수정</MyDiv>
                     </>
                   ) : null}
@@ -90,9 +97,12 @@ function Reviews({ exhibitionProject, apiUrl }) {
               <ReviewCard>
                 <div>
                   <span>닉네임: {commentObj.nickName}</span>
-                  {user === commentObj.nickName ? (
+                  {user.nickName === commentObj.nickName ? (
                     <>
-                      <Div>삭제</Div> <Div>수정</Div>
+                      <Div value={commentObj._id} onClick={onDeleteReview}>
+                        삭제
+                      </Div>
+                      <Div>수정</Div>
                     </>
                   ) : null}
                 </div>
@@ -172,6 +182,7 @@ const Div = styled.span`
   color: white;
   margin-left: 10px;
   cursor: pointer;
+
   text-decoration: underline;
 `;
 const MyDiv = styled.span`

@@ -13,8 +13,12 @@ const reviewApi = {
     );
   },
   getReviewApi: function getReviewApi(projectReviewId) {
-    console.log('여긴 api폴더:', projectReviewId);
     return axios.get(`/api/comment/postId/${projectReviewId.postId}`);
+  },
+  deleteReviewApi: function deleteReviewApi(projectReviewId, commentId) {
+    return axios.delete(`/api/comment/${projectReviewId.postId}/${commentId}`, {
+      headers,
+    });
   },
 };
 export { reviewApi };

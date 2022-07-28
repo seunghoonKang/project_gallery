@@ -94,9 +94,9 @@ class UserService {
       throw new Error('해당 회원 정보가 없습니다.');
     }
 
-    const { email, nickName, role } = user;
+    const { email, nickName, role, _id } = user;
 
-    return { email, nickName, role };
+    return { email, nickName, role, _id };
   }
 
   // 유저 정보 수정
