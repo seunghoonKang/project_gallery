@@ -39,7 +39,7 @@ function Reviews({ exhibitionProject, apiUrl }) {
 
   // post 보낼때 보내는 id와 DATA
   const projectReviewId = {
-    postId: exhibitionProject._id,
+    postId: exhibitionProject?._id,
   };
 
   const commentData = {

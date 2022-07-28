@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import RecruitmentProject from '../../recruitment/recruitmentProject';
+import RecruitmentProject from '../../components/recruitment/recruitmentProject';
 import { recruitment } from '../../api/recruitment/recruitmentProject';
 import PaginationContents from '../../share/pagination/paginationContents';
 import WriteComp from '../../share/middlewares/writeComponent';
