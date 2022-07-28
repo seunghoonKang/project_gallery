@@ -46,7 +46,7 @@ class CommentBoxService {
     const commentList = await commentBox.commentList;
 
     for await (const commentIter of commentList) {
-      if (commentIter._id === commentId) {
+      if (commentIter._id == commentId) {
         return commentIter;
       }
     }

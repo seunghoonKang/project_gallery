@@ -69,11 +69,11 @@ commentBoxRouter.delete(
   async function (req, res, next) {
     try {
       const { postId, commentId } = req.params;
-      // const commentInfo = await commentBoxService.getComment(postId, commentId);
-      // console.log(commentInfo);
-      // if (commentInfo.nickName !== req.currentNickName) {
-      //   throw new Error('댓글을 삭제할 권한이 없습니다.');
-      // }
+      const commentInfo = await commentBoxService.getComment(postId, commentId);
+
+      if (commentInfo.nickName !== req.currentNickName) {
+        throw new Error('댓글을 삭제할 권한이 없습니다.');
+      }
 
       const deletedCommentList = await commentBoxService.deleteComment(
         postId,
