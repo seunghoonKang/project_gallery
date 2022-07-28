@@ -88,7 +88,7 @@ function ExhibitionForm() {
               <Form.Control
                 type="file"
                 name="image"
-                accept="image/jpg"
+                accept="image/jpg/png"
                 multiple
                 onChange={(e) => {
                   const currFile = e.target.files[0];
@@ -96,6 +96,7 @@ function ExhibitionForm() {
                   setFile(currFile);
                 }}
               />
+              <ImgArt>맨 처음 사진은 썸네일로 지정됩니다. (최대 5장)</ImgArt>
               <div style={{ maxWidth: '700px', margin: '2rem auto' }}></div>
               <Form.Label>프로젝트url</Form.Label>
 
@@ -176,4 +177,8 @@ const SubmitButton = styled(Button)`
 const Section = styled.section`
   background-color: #27262b;
   height: 100%;
+`;
+const ImgArt = styled.div`
+  font-size: 13px;
+  color: red;
 `;
