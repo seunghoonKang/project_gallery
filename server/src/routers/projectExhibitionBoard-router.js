@@ -71,15 +71,20 @@ projectExhibitionBoardRouter.get(
   }
 );
 
-// 프로젝트 전시 - 태그로 불러오기(미완성)
+// 프로젝트 전시 - 태그로 불러오기
 projectExhibitionBoardRouter.get('/tags/:tags', async (req, res, next) => {
   try {
     const posts = await projectExhibitionBoardService.getPosts();
-    const searchTag = req.params.tags.split('&');
+    const tags = req.params.tags;
+    const searchTags = tags.split('&');
     const resultArr = [];
 
     for (let i = 0; i < posts.length; i++) {
       // posts의 태그와 tags가 포함관계인 게시글의 아이디와 게시글 제목만 리턴
+      const diffArr = searchTags.filter((x) => !posts[i].tags.includes(x));
+      if (diffArr.length === 0) {
+        resultArr.push(posts[i]);
+      }
     }
 
     res.status(200).json(resultArr);
@@ -88,27 +93,29 @@ projectExhibitionBoardRouter.get('/tags/:tags', async (req, res, next) => {
   }
 });
 
-// 프로젝트 전시 - 키워드로 검색하기(미완성)
-projectExhibitionBoardRouter.get(
-  '/keyword/:keyword',
-  async (req, res, next) => {
-    try {
-      const keyword = req.params.keyword;
-      const posts = await projectExhibitionBoardService.getPosts();
-      const resultArr = [];
-
-      for (let i = 0; i < posts.length; i++) {
-        if (posts[i].title.includes(keyword)) {
-          resultArr.push(posts[i]);
-        }
-      }
-
-      res.status(200).json(resultArr);
-    } catch (error) {
-      next(error);
+// 프로젝트 전시 - 키워드로 검색하기
+projectExhibitionBoardRouter.get('/search/:keyword', async (req, res, next) => {
+  try {
+    const keyword = req.params.keyword;
+    if (keyword.length < 2) {
+      throw new Error('검색어는 한 글자 이상 입력해주십시오.');
     }
+
+    const posts = await projectExhibitionBoardService.getPosts();
+    const resultArr = [];
+
+    for (let i = 0; i < posts.length; i++) {
+      const title = posts[i].title;
+      if (title.includes(keyword)) {
+        resultArr.push(posts[i]);
+      }
+    }
+
+    res.status(200).json(resultArr);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 // 프로젝트 전시 - 게시글 수정
 projectExhibitionBoardRouter.patch(
