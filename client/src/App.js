@@ -18,6 +18,7 @@ import ExhibitionListPage from './pages/exhibition/exhibitionListPages';
 import { PropsalDetailPage } from './pages/proposal/proposalDetailPage';
 import RecruitmentListPage from './pages/recruitment/recruitmentListPage';
 import { RecrutmentDetailPage } from './pages/recruitment/recruitmentDetailPage';
+import { Messenger } from './messenger/messenger';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/write" element={<Write />} />
           <Route path="/writeMiddle" element={<WriteMiddle />} />
+          <Route path="/messenger" element={<Messenger />} />
           <Route path="/proposalList" element={<ProposalListPage />} />
           <Route path="/proposalDetail/:id" element={<PropsalDetailPage />} />
           <Route path="/register" element={<Register />} />
