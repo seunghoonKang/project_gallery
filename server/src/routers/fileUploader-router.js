@@ -7,7 +7,7 @@ const fileUploaderRouter = Router();
 fileUploaderRouter.post(
   '/',
   loginRequired,
-  upload.array('imgs', 5),
+  upload.array('images', 5),
   async (req, res, next) => {
     const incoming = req.files;
     const locations = incoming.map((img) => img.location);
