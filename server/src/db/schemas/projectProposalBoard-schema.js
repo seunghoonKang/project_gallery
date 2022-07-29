@@ -4,13 +4,13 @@ const ProjectProposalBoardSchema = new Schema(
   {
     nickName: {
       type: String,
-      required: false,
+      required: true,
     },
     title: {
       type: String,
       required: true,
     },
-    tag: {
+    tags: {
       type: [String],
       required: true,
     },

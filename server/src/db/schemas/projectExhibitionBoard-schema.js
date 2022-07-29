@@ -14,13 +14,30 @@ const ProjectExhibitionBoardSchema = new Schema(
       type: String,
       required: true,
     },
-    tag: {
+    tags: {
       type: [String],
       required: true,
     },
     description: {
       type: String,
       required: true,
+    },
+    images: {
+      type: [String],
+      required: false,
+    },
+    intro: {
+      type: String,
+      required: true,
+    },
+    updateLog: {
+      type: String,
+      required: false,
+      default: '업데이트 내역이 없습니다.',
+    },
+    commentBoxId: {
+      type: String,
+      required: false,
     },
   },
   {

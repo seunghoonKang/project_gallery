@@ -23,7 +23,7 @@ function DeleteUser() {
     };
 
     axios
-      .post('http://localhost:8000/api/user/delete', body)
+      .post('/api/user/delete', body)
       .then((res) => {
         alert('회원탈퇴가 정상적으로 되었습니다 ');
         const user = res.data;

@@ -72,9 +72,14 @@ class UserService {
     // 로그인 성공 -> JWT 웹 토큰 생성
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
 
-    // 3개 프로퍼티를 jwt 토큰에 담음
+    // 4개 프로퍼티를 jwt 토큰에 담음
     const token = jwt.sign(
-      { userId: user._id, nickName: user.nickName, role: user.role },
+      {
+        userId: user._id,
+        email: user.email,
+        nickName: user.nickName,
+        role: user.role,
+      },
       secretKey
     );
 
@@ -86,30 +91,12 @@ class UserService {
     const user = await this.userModel.findById(userId);
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!user) {
-      throw new Error('해당 회원 정보가 없습니다. 유효한 ID가 아닙니다.');
+      throw new Error('해당 회원 정보가 없습니다.');
     }
 
-    const { email, nickName, role } = user;
+    const { email, nickName, role, _id } = user;
 
-    return { email, nickName, role };
-  }
-
-  async recheckPassword(loginInfo) {
-    const { userId, inputPassword } = loginInfo;
-    const user = await this.userModel.findById(userId);
-    const correctPasswordHash = user.password;
-
-    // 비밀번호 일치 여부 확인
-    const isPasswordCorrect = await bcrypt.compare(
-      inputPassword,
-      correctPasswordHash
-    );
-
-    if (!isPasswordCorrect) {
-      throw new Error(
-        '비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.'
-      );
-    }
+    return { email, nickName, role, _id };
   }
 
   // 유저 정보 수정
