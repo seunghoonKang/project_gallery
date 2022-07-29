@@ -51,6 +51,17 @@ userRouter.get('/', loginRequired, async (req, res, next) => {
     next(error);
   }
 });
+userRouter.get('/:userId', async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    console.log(userId);
+    const getUserInfo = await userService.userInfo(userId);
+
+    res.status(200).json(getUserInfo);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // 회원 정보 수정
 userRouter.patch('/', loginRequired, async (req, res, next) => {

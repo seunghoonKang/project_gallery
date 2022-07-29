@@ -99,6 +99,12 @@ class UserService {
     return { email, nickName, role, _id };
   }
 
+  async userInfo(userId) {
+    const findUserInfo = await this.userModel.findById(userId);
+
+    return findUserInfo;
+  }
+
   // 유저 정보 수정
   async editUserInfo(userId, toUpdate) {
     // 우선 해당 id의 유저가 db에 있는지 확인

@@ -7,6 +7,8 @@ import {
   teamRecruitmentBoardRouter,
   commentBoxRouter,
   fileUploaderRouter,
+  conversationRouter,
+  messagesRouter,
 } from './routers';
 import { errorHandler } from './middlewares';
 
@@ -25,6 +27,8 @@ app.use('/api/proposal', projectProposalBoardRouter);
 app.use('/api/recruitment', teamRecruitmentBoardRouter);
 app.use('/api/comment', commentBoxRouter);
 app.use('/api/upload', fileUploaderRouter);
+app.use('/api/conversations', conversationRouter);
+app.use('/api/messages', messagesRouter);
 
 app.use(errorHandler);
 
