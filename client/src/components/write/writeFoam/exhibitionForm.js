@@ -4,9 +4,10 @@ import { Autocomplete, TextField, Stack, Button } from '@mui/material';
 import { writeApi } from '../../../api/write/writeApi';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function ExhibitionForm() {
-  const [file, setFile] = useState([]);
+  const [file, setFile] = useState(null);
   const [inputTags, setInputTags] = useState([]);
   const navigate = useNavigate();
   const tagsOption = [
@@ -15,12 +16,11 @@ function ExhibitionForm() {
     { tags: 'C' },
     { tags: ' C++' },
   ];
+  //console.log(inputTags);
 
-  console.log(inputTags);
-
-  function onSubmitHandling(e) {
-    //e.preventDefault();
-    console.log(inputTags);
+  async function onSubmitHandling(e) {
+    e.preventDefault();
+    //console.log(inputTags);
     const tagsArray = [];
     inputTags.map((tag, i) => {
       return tagsArray.push(tag.tags);
@@ -31,28 +31,39 @@ function ExhibitionForm() {
     const tags = tagsArray;
     const url = urlRef.current.value;
     const intro = introRef.current.value;
-
     const token = localStorage.getItem('token');
 
     const formData = new FormData();
 
-    formData.append('image', file);
-    console.log(file);
-
-    const data = { title, description, tags, url, intro };
-    console.log(data);
-
-    const headers = {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    };
-
-    if (token) {
-      writeApi.exhibitionInputApi(data, headers).then((res) => {
-        console.log(res);
+    formData.append('images', file);
+    try {
+      const res = await axios.post('/api/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
       });
-      navigate('/writemiddle');
-    } else {
-      alert('로그인 또는 회원가입을 해주세요!');
+      console.log({ res });
+      alert('success');
+      const images = res.data.imgUrls[0];
+      const data = { title, description, tags, url, intro, images };
+      //console.log(data);
+
+      const headers = {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      };
+
+      if (token) {
+        writeApi.exhibitionInputApi(data, headers).then((res) => {
+          //console.log(res);
+        });
+        //navigate('/writemiddle');
+      } else {
+        alert('로그인 또는 회원가입을 해주세요!');
+      }
+    } catch (err) {
+      alert('fail');
+      console.log(err);
     }
   }
 
@@ -74,7 +85,7 @@ function ExhibitionForm() {
             padding: '10px',
           }}
         >
-          <Form onSubmit={onSubmitHandling}>
+          <Form onSubmit={onSubmitHandling} enctype="multipart/form-data">
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>글제목</Form.Label>
 
@@ -87,7 +98,7 @@ function ExhibitionForm() {
               <Form.Label>사진</Form.Label>
               <Form.Control
                 type="file"
-                name="image"
+                name="images"
                 accept="image/jpg/png"
                 multiple
                 onChange={(e) => {
