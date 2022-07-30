@@ -4,13 +4,9 @@ const headers = {
 };
 const reviewApi = {
   postReviewApi: function postReviwApi(commentData, projectReviewId) {
-    return axios.post(
-      `/api/comment/postId/${projectReviewId.postId}`,
-      commentData,
-      {
-        headers,
-      }
-    );
+    return axios.post(`/api/comment/postId/${projectReviewId}`, commentData, {
+      headers,
+    });
   },
   getReviewApi: function getReviewApi(projectReviewId) {
     console.log('api:', projectReviewId);
