@@ -54,6 +54,7 @@ function Reviews({ exhibitionProject }) {
     });
     reviewApi.getReviewApi(projectReviewId).then((res) => {
       setGetReview(res.data);
+      console.log('다시가져온거', getReview);
     });
   }
 
