@@ -13,10 +13,11 @@ const reviewApi = {
     );
   },
   getReviewApi: function getReviewApi(projectReviewId) {
-    return axios.get(`/api/comment/postId/${projectReviewId.postId}`);
+    console.log('api:', projectReviewId);
+    return axios.get(`/api/comment/postId/${projectReviewId}`);
   },
   deleteReviewApi: function deleteReviewApi(projectReviewId, commentId) {
-    return axios.delete(`/api/comment/${projectReviewId.postId}/${commentId}`, {
+    return axios.delete(`/api/comment/${projectReviewId}/${commentId}`, {
       headers,
     });
   },

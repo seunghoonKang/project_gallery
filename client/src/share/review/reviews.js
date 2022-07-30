@@ -4,25 +4,24 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { reviewApi } from '../../api/review/reviewApi';
 import userApi from '../../api/user/userApi';
-import axios from 'axios';
 
-function Reviews({ exhibitionProject, apiUrl }) {
+function Reviews({ exhibitionProject }) {
   const projectNickname = exhibitionProject.nickName;
-  // const projectReviewId2 = exhibitionProject._id;
-  // console.log(projectReviewId2);
 
   const [getReview, setGetReview] = useState([]);
   const [reviewDescription, setReviewDescription] = useState('');
   const [user, setUser] = useState('');
+  //const [projectReviewId, setProjectReviewId] = useState('');
   const token = localStorage.getItem('token');
 
-  //처음 리뷰 가지고 오기
-  useEffect(() => {
-    reviewApi.getReviewApi(projectReviewId).then((res) => {
-      setGetReview(res.data);
-      loginCheck();
-    });
-  }, []);
+  // post 보낼때 보내는 id와 DATA
+  const projectReviewId = exhibitionProject?._id;
+  console.log('projectReviewId:', projectReviewId);
+
+  const commentData = {
+    comment: reviewDescription,
+  };
+  console.log(commentData);
 
   // 로그인 체크 그리고 유저 정보가지고오기
   function loginCheck() {
@@ -37,15 +36,14 @@ function Reviews({ exhibitionProject, apiUrl }) {
   }
   console.log('로그인 아이디 :', user.nickName);
 
-  // post 보낼때 보내는 id와 DATA
-  const projectReviewId = {
-    postId: exhibitionProject?._id,
-  };
+  //처음 리뷰 가지고 오기
+  useEffect(() => {
+    reviewApi.getReviewApi(projectReviewId).then((res) => {
+      setGetReview(res.data);
+      loginCheck();
+    });
+  }, [projectReviewId]);
 
-  const commentData = {
-    comment: reviewDescription,
-  };
-  console.log(commentData);
   //댓글 post날리는 부분
   function onSubmitHandler(e) {
     e.preventDefault();
@@ -59,14 +57,18 @@ function Reviews({ exhibitionProject, apiUrl }) {
     });
   }
 
-  // 댓글 delete
+  // 댓글 delete api요청
   function onDeleteReview(e) {
     const commentId = e.currentTarget.getAttribute('value');
+    // console.log('코멘트Id:', commentId);
     const deleteReview = window.confirm('댓글을 삭제하시겠습니까?');
     if (deleteReview) {
       reviewApi.deleteReviewApi(projectReviewId, commentId).then((res) => {
         console.log(res.data);
         alert('댓글이 삭제되었습니다');
+        reviewApi.getReviewApi(projectReviewId).then((res) => {
+          setGetReview(res.data);
+        });
       });
     } else {
       alert('댓글이 삭제되지 않았습니다');
