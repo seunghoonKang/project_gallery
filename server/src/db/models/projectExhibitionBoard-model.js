@@ -7,23 +7,23 @@ const ProjectExhibitionBoard = model(
 );
 
 class ProjectExhibitionBoardModel {
-  async create(projectInfo) {
-    const newPost = await ProjectExhibitionBoard.create(projectInfo);
+  async create(postInfo) {
+    const newPost = await ProjectExhibitionBoard.create(postInfo);
     return newPost;
   }
 
   async getAll() {
-    const posts = await ProjectExhibitionBoard.findAll();
+    const posts = await ProjectExhibitionBoard.find({});
     return posts;
   }
 
-  async findById(projectId) {
-    const post = await ProjectExhibitionBoard.findOne({ _id: projectId });
+  async findById(postId) {
+    const post = await ProjectExhibitionBoard.findOne({ _id: postId });
     return post;
   }
 
   async findByNickName(nickName) {
-    const posts = await ProjectExhibitionBoard.find(nickName);
+    const posts = await ProjectExhibitionBoard.find({ nickName: nickName });
     return posts;
   }
 
@@ -31,7 +31,7 @@ class ProjectExhibitionBoardModel {
     const filter = { _id: postId };
     const option = { returnOriginal: false };
 
-    const updatedPost = await ProjectExhibitionBoard.findByIdAndUpdate(
+    const updatedPost = await ProjectExhibitionBoard.findOneAndUpdate(
       filter,
       update,
       option

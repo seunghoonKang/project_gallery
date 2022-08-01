@@ -1,9 +1,12 @@
+@import url(//font.elice.io/EliceDigitalBaeum.css);
+
 .App {
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: #27262b;
+  font-family: 'Elice Digital Baeum', sans-serif;
 }
 .displayTapBox {
   margin-left: 200px;
@@ -20,4 +23,54 @@
   border-color: white;
   border-width: 1px;
   padding-left: 13px;
+}
+.messenger {
+  height: calc(100vh-70px);
+  display: flex;
+}
+.chatMenu {
+  flex: 3.5;
+}
+
+.chatBox {
+  flex: 5.5;
+}
+.chatOnline {
+  flex: 3;
+}
+.MessageContainer {
+  background-color: white;
+}
+.chatMenuWrapper,
+.chatOnlineWrapper,
+.chatBoxWrapper {
+  padding: 10px;
+
+  height: 100%;
+}
+
+.conversation:hover {
+  background-color: rgb(182, 169, 169);
+  background-color: rgb(241, 241, 194);
+}
+.messegeOwn {
+  align-items: flex-end;
+}
+
+.chatBoxWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.messageBox {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.messageBoxOwn {
+  display: flex;
+  margin-top: 20px;
+  justify-content: flex-end;
 }
