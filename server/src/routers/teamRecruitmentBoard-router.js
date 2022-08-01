@@ -4,35 +4,73 @@ import { teamRecruitmentBoardService } from '../services';
 
 const teamRecruitmentBoardRouter = Router();
 
-// 팀원 모집 조회 api 호출
-teamRecruitmentBoardRouter.get('/info', async (req, res, next) => {
+// 팀원 모집 추가 api 호출
+teamRecruitmentBoardRouter.post('/', loginRequired, async (req, res, next) => {
   try {
-    const teams = await teamRecruitmentBoardService.getTeamRecruitmentBoard(
-      nickName
-    );
-    res.status(201).json(teams);
+    const nickName = req.currentNickName;
+    const { title, description } = req.body;
+
+    const newTeam = await teamRecruitmentBoardService.addRecruitment({
+      nickName,
+      title,
+      description,
+    });
+
+    res.status(200).json(newTeam);
   } catch (error) {
     next(error);
   }
 });
 
-// 팀원 모집 추가 api 호출
-teamRecruitmentBoardRouter.post(
-  '/create',
+// 팀원 모집 전체 조회
+teamRecruitmentBoardRouter.get('/list', async (req, res, next) => {
+  try {
+    const allTeam = await teamRecruitmentBoardService.getRecruitments();
+    res.status(200).json(allTeam);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// 팀원 모집 조회 api 호출
+teamRecruitmentBoardRouter.get('/postId/:postId', async (req, res, next) => {
+  try {
+    const postId = req.params.postId;
+    const team = await teamRecruitmentBoardService.getRecruitmentById(postId);
+    res.status(200).json(team);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// 팀원 모집 수정 api 호출
+teamRecruitmentBoardRouter.patch(
+  '/postId/:postId',
   loginRequired,
   async (req, res, next) => {
     try {
-      const { title, position, tag, description } = req.body;
+      const postId = req.params.postId;
+      const nickName = req.currentNickName;
+      const { title, description } = req.body;
 
-      const new_team =
-        await teamRecruitmentBoardService.addTeamRecruitmentBoard({
-          title,
-          position,
-          tag,
-          description,
-        });
+      const originRecruitment =
+        await teamRecruitmentBoardService.getRecruitmentById(postId);
 
-      res.status(201).json(new_team);
+      if (originRecruitment.nickName !== nickName) {
+        throw new Error('모집을 수정할 권한이 없습니다.');
+      }
+
+      const toUpdate = {
+        ...(title && { title }),
+        ...(description && { description }),
+      };
+
+      const updatedTeamInfo = await teamRecruitmentBoardService.editRecruitment(
+        postId,
+        toUpdate
+      );
+
+      res.status(200).json(updatedTeamInfo);
     } catch (error) {
       next(error);
     }
@@ -41,50 +79,24 @@ teamRecruitmentBoardRouter.post(
 
 // 팀원 모집 삭제 api 호출
 teamRecruitmentBoardRouter.delete(
-  '/delete',
+  '/postId/:postId',
   loginRequired,
   async (req, res, next) => {
     try {
-      const nickName = req.body.nickName;
-      const team = await teamRecruitmentBoardService.deleteTeam(nickName);
+      const postId = req.params.postId;
+      const nickName = req.currentNickName;
 
-      res.status(201).json(team);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
+      const originRecruitment =
+        await teamRecruitmentBoardService.getRecruitmentById(postId);
 
-// 팀원 모집 수정 api 호출
-teamRecruitmentBoardRouter.patch(
-  '/edit',
-  loginRequired,
-  async (req, res, next) => {
-    try {
-      const { nickName, _id, title, position, tag, description } = req.body;
-
-      const recruitment_origin =
-        await teamRecruitmentBoardService.getTeamRecruitmentBoard(_id);
-
-      if (recruitment_origin.nickName !== nickName) {
-        throw new Error('모집을 수정할 권한이 없습니다.');
+      if (originRecruitment.nickName !== nickName) {
+        throw new Error('모집을 삭제할 권한이 없습니다.');
       }
+      const deletedTeam = await teamRecruitmentBoardService.deleteRecruitment(
+        postId
+      );
 
-      const toUpdate = {
-        ...(title && { title }),
-        ...(position && { position }),
-        ...(tag && { tag }),
-        ...(description && { description }),
-      };
-
-      const titleId = { _id: titleId };
-      const updatedTeam =
-        await teamRecruitmentBoardService.setTeamRecruitmentBoard(
-          titleId,
-          toUpdate
-        );
-
-      res.status(200).json(updatedTeam);
+      res.status(200).json(deletedTeam);
     } catch (error) {
       next(error);
     }

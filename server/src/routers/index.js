@@ -2,4 +2,7 @@ export * from './user-router';
 export * from './projectExhibitionBoard-router';
 export * from './projectProposalBoard-router';
 export * from './teamRecruitmentBoard-router';
-export * from './comment-router';
+export * from './commentBox-router';
+export * from './fileUploader-router';
+export * from './conversations-router';
+export * from './messages-router';

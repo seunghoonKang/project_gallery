@@ -1,27 +1,28 @@
 import { Router } from 'express';
 import { loginRequired } from '../middlewares';
-import { projectExhibitionBoardService } from '../services';
+import { projectExhibitionBoardService, commentBoxService } from '../services';
 
 const projectExhibitionBoardRouter = Router();
 
 // 프로젝트 전시 - 게시글 생성
 projectExhibitionBoardRouter.post(
-  '/register',
+  '/',
   loginRequired,
   async (req, res, next) => {
     try {
-      const title = req.body.title;
+      const { title, url, tags, description, images, intro, updateLog } =
+        req.body;
       const nickName = req.currentNickName;
-      const url = req.body.url;
-      const tag = req.body.tag;
-      const description = req.body.description;
 
       const newPost = await projectExhibitionBoardService.addPost({
         title,
         nickName,
         url,
-        tag,
+        tags,
         description,
+        images,
+        intro,
+        updateLog,
       });
 
       res.status(200).json(newPost);
@@ -43,11 +44,10 @@ projectExhibitionBoardRouter.get('/list', async (req, res, next) => {
 });
 
 // 프로젝트 전시 - 오브젝트 아이디로 불러오기
-projectExhibitionBoardRouter.get('/post/:postId', async (req, res, next) => {
+projectExhibitionBoardRouter.get('/postId/:postId', async (req, res, next) => {
   try {
-    const postById = await projectExhibitionBoardService.getPostById(
-      req.params.postId
-    );
+    const postId = req.params.postId;
+    const postById = await projectExhibitionBoardService.getPostById(postId);
 
     res.status(200).json(postById);
   } catch (error) {
@@ -57,47 +57,56 @@ projectExhibitionBoardRouter.get('/post/:postId', async (req, res, next) => {
 
 // 프로젝트 전시 - 작성자 닉네임으로 불러오기
 projectExhibitionBoardRouter.get(
-  '/filter/:nickName',
+  '/nickName/:nickName',
   async (req, res, next) => {
     try {
-      const postByNickName =
-        await projectExhibitionBoardService.getPostByNickName(
-          req.params.nickName
-        );
+      const nickName = req.params.nickname;
+      const postsByNickName =
+        await projectExhibitionBoardService.getPostsByNickName(nickName);
 
-      res.status(200).json(postByNickName);
+      res.status(200).json(postsByNickName);
     } catch (error) {
       next(error);
     }
   }
 );
 
-// 프로젝트 전시 - 태그로 불러오기(미완성)
-projectExhibitionBoardRouter.get('/filter/:tag', async (req, res, next) => {
+// 프로젝트 전시 - 태그로 불러오기
+projectExhibitionBoardRouter.get('/tags/:tags', async (req, res, next) => {
   try {
     const posts = await projectExhibitionBoardService.getPosts();
+    const tags = req.params.tags;
+    const searchTags = tags.split('&');
+    const resultArr = [];
 
-    // 태그를 복수 적용할 수 있게 할 것인지?
-    // 구분자로 || && 사용할건지, 하나만 사용할 것인지
-    // 배열로 저장해야함, split?
-    // 태그를 변경할때마다 페이지 로딩을 다시 하지 않으려면 프론트에서?
-    const tags = req.params.tag;
+    for (let i = 0; i < posts.length; i++) {
+      // posts의 태그와 tags가 포함관계인 게시글의 아이디와 게시글 제목만 리턴
+      const diffArr = searchTags.filter((x) => !posts[i].tags.includes(x));
+      if (diffArr.length === 0) {
+        resultArr.push(posts[i]);
+      }
+    }
 
-    res.status(200).json();
+    res.status(200).json(resultArr);
   } catch (error) {
     next(error);
   }
 });
 
 // 프로젝트 전시 - 키워드로 검색하기
-projectExhibitionBoardRouter.get('/filter/keyword', async (req, res, next) => {
+projectExhibitionBoardRouter.get('/search/:keyword', async (req, res, next) => {
   try {
-    const keyword = req.query.keyword;
+    const keyword = req.params.keyword;
+    if (keyword.length < 2) {
+      throw new Error('검색어는 한 글자 이상 입력해주십시오.');
+    }
+
     const posts = await projectExhibitionBoardService.getPosts();
-    let resultArr = [];
+    const resultArr = [];
 
     for (let i = 0; i < posts.length; i++) {
-      if (posts[i].title.includes(keyword)) {
+      const title = posts[i].title;
+      if (title.includes(keyword)) {
         resultArr.push(posts[i]);
       }
     }
@@ -109,45 +118,74 @@ projectExhibitionBoardRouter.get('/filter/keyword', async (req, res, next) => {
 });
 
 // 프로젝트 전시 - 게시글 수정
-projectExhibitionBoardRouter.patch('/edit/:postId', async (req, res, next) => {
-  try {
-    const postId = req.params.postId;
-    const title = req.body.title;
-    const nickName = req.body.nickName;
-    const url = req.body.url;
-    const tag = req.body.tag;
-    const description = req.body.description;
+projectExhibitionBoardRouter.patch(
+  '/postId/:postId',
+  loginRequired,
+  async (req, res, next) => {
+    try {
+      // 본인 글인지 확인하는 절차 삽입
+      const postId = req.params.postId;
+      const nickName = req.currentNickName;
+      const { title, url, tags, description, images, intro, updateLog } =
+        req.body;
 
-    const toUpdate = {
-      ...(title && { title }),
-      ...(nickName && { nickName }),
-      ...(url && { url }),
-      ...(tag && { tag }),
-      ...(description && { description }),
-    };
+      const postById = await projectExhibitionBoardService.getPostById(postId);
+      const owner = postById.nickName;
 
-    const updatedPostInfo = await projectExhibitionBoardService.editPost(
-      postId,
-      toUpdate
-    );
+      if (owner !== nickName) {
+        throw new Error('전시물을 수정할 권한이 없습니다.');
+      }
 
-    res.status(200).json(updatedPostInfo);
-  } catch (error) {
-    next(error);
+      const toUpdate = {
+        ...(title && { title }),
+        ...(nickName && { nickName }),
+        ...(url && { url }),
+        ...(tags && { tags }),
+        ...(description && { description }),
+        ...(images && { images }),
+        ...(intro && { intro }),
+        ...(updateLog && { updateLog }),
+      };
+
+      const updatedPostInfo = await projectExhibitionBoardService.editPost(
+        postId,
+        toUpdate
+      );
+
+      res.status(200).json(updatedPostInfo);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 // 프로젝트 전시 - 게시글 삭제
-projectExhibitionBoardRouter.delete('/delete', async (req, res, next) => {
-  try {
-    const deletedPost = await projectExhibitionBoardService.deletePost(
-      req.body.postId
-    );
+projectExhibitionBoardRouter.delete(
+  '/postId/:postId',
+  loginRequired,
+  async (req, res, next) => {
+    try {
+      const postId = req.params.postId;
+      const nickName = req.currentNickName;
 
-    res.status(200).json(deletedPost);
-  } catch (error) {
-    next(error);
+      const postById = await projectExhibitionBoardService.getPostById(postId);
+      const owner = postById.nickName;
+      if (owner !== nickName) {
+        throw new Error('전시물을 삭제할 권한이 없습니다.');
+      }
+
+      const deletedCommentBox = await commentBoxService.deleteCommentBox(
+        postId
+      );
+      const deletedPost = await projectExhibitionBoardService.deletePost(
+        postId
+      );
+
+      res.status(200).json(deletedPost);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 export { projectExhibitionBoardRouter };
